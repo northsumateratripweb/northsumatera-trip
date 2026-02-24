@@ -125,10 +125,13 @@ class TranslationSeeder extends Seeder
                 'group' => 'nav'
             ],
             [
-                'key' => 'nav_contact',
-                'id_value' => 'Kontak',
-                'en_value' => 'Contact',
-                'ms_value' => 'Hubungi',
+                'group' => 'nav'
+            ],
+            [
+                'key' => 'nav_blog',
+                'id_value' => 'Blog',
+                'en_value' => 'Blog',
+                'ms_value' => 'Blog',
                 'group' => 'nav'
             ],
             [
