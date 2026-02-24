@@ -7,19 +7,19 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org/",
-  "@type": "BlogPosting",
+  "@@context": "https://schema.org/",
+  "@@type": "BlogPosting",
   "headline": "{{ $post->title }}",
   "image": "{{ $post->image_url }}",
   "author": {
-    "@type": "Organization",
+    "@@type": "Organization",
     "name": "NorthSumateraTrip"
   },
   "publisher": {
-    "@type": "Organization",
+    "@@type": "Organization",
     "name": "NorthSumateraTrip",
     "logo": {
-      "@type": "ImageObject",
+      "@@type": "ImageObject",
       "url": "{{ App\Helpers\SettingsHelper::logo() ?? asset('images/logo.png') }}"
     }
   },
@@ -30,20 +30,20 @@
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
   "itemListElement": [{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 1,
     "name": "Home",
     "item": "{{ route('home') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 2,
     "name": "Blog",
     "item": "{{ route('blog.index') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 3,
     "name": "{{ $post->title }}",
     "item": "{{ url()->current() }}"

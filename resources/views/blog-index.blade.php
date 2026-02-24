@@ -6,15 +6,15 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
   "itemListElement": [{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 1,
     "name": "Home",
     "item": "{{ route('home') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 2,
     "name": "Blog",
     "item": "{{ url()->current() }}"

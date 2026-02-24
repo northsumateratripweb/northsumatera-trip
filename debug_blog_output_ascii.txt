@@ -1,0 +1,753 @@
+ Rendering post: 10 Spot Foto Paling Instagrammable di Danau Toba 2026
+<!DOCTYPE html>
+<html lang="en" class="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="csrf-token" content="">
+    
+    <!-- ??? Dark mode: apply BEFORE render to avoid flash -->
+    <script>
+        (function() {
+            const saved = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            if (saved === 'dark' || (!saved && prefersDark)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        })();
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Mulai dari Bukit Holbung hingga Huta SiallaganDanau Toba menyajikan sejuta sudut pandang yang unik. Tahun ini, beberapa spot muncul sebagai favorit para fotogra...">
+    <meta name="keywords" content="wisata sumatera utara, paket tour danau toba, sewa mobil medan, trip sumut, berastagi tour, bukit lawang adventure">
+    <meta name="author" content="NorthSumateraTrip">
+    <link rel="canonical" href="http://localhost:8000">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type"        content="website">
+    <meta property="og:url"         content="http://localhost:8000">
+    <meta property="og:title"       content="10 Spot Foto Paling Instagrammable di Danau Toba 2026 - NorthSumateraTrip">
+    <meta property="og:description" content="Mulai dari Bukit Holbung hingga Huta SiallaganDanau Toba menyajikan sejuta sudut pandang yang unik. Tahun ini, beberapa spot muncul sebagai favorit para fotogra...">
+    <meta property="og:image"       content="https://images.unsplash.com/photo-1536514072410-d09633e9bf0d?q=80&amp;w=1200">
+
+    <!-- Twitter -->
+    <meta property="twitter:card"        content="summary_large_image">
+    <meta property="twitter:url"         content="http://localhost:8000">
+    <meta property="twitter:title"       content="10 Spot Foto Paling Instagrammable di Danau Toba 2026 - NorthSumateraTrip">
+    <meta property="twitter:description" content="Mulai dari Bukit Holbung hingga Huta SiallaganDanau Toba menyajikan sejuta sudut pandang yang unik. Tahun ini, beberapa spot muncul sebagai favorit para fotogra...">
+    <meta property="twitter:image"       content="https://images.unsplash.com/photo-1536514072410-d09633e9bf0d?q=80&amp;w=1200">
+
+    <!-- Favicon & PWA -->
+    <link rel="icon" type="image/x-icon" href="http://localhost:8000/storage/settings/01KJ70EPSW9GWT0KVDVV1BPQN4.jpg">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#3b82f6" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)">
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch"  href="https://fonts.bunny.net">
+    <link rel="preconnect"    href="https://fonts.bunny.net" crossorigin>
+    <link rel="preconnect"    href="https://fonts.googleapis.com">
+    <link rel="preconnect"    href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700,800&display=swap" rel="stylesheet" />
+
+    <title>10 Spot Foto Paling Instagrammable di Danau Toba 2026 - NorthSumateraTrip</title>
+
+    <!-- Custom Scripts / JSON-LD -->
+        <!-- Deployment Sync: 2026-02-24 13:17 -->
+    <link rel="preload" as="style" href="http://localhost:8000/build/assets/app--hEj2KTi.css" /><link rel="modulepreload" as="script" href="http://localhost:8000/build/assets/app-C6cLCP43.js" /><link rel="stylesheet" href="http://localhost:8000/build/assets/app--hEj2KTi.css" data-navigate-track="reload" /><script type="module" src="http://localhost:8000/build/assets/app-C6cLCP43.js" data-navigate-track="reload"></script>    
+        <script type="application/ld+json">
+{
+  "@context": "https://schema.org/",
+  "@type": "BlogPosting",
+  "headline": "10 Spot Foto Paling Instagrammable di Danau Toba 2026",
+  "image": "https://images.unsplash.com/photo-1536514072410-d09633e9bf0d?q=80&amp;w=1200",
+  "author": {
+    "@type": "Organization",
+    "name": "NorthSumateraTrip"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "NorthSumateraTrip",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "http://localhost:8000/storage/settings/01KJ70CGSAYJKJPEFD76N8GTKA.jpg"
+    }
+  },
+  "datePublished": "2026-02-22T02:00:17+00:00",
+  "dateModified": "2026-02-22T02:00:17+00:00",
+  "description": "Mulai dari Bukit Holbung hingga Huta SiallaganDanau Toba menyajikan sejuta sudut pandang yang unik. Tahun ini, beberapa spot muncul sebagai favorit para fotogra..."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "http://localhost:8000"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Blog",
+    "item": "http://localhost:8000/blog"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "10 Spot Foto Paling Instagrammable di Danau Toba 2026",
+    "item": "http://localhost:8000"
+  }]
+}
+</script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "NorthSumateraTrip",
+      "url": "http://localhost:8000",
+      "logo": "http://localhost:8000/storage/settings/01KJ70CGSAYJKJPEFD76N8GTKA.jpg",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+6282381118520",
+        "contactType": "customer service",
+        "areaServed": "ID",
+        "availableLanguage": ["Indonesian", "English"]
+      },
+      "sameAs": [
+        "",
+        "",
+        ""
+      ]
+    }
+    </script>
+</head>
+
+<body class="antialiased font-['Instrument_Sans'] transition-colors duration-300 noise-bg" style="background-color:var(--bg-main); color:var(--text-main);">
+    <!-- Skip to Content for A11y -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[1000] focus:px-6 focus:py-3 focus:bg-blue-700 focus:text-white focus:rounded-2xl focus:font-black focus:text-xs focus:uppercase focus:tracking-widest">
+        Lanjut ke Konten
+    </a>
+
+    <!-- Blue dark mode ambient glow -->
+    <div id="dm-glow" class="pointer-events-none fixed inset-0 z-0 opacity-0 transition-opacity duration-1000" aria-hidden="true">
+        <div class="absolute top-0 left-1/4 w-[800px] h-[600px] rounded-full" style="background:radial-gradient(ellipse at center, rgba(59,130,246,0.15) 0%, transparent 75%); filter:blur(150px);"></div>
+        <div class="absolute bottom-0 right-1/4 w-[700px] h-[500px] rounded-full" style="background:radial-gradient(ellipse at center, rgba(37,99,235,0.12) 0%, transparent 75%); filter:blur(150px);"></div>
+    </div>
+
+    <!-- ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+    <!-- NAVBAR                                                  -->
+    <!-- ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+    <nav x-data="{ mobileMenu: false, isScrolled: false }" 
+         x-init="window.addEventListener('scroll', () => { isScrolled = window.scrollY > 10 })"
+         :class="{ 'bg-white dark:bg-slate-900 shadow-sm border-b border-slate-100 dark:border-slate-800 py-4': isScrolled || !request()->routeIs('home'), 'bg-transparent py-6 md:py-10': !isScrolled && request()->routeIs('home') }"
+         class="fixed w-full top-0 left-0 z-[100] transition-all duration-500">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+            <!-- Logo -->
+            <a href="/" class="relative group">
+                <div class="flex items-center gap-2 sm:gap-3">
+                                            <img src="http://localhost:8000/storage/settings/01KJ70CGSAYJKJPEFD76N8GTKA.jpg" alt="NorthSumateraTrip Logo" class="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110">
+                                    </div>
+            </a>
+
+                <!-- Desktop Nav Links -->
+                <div class="hidden md:flex items-center gap-6 lg:gap-8">
+                    <a href="http://localhost:8000"          class="text-sm font-black transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-blue-600">Home</a>
+                    <a href="http://localhost:8000/packages"      class="text-sm font-black transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-blue-600">Packages</a>
+                    <a href="http://localhost:8000/rental"        class="text-sm font-black transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-blue-600">Car Rental</a>
+                    <a href="http://localhost:8000/gallery" class="text-sm font-black transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-blue-600">Gallery</a>
+                    <a href="http://localhost:8000/blog"    class="text-sm font-black transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-blue-600">Blog</a>
+                    <a href="http://localhost:8000/contact"       class="text-sm font-black transition-all duration-300 text-slate-500 dark:text-slate-400 hover:text-blue-600">Contact</a>
+                </div>
+
+                <!-- Nav Right Actions -->
+                <div class="flex items-center gap-0.5 sm:gap-2">
+                    <div class="hidden md:block">
+                        <div class="relative inline-block" x-data="{ open: false }">
+    <button @click="open = !open" 
+            class="group flex items-center gap-1.5 md:gap-2.5 px-2.5 md:px-3.5 py-2 md:py-2.5 bg-white/50 hover:bg-white border border-slate-200/60 rounded-2xl transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-0.5 active:scale-95 active:translate-y-0"
+            aria-label="Pilih Bahasa"
+            :aria-expanded="open">
+        <div class="w-7 h-7 flex items-center justify-center rounded-xl bg-slate-100/80 group-hover:bg-blue-100 group-hover:rotate-12 transition-all duration-500">
+            <span class="text-sm leading-none" aria-hidden="true">????????</span>
+        </div>
+        <span class="text-xs font-black text-slate-700 uppercase tracking-[0.15em] ml-0.5">EN</span>
+        <svg width="16" height="16" class="w-4 h-4 text-slate-400 group-hover:text-blue-700 transition-all duration-500" 
+             :class="{ 'rotate-180': open }"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+
+    <div x-show="open" 
+         @click.away="open = false"
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0 translate-y-8 scale-90"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-8 scale-90"
+         class="absolute left-0 sm:left-auto sm:right-0 mt-5 w-[280px] sm:w-72 bg-white/95 backdrop-blur-xl border border-white rounded-[32px] shadow-[0_40px_80px_-15px_rgba(15,23,42,0.15)] z-[110] overflow-hidden p-3.5"
+         style="display: none;">
+        
+        <div class="px-4 py-3 mb-2 flex items-center justify-between">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Pilih Bahasa</p>
+            <div class="h-px flex-1 bg-slate-100 ml-4"></div>
+        </div>
+
+        <div class="space-y-1.5">
+                            <a href="http://localhost:8000/lang/id" 
+                   class="group/item flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-500 text-slate-600 hover:bg-slate-50 hover:text-blue-700 hover:translate-x-1"
+                   aria-label="Bahasa Indonesia">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 group-hover/item:bg-white group-hover/item:rotate-6 transition-all duration-500">
+                        <span class="text-2xl leading-none" aria-hidden="true">????????</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-black leading-none mb-1.5 tracking-tight">Bahasa Indonesia</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black opacity-40 tracking-[0.2em] uppercase">id</span>
+                                                    </div>
+                    </div>
+                                    </a>
+                            <a href="http://localhost:8000/lang/en" 
+                   class="group/item flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-500 bg-blue-50/80 text-blue-700"
+                   aria-label="English">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white shadow-lg shadow-blue-200/50 rotate-3">
+                        <span class="text-2xl leading-none" aria-hidden="true">????????</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-black leading-none mb-1.5 tracking-tight">English</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black opacity-40 tracking-[0.2em] uppercase">en</span>
+                                                            <span class="w-1 h-1 bg-blue-400 rounded-full"></span>
+                                <span class="text-[9px] font-black text-blue-400 uppercase tracking-widest">lang_active</span>
+                                                    </div>
+                    </div>
+                                            <div class="ml-auto w-7 h-7 bg-blue-700 rounded-xl flex items-center justify-center shadow-xl shadow-blue-700/30 -rotate-6">
+                            <svg width="16" height="16" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                                    </a>
+                            <a href="http://localhost:8000/lang/ms" 
+                   class="group/item flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-500 text-slate-600 hover:bg-slate-50 hover:text-blue-700 hover:translate-x-1"
+                   aria-label="Bahasa Melayu">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 group-hover/item:bg-white group-hover/item:rotate-6 transition-all duration-500">
+                        <span class="text-2xl leading-none" aria-hidden="true">????????</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-black leading-none mb-1.5 tracking-tight">Bahasa Melayu</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black opacity-40 tracking-[0.2em] uppercase">ms</span>
+                                                    </div>
+                    </div>
+                                    </a>
+                    </div>
+    </div>
+</div>
+
+                    </div>
+
+                    <!-- ???? Dark Mode Toggle -->
+                    <button id="themeToggle"
+                            onclick="toggleTheme()"
+                            class="theme-toggle tap-target hidden md:flex"
+                            aria-label="Ganti Tema Terang/Gelap"
+                            title="Ganti Tema">
+                        <!-- Sun icon (shown in dark mode) -->
+                        <svg id="iconSun" width="20" height="20" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                        <!-- Moon icon (shown in light mode) -->
+                        <svg id="iconMoon" width="20" height="20" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        </svg>
+                    </button>
+
+                    
+                    <!-- Wishlist -->
+                    <button onclick="openWishlist()"
+                            class="tap-target relative p-2 text-slate-600 dark:text-slate-300 hover:text-blue-500 transition-colors"
+                            aria-label="Buka Wishlist">
+                        <svg width="24" height="24" class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                        </svg>
+                        <span id="wishlistBadge" class="hidden absolute top-0.5 right-0.5 w-4 h-4 bg-rose-500 text-white text-[9px] font-black rounded-full flex items-center justify-center">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Toggle -->
+                    <button class="md:hidden tap-target p-2 text-slate-600 dark:text-slate-300 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                            @click="mobileMenu = !mobileMenu"
+                            :aria-expanded="mobileMenu"
+                            aria-controls="mobile-menu"
+                            aria-label="Toggle Menu Utama">
+                        <svg width="24" height="24" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="!mobileMenu" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                        <svg width="24" height="24" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" x-show="mobileMenu" x-cloak aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ?????? Mobile Menu ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+        <div x-show="mobileMenu"
+             id="mobile-menu"
+             x-transition:enter="transition ease-out duration-300"
+             x-transition:enter-start="opacity-0 -translate-y-4"
+             x-transition:enter-end="opacity-100 translate-y-0"
+             x-transition:leave="transition ease-in duration-200"
+             x-transition:leave-start="opacity-100 translate-y-0"
+             x-transition:leave-end="opacity-0 -translate-y-4"
+             class="md:hidden fixed inset-x-0 top-16 sm:top-20
+                    bg-white/95 dark:bg-slate-900/95 backdrop-blur-xl
+                    border-b border-slate-200 dark:border-slate-700
+                    shadow-2xl z-[90]"
+             x-cloak>
+
+            <div class="px-4 py-6 space-y-1">
+                                    <a href="http://localhost:8000"
+                       @click="mobileMenu = false"
+                       class="flex items-center justify-between p-4 rounded-2xl text-base font-black transition-all duration-200
+                              text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100">
+                        <span>Home</span>
+                        <svg width="16" height="16" class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                                    <a href="http://localhost:8000/packages"
+                       @click="mobileMenu = false"
+                       class="flex items-center justify-between p-4 rounded-2xl text-base font-black transition-all duration-200
+                              text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100">
+                        <span>Packages</span>
+                        <svg width="16" height="16" class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                                    <a href="http://localhost:8000/rental"
+                       @click="mobileMenu = false"
+                       class="flex items-center justify-between p-4 rounded-2xl text-base font-black transition-all duration-200
+                              text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100">
+                        <span>Car Rental</span>
+                        <svg width="16" height="16" class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                                    <a href="http://localhost:8000/gallery"
+                       @click="mobileMenu = false"
+                       class="flex items-center justify-between p-4 rounded-2xl text-base font-black transition-all duration-200
+                              text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100">
+                        <span>Gallery</span>
+                        <svg width="16" height="16" class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                                    <a href="http://localhost:8000/blog"
+                       @click="mobileMenu = false"
+                       class="flex items-center justify-between p-4 rounded-2xl text-base font-black transition-all duration-200
+                              text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100">
+                        <span>Blog</span>
+                        <svg width="16" height="16" class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                                    <a href="http://localhost:8000/contact"
+                       @click="mobileMenu = false"
+                       class="flex items-center justify-between p-4 rounded-2xl text-base font-black transition-all duration-200
+                              text-slate-900 dark:text-slate-100 hover:bg-slate-50 dark:hover:bg-slate-800 active:bg-slate-100">
+                        <span>Contact</span>
+                        <svg width="16" height="16" class="w-4 h-4 opacity-40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </a>
+                
+                <!-- Language Switcher (mobile) -->
+                <div class="px-4 py-8 border-t border-slate-100 dark:border-slate-800 mt-4 min-h-[120px]">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-4">select_language</p>
+                    <div class="relative">
+                        <div class="relative inline-block" x-data="{ open: false }">
+    <button @click="open = !open" 
+            class="group flex items-center gap-1.5 md:gap-2.5 px-2.5 md:px-3.5 py-2 md:py-2.5 bg-white/50 hover:bg-white border border-slate-200/60 rounded-2xl transition-all duration-500 shadow-sm hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-0.5 active:scale-95 active:translate-y-0"
+            aria-label="Pilih Bahasa"
+            :aria-expanded="open">
+        <div class="w-7 h-7 flex items-center justify-center rounded-xl bg-slate-100/80 group-hover:bg-blue-100 group-hover:rotate-12 transition-all duration-500">
+            <span class="text-sm leading-none" aria-hidden="true">????????</span>
+        </div>
+        <span class="text-xs font-black text-slate-700 uppercase tracking-[0.15em] ml-0.5">EN</span>
+        <svg width="16" height="16" class="w-4 h-4 text-slate-400 group-hover:text-blue-700 transition-all duration-500" 
+             :class="{ 'rotate-180': open }"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24"
+             aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path>
+        </svg>
+    </button>
+
+    <div x-show="open" 
+         @click.away="open = false"
+         x-transition:enter="transition ease-out duration-500"
+         x-transition:enter-start="opacity-0 translate-y-8 scale-90"
+         x-transition:enter-end="opacity-100 translate-y-0 scale-100"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 translate-y-0 scale-100"
+         x-transition:leave-end="opacity-0 translate-y-8 scale-90"
+         class="absolute left-0 sm:left-auto sm:right-0 mt-5 w-[280px] sm:w-72 bg-white/95 backdrop-blur-xl border border-white rounded-[32px] shadow-[0_40px_80px_-15px_rgba(15,23,42,0.15)] z-[110] overflow-hidden p-3.5"
+         style="display: none;">
+        
+        <div class="px-4 py-3 mb-2 flex items-center justify-between">
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-[0.25em]">Pilih Bahasa</p>
+            <div class="h-px flex-1 bg-slate-100 ml-4"></div>
+        </div>
+
+        <div class="space-y-1.5">
+                            <a href="http://localhost:8000/lang/id" 
+                   class="group/item flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-500 text-slate-600 hover:bg-slate-50 hover:text-blue-700 hover:translate-x-1"
+                   aria-label="Bahasa Indonesia">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 group-hover/item:bg-white group-hover/item:rotate-6 transition-all duration-500">
+                        <span class="text-2xl leading-none" aria-hidden="true">????????</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-black leading-none mb-1.5 tracking-tight">Bahasa Indonesia</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black opacity-40 tracking-[0.2em] uppercase">id</span>
+                                                    </div>
+                    </div>
+                                    </a>
+                            <a href="http://localhost:8000/lang/en" 
+                   class="group/item flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-500 bg-blue-50/80 text-blue-700"
+                   aria-label="English">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-white shadow-lg shadow-blue-200/50 rotate-3">
+                        <span class="text-2xl leading-none" aria-hidden="true">????????</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-black leading-none mb-1.5 tracking-tight">English</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black opacity-40 tracking-[0.2em] uppercase">en</span>
+                                                            <span class="w-1 h-1 bg-blue-400 rounded-full"></span>
+                                <span class="text-[9px] font-black text-blue-400 uppercase tracking-widest">lang_active</span>
+                                                    </div>
+                    </div>
+                                            <div class="ml-auto w-7 h-7 bg-blue-700 rounded-xl flex items-center justify-center shadow-xl shadow-blue-700/30 -rotate-6">
+                            <svg width="16" height="16" class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </div>
+                                    </a>
+                            <a href="http://localhost:8000/lang/ms" 
+                   class="group/item flex items-center gap-4 px-4 py-3.5 rounded-2xl transition-all duration-500 text-slate-600 hover:bg-slate-50 hover:text-blue-700 hover:translate-x-1"
+                   aria-label="Bahasa Melayu">
+                    <div class="w-12 h-12 flex items-center justify-center rounded-2xl bg-slate-100 group-hover/item:bg-white group-hover/item:rotate-6 transition-all duration-500">
+                        <span class="text-2xl leading-none" aria-hidden="true">????????</span>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="text-[13px] font-black leading-none mb-1.5 tracking-tight">Bahasa Melayu</span>
+                        <div class="flex items-center gap-2">
+                            <span class="text-[9px] font-black opacity-40 tracking-[0.2em] uppercase">ms</span>
+                                                    </div>
+                    </div>
+                                    </a>
+                    </div>
+    </div>
+</div>
+
+                    </div>
+                </div>
+
+                <!-- Dark mode toggle (mobile) -->
+                <div class="pt-3 pb-1 border-t border-slate-100 dark:border-slate-700 mt-2">
+                    <button @click="toggleTheme(); mobileMenu = false"
+                            class="w-full flex items-center gap-3 p-4 rounded-2xl text-base font-black
+                                   text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
+                        <span id="mobileThemeIcon" class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-700 flex items-center justify-center">
+                            <!-- Updated by JS -->
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                            </svg>
+                        </span>
+                        <span id="mobileThemeLabel">Mode Gelap</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+    <!-- MAIN CONTENT                                            -->
+    <!-- ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+    <main id="main-content">
+            <div class="pt-36 md:pt-44 pb-24 max-w-4xl mx-auto px-6 lg:px-8 relative">
+        <!-- Decorative Blobs -->
+        <div class="absolute top-0 right-0 w-[60%] h-[60%] bg-blue-100/30 dark:bg-blue-900/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2 opacity-50"></div>
+        <div class="absolute bottom-1/4 left-0 w-[50%] h-[50%] bg-indigo-100/20 dark:bg-indigo-900/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2 opacity-30"></div>
+
+        <!-- Header -->
+        <header class="mb-16 text-center reveal">
+            <div class="inline-flex items-center gap-3 px-6 py-2 bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-2xl text-[10px] font-black uppercase tracking-[0.2em] mb-8 border border-blue-100 dark:border-blue-800">
+                Destinasi
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black text-slate-900 dark:text-white tracking-tight leading-[1.1] mb-8 uppercase">
+                10 Spot Foto Paling Instagrammable di Danau Toba 2026
+            </h1>
+            <div class="flex items-center justify-center gap-4 text-[10px] font-black text-slate-400 uppercase tracking-widest">
+                <span>22 Feb, 2026</span>
+                <div class="w-1.5 h-1.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                <span>1 Min Read</span>
+            </div>
+        </header>
+
+        <!-- Featured Image -->
+        <div class="mb-20 relative group rounded-[64px] overflow-hidden bg-white dark:bg-slate-900 shadow-2xl shadow-blue-500/5 border border-slate-100 dark:border-slate-800 p-3">
+            <div class="aspect-video overflow-hidden rounded-[54px] relative">
+                <img src="https://images.unsplash.com/photo-1536514072410-d09633e9bf0d?q=80&amp;w=1200" alt="10 Spot Foto Paling Instagrammable di Danau Toba 2026" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-105">
+            </div>
+        </div>
+
+        <!-- Content -->
+        <div class="prose prose-slate dark:prose-invert max-w-none prose-p:text-slate-600 dark:prose-p:text-slate-400 prose-p:text-lg prose-p:leading-[1.8] prose-p:font-medium prose-headings:font-black prose-headings:text-slate-900 dark:prose-headings:text-white prose-headings:uppercase prose-headings:tracking-tight prose-strong:text-slate-900 dark:prose-strong:text-white mb-24">
+            <h2>Mulai dari Bukit Holbung hingga Huta Siallagan</h2><p>Danau Toba menyajikan sejuta sudut pandang yang unik. Tahun ini, beberapa spot muncul sebagai favorit para fotografer profesional...</p>
+        </div>
+        
+        <!-- Footer -->
+        <footer class="pt-16 border-t border-slate-100 dark:border-slate-800">
+            <div class="flex flex-col items-center gap-10">
+                <p class="text-[10px] font-black text-slate-300 uppercase tracking-[0.3em] text-center">Bagikan informasi ini jika bermanfaat!</p>
+                
+                <a href="http://localhost:8000/blog" class="inline-flex items-center gap-4 px-10 py-5 bg-slate-900 dark:bg-white text-white dark:text-slate-950 rounded-full text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 dark:hover:bg-blue-600 dark:hover:text-white transition-all transform hover:-translate-y-1 shadow-2xl">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    Kembali ke Blog
+                </a>
+            </div>
+        </footer>
+    </div>
+    </main>
+
+    <footer id="contact" class="bg-white dark:bg-slate-900 py-20 sm:py-32 border-t border-slate-100 dark:border-slate-800 transition-colors duration-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 lg:gap-24 mb-20">
+            <div class="lg:col-span-5">
+                <a href="/" class="text-2xl font-black tracking-tighter flex items-center gap-2" aria-label="NorthSumateraTrip Home">
+                                            <img src="http://localhost:8000/storage/settings/01KJ70CGSAYJKJPEFD76N8GTKA.jpg" alt="NorthSumateraTrip" class="h-8 w-auto object-contain">
+                                    </a>
+                <p class="text-slate-500 dark:text-slate-400 text-sm mt-6 max-w-md font-medium leading-relaxed">
+                    Solusi perjalanan wisata profesional untuk menjelajahi keindahan Danau Toba, Berastagi, dan Bukit Lawang dengan layanan eksklusif dan terpercaya.
+                </p>
+                <div class="flex items-center gap-4 mt-8">
+                                            <a href="https://wa.me/6282381118520" target="_blank" class="w-10 h-10 rounded-xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-600 flex items-center justify-center text-emerald-500 hover:border-emerald-500 hover:bg-emerald-50 dark:hover:bg-emerald-500/10 hover:shadow-lg transition-all duration-300" aria-label="Chat WhatsApp">
+                            <svg width="20" height="20" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347Z"/></svg>
+                        </a>
+                                                                                                </div>
+            </div>
+
+            <div class="lg:col-span-3">
+                <h4 class="text-sm font-black uppercase tracking-[0.2em] mb-8 text-blue-700">Navigation</h4>
+                <ul class="space-y-4">
+                    <li><a href="/" class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold transition-colors">Home</a></li>
+                    <li><a href="http://localhost:8000/packages" class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold transition-colors">Packages</a></li>
+                    <li><a href="http://localhost:8000/rental" class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold transition-colors">Car Rental</a></li>
+                    <li><a href="http://localhost:8000/gallery" class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold transition-colors">Gallery</a></li>
+                    <li><a href="http://localhost:8000/blog" class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold transition-colors">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="lg:col-span-4">
+                <h4 class="text-sm font-black uppercase tracking-[0.2em] mb-8 text-blue-700">Our Address</h4>
+                <p class="text-slate-600 dark:text-slate-400 font-bold leading-relaxed mb-6">
+                    Jln Medan-Sidikalang No 113
+                </p>
+                                    <a href="mailto:ridhorobbipasi@gmail.com" class="text-slate-600 dark:text-slate-400 hover:text-blue-700 dark:hover:text-blue-400 font-bold transition-colors">
+                        ridhorobbipasi@gmail.com
+                    </a>
+                            </div>
+        </div>
+
+        <div class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-slate-400 dark:text-slate-500 text-xs font-bold">
+                ?? 2026 NorthSumateraTrip. All rights reserved.
+            </p>
+            <div class="flex items-center gap-6">
+                <a href="http://localhost:8000/sitemap.xml" class="text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-400 text-xs font-bold transition-colors">Sitemap</a>
+                <a href="http://localhost:8000/terms" class="text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-400 text-xs font-bold transition-colors">Terms &amp; Conditions</a>
+                <a href="http://localhost:8000/privacy" class="text-slate-400 dark:text-slate-500 hover:text-blue-700 dark:hover:text-blue-400 text-xs font-bold transition-colors">Privacy Policy</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Floating Action Button (Back to Top) -->
+<div x-data="{ show: false }" 
+     x-init="window.addEventListener('scroll', () => { show = window.pageYOffset > 500 })"
+     x-show="show"
+     x-transition:enter="transition ease-out duration-300"
+     x-transition:enter-start="opacity-0 translate-y-10"
+     x-transition:enter-end="opacity-100 translate-y-0"
+     x-transition:leave="transition ease-in duration-300"
+     x-transition:leave-start="opacity-100 translate-y-0"
+     x-transition:leave-end="opacity-0 translate-y-10"
+     class="fixed bottom-8 right-28 z-[90]"
+     x-cloak>
+    <button @click="window.scrollTo({top: 0, behavior: 'smooth'})"
+            class="group w-12 h-12 sm:w-14 sm:h-14 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-2xl shadow-2xl flex items-center justify-center hover:bg-blue-600 hover:text-white hover:border-blue-600 hover:-translate-y-2 transition-all duration-500"
+            aria-label="Kembali ke Atas">
+        <svg width="24" height="24" class="w-5 h-5 sm:w-6 sm:h-6 transform group-hover:-translate-y-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 15l7-7 7 7"></path></svg>
+    </button>
+</div>
+    <a href="https://wa.me/6282381118520" 
+   target="_blank" 
+   rel="noopener noreferrer"
+   class="fixed bottom-8 right-8 z-50 flex items-center gap-3 group"
+   aria-label="Hubungi via WhatsApp">
+    <div class="bg-white px-5 py-2.5 rounded-2xl shadow-2xl border border-slate-100 opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 hidden md:block">
+        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest leading-none mb-1">Butuh Bantuan?</p>
+        <p class="text-xs font-black text-slate-900 uppercase tracking-wider leading-none">Chat Sekarang</p>
+    </div>
+    <div class="relative bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-[24px] p-4 shadow-2xl shadow-emerald-500/40 transition-all duration-500 hover:scale-110 hover:-rotate-12">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+        </svg>
+        <span class="absolute -top-1.5 -right-1.5 bg-rose-500 text-white text-[10px] font-black rounded-full w-5 h-5 flex items-center justify-center border-2 border-white animate-bounce">1</span>
+    </div>
+</a>
+
+<style>
+    @media print {
+        .fixed.bottom-6.right-6 {
+            display: none !important;
+        }
+    }
+</style>
+
+    <!-- ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+    <!-- GLOBAL SCRIPTS                                          -->
+    <!-- ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? -->
+    <script>
+        /* ????????? Dark Mode ????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? */
+        function toggleTheme() {
+            const html = document.documentElement;
+            const isDark = html.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            updateThemeIcons(isDark);
+            updateGlow(isDark);
+        }
+
+        function updateGlow(isDark) {
+            const glow = document.getElementById('dm-glow');
+            if (glow) glow.style.opacity = isDark ? '1' : '0';
+        }
+
+        function updateThemeIcons(isDark) {
+            const sun  = document.getElementById('iconSun');
+            const moon = document.getElementById('iconMoon');
+            const mobileLabel = document.getElementById('mobileThemeLabel');
+            const mobileIcon  = document.getElementById('mobileThemeIcon');
+
+            if (isDark) {
+                sun?.classList.remove('hidden');
+                moon?.classList.add('hidden');
+                if (mobileLabel) mobileLabel.textContent = 'Mode Terang';
+                if (mobileIcon) mobileIcon.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`;
+            } else {
+                sun?.classList.add('hidden');
+                moon?.classList.remove('hidden');
+                if (mobileLabel) mobileLabel.textContent = 'Mode Gelap';
+                if (mobileIcon) mobileIcon.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
+            }
+        }
+
+        /* ????????? Wishlist ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? */
+        function openWishlist() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            if (wishlist.length === 0) {
+                alert('Wishlist Anda masih kosong');
+                return;
+            }
+            let html = '<div class="space-y-3 max-h-[55vh] overflow-y-auto custom-scrollbar pr-2">';
+            wishlist.forEach(item => {
+                html += `
+                    <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-100 dark:border-slate-600">
+                        <img src="${item.thumb}" class="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0">
+                        <div class="flex-1 min-w-0">
+                            <h4 class="font-black text-slate-900 dark:text-white text-sm truncate">${item.title}</h4>
+                            <a href="/tour/${item.id}" class="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Lihat Detail</a>
+                        </div>
+                        <button onclick="removeFromWishlist(${item.id})" class="p-2 text-slate-400 hover:text-rose-500 transition-colors flex-shrink-0 tap-target">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                `;
+            });
+            html += '</div>';
+
+            const overlay = document.createElement('div');
+            overlay.id = 'wishlistOverlay';
+            overlay.className = 'fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6';
+            overlay.innerHTML = `
+                <div class="bg-white dark:bg-slate-800 rounded-t-[32px] sm:rounded-[32px] w-full sm:max-w-md p-6 sm:p-8 shadow-2xl animate-fade-up sm:animate-scale-in">
+                    <div class="w-10 h-1 bg-slate-200 dark:bg-slate-600 rounded-full mx-auto mb-6 sm:hidden"></div>
+                    <div class="flex items-center justify-between mb-6">
+                        <h3 class="text-xl font-black text-slate-900 dark:text-white">Wishlist <span class="text-blue-500">Saya</span></h3>
+                        <button onclick="document.getElementById('wishlistOverlay').remove()" class="w-9 h-9 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        </button>
+                    </div>
+                    ${html}
+                    <button onclick="document.getElementById('wishlistOverlay').remove()" class="w-full mt-6 py-3.5 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors">Tutup</button>
+                </div>
+            `;
+            overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+            document.body.appendChild(overlay);
+        }
+
+        function removeFromWishlist(id) {
+            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            wishlist = wishlist.filter(item => item.id !== id);
+            localStorage.setItem('wishlist', JSON.stringify(wishlist));
+            updateWishlistBadge();
+            const overlay = document.getElementById('wishlistOverlay');
+            if (overlay) { overlay.remove(); openWishlist(); }
+        }
+
+        function updateWishlistBadge() {
+            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            const badge = document.getElementById('wishlistBadge');
+            if (badge) {
+                badge.textContent = wishlist.length;
+                badge.classList.toggle('hidden', wishlist.length === 0);
+            }
+        }
+
+        /* ????????? Scroll Reveal ????????????????????????????????????????????????????????????????????????????????????????????????????????? */
+        function reveal() {
+            document.querySelectorAll('.reveal').forEach(el => {
+                const top = el.getBoundingClientRect().top;
+                if (top < window.innerHeight - 100) el.classList.add('active');
+            });
+        }
+
+        /* ????????? Init ???????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????????? */
+        /* ????????? Premium Effects ????????????????????????????????????????????????????????????????????????????????????????????? */
+        document.addEventListener('mousemove', e => {
+            // Global Mouse Follow for CSS Variables
+            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
+            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
+            
+            // Premium Card Glow Logic
+            document.querySelectorAll('.group').forEach(group => {
+                const rect = group.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                group.style.setProperty('--mouse-x', `${x}px`);
+                group.style.setProperty('--mouse-y', `${y}px`);
+            });
+
+            // Parallax Floating Logic
+            document.querySelectorAll('.parallax-el').forEach(el => {
+                const speed = parseFloat(el.dataset.speed) || 0.05;
+                const x = (window.innerWidth / 2 - e.clientX) * speed;
+                const y = (window.innerHeight / 2 - e.clientY) * speed;
+                el.style.transform = `translate(${x}px, ${y}px)`;
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const isDark = document.documentElement.classList.contains('dark');
+            updateThemeIcons(isDark);
+            updateGlow(isDark);
+            updateWishlistBadge();
+            reveal();
+            window.addEventListener('scroll', reveal, { passive: true });
+        });
+    </script>
+    </body>
+</html>
+
+Success!

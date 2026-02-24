@@ -15,7 +15,7 @@
   "url": "{{ url('/') }}",
   "telephone": "+{{ App\Helpers\SettingsHelper::whatsappNumber() }}",
   "address": {
-    "@type": "PostalAddress",
+    "@@type": "PostalAddress",
     "streetAddress": "Medan, Sumatera Utara",
     "addressLocality": "Medan",
     "addressRegion": "Sumatera Utara",
@@ -23,12 +23,12 @@
     "addressCountry": "ID"
   },
   "geo": {
-    "@type": "GeoCoordinates",
+    "@@type": "GeoCoordinates",
     "latitude": 3.5952,
     "longitude": 98.6722
   },
   "openingHoursSpecification": {
-    "@type": "OpeningHoursSpecification",
+    "@@type": "OpeningHoursSpecification",
     "dayOfWeek": [
       "Monday",
       "Tuesday",
@@ -40,7 +40,12 @@
     ],
     "opens": "00:00",
     "closes": "23:59"
-  }
+  },
+  "sameAs": [
+    "https://facebook.com/northsumateratrip",
+    "https://instagram.com/northsumateratrip",
+    "https://twitter.com/northsumateratrip"
+  ]
 }
 </script>
 @endpush
@@ -549,7 +554,7 @@
     </section>
                     <div class="hidden lg:flex lg:justify-end">
                         <div class="relative w-full max-w-[420px] aspect-square bg-slate-800 rounded-[48px] overflow-hidden border border-slate-700 shadow-2xl rotate-2">
-                             <img src="https://images.unsplash.com/photo-1571732117565-d01449b803f2?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="Sumatera Adventure">
+                             <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="Sumatera Adventure">
                              <div class="absolute inset-0 flex items-center justify-center p-12">
                                 <div class="text-center">
                                     <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-[32px] flex items-center justify-center mx-auto mb-6 border border-white/20">
@@ -732,7 +737,7 @@
                     btn.textContent = key.toUpperCase();
                     btn.dataset.tripId = key;
                     btn.dataset.tripPrice = tripData.price || 0;
-                    btn.onclick = (e) => selectTrip(e);
+                    btn.onclick = function(e) { selectTrip(e); };
                     container.appendChild(btn);
                 });
             } else {
@@ -741,8 +746,8 @@
 
             // Load description and itinerary
             fetch(url)
-                .then(response => response.text())
-                .then(html => {
+                .then(function(response) { return response.text(); })
+                .then(function(html) {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
                     const desc = doc.getElementById('tourDescription')?.innerHTML || '';
@@ -845,8 +850,8 @@
                     hp_field: document.getElementById('hp_field')?.value
                 })
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(function(response) { return response.json(); })
+            .then(function(data) {
                 if (data.success) {
                     // Manual Payment Success Logic
                     const bank = data.payment_info.bank_details;
@@ -869,7 +874,7 @@
                     btnLoading.classList.add('hidden');
                 }
             })
-            .catch(error => {
+            .catch(function(error) {
                 console.error('Error:', error);
                 alert('Terjadi kesalahan. Silakan coba lagi.');
                 btn.disabled = false;

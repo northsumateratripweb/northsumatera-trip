@@ -353,13 +353,13 @@
                     <button onclick="document.getElementById('wishlistOverlay').remove()" class="w-full mt-6 py-3.5 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors">Tutup</button>
                 </div>
             `;
-            overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+            overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
             document.body.appendChild(overlay);
         }
 
         function removeFromWishlist(id) {
             let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-            wishlist = wishlist.filter(item => item.id !== id);
+            wishlist = wishlist.filter(function(item) { return item.id !== id; });
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
             updateWishlistBadge();
             const overlay = document.getElementById('wishlistOverlay');
@@ -377,7 +377,7 @@
 
         /* ─── Scroll Reveal ─────────────────────────────────── */
         function reveal() {
-            document.querySelectorAll('.reveal').forEach(el => {
+            document.querySelectorAll('.reveal').forEach(function(el) {
                 const top = el.getBoundingClientRect().top;
                 if (top < window.innerHeight - 100) el.classList.add('active');
             });
@@ -391,7 +391,7 @@
             document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
             
             // Premium Card Glow Logic
-            document.querySelectorAll('.group').forEach(group => {
+            document.querySelectorAll('.group').forEach(function(group) {
                 const rect = group.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
@@ -400,7 +400,7 @@
             });
 
             // Parallax Floating Logic
-            document.querySelectorAll('.parallax-el').forEach(el => {
+            document.querySelectorAll('.parallax-el').forEach(function(el) {
                 const speed = parseFloat(el.dataset.speed) || 0.05;
                 const x = (window.innerWidth / 2 - e.clientX) * speed;
                 const y = (window.innerHeight / 2 - e.clientY) * speed;
