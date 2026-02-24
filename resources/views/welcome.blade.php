@@ -32,6 +32,7 @@
                         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-600"></span>
                     </span>
                     <span class="text-[11px] font-black uppercase tracking-[0.2em] text-blue-700">{{ App\Helpers\SettingsHelper::heroBadge() }}</span>
+                    <!-- Deployment Trigger: Realtime Sync Active -->
                 </div>
                 
                 <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-slate-900 dark:text-white leading-[1.05] tracking-tight mb-8">
