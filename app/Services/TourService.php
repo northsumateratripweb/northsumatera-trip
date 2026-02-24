@@ -46,49 +46,18 @@ class TourService
     {
         $tour = $this->tourRepository->findById($tourId);
 
-        // Midtrans Config
-        \Midtrans\Config::$serverKey = config('services.midtrans.server_key');
-        \Midtrans\Config::$isProduction = config('services.midtrans.is_production');
-        \Midtrans\Config::$isSanitized = true;
-        \Midtrans\Config::$is3ds = true;
-
-        $orderId = 'TRIP-' . uniqid();
+        $orderId = 'TRIP-' . strtoupper(uniqid());
         $quantity = $data['qty'] ?? 1;
         $basePrice = $tour->price;
 
+        // Determine price based on selected trip type if applicable
         if (isset($data['trip_id']) && $tour->trips && isset($tour->trips[$data['trip_id']])) {
             $basePrice = $tour->trips[$data['trip_id']]['price'] ?? $tour->price;
         }
 
         $grossAmount = $basePrice * $quantity;
 
-        $params = [
-            'transaction_details' => [
-                'order_id' => $orderId,
-                'gross_amount' => $grossAmount,
-            ],
-            'customer_details' => [
-                'first_name' => $data['customer_name'] ?? 'Customer',
-                'email' => $data['email'] ?? 'customer@test.com',
-                'phone' => $data['phone'] ?? '08000000000',
-            ],
-            'item_details' => [
-                [
-                    'id' => $tour->id,
-                    'price' => $basePrice,
-                    'quantity' => $quantity,
-                    'name' => $tour->title . (isset($data['trip_id']) ? ' - Trip ' . strtoupper($data['trip_id']) : ''),
-                ],
-            ],
-        ];
-
-        try {
-            $snapToken = \Midtrans\Snap::getSnapToken($params);
-        } catch (\Exception $e) {
-            Log::error('Midtrans Snap Token Error: ' . $e->getMessage());
-            throw new \App\Exceptions\BookingException('Gagal membuat token pembayaran: ' . $e->getMessage());
-        }
-
+        // Create Booking
         $booking = Booking::create([
             'tour_id' => $tour->id,
             'trip_type' => $data['trip_id'] ?? null,
@@ -110,12 +79,52 @@ class TourService
             'status' => 'pending',
             'payment_status' => 'pending',
             'external_id' => $orderId,
-            'snap_token' => $snapToken,
+            'snap_token' => null, // No longer using Midtrans
         ]);
+
+        // Create TripData for Admin Dashboard
+        \App\Models\TripData::create([
+            'booking_id'    => $booking->id,
+            'tanggal'       => $booking->travel_date,
+            'nama_pelanggan'=> $booking->customer_name,
+            'status'        => 'Sudah Booking',
+            'nomor_hp'      => $booking->customer_whatsapp ?? $booking->phone,
+            'layanan'       => 'Tour Package',
+            'jenis_mobil'   => null,
+            'drone'         => $booking->use_drone,
+            'jumlah_hari'   => $tour->duration_days,
+            'penumpang'     => $quantity,
+            'hotel_1'       => $booking->hotel_1,
+            'hotel_2'       => $booking->hotel_2,
+            'hotel_3'       => $booking->hotel_3,
+            'hotel_4'       => $booking->hotel_4,
+            'harga'         => $booking->total_price,
+            'tiba'          => $booking->tiba,
+            'flight_balik'  => $booking->flight_balik,
+            'notes'         => 'Booking paket: ' . $tour->title . ' | ID: ' . $orderId,
+        ]);
+
+        // WhatsApp Notification (Optional, can also be handled in Controller)
+        try {
+            $waMessage = "✨ *BOOKING PAKET WISATA BERHASIL* ✨\n\n";
+            $waMessage .= "Halo *" . $booking->customer_name . "*,\n";
+            $waMessage .= "Terima kasih telah memesan paket wisata bersama kami!\n\n";
+            $waMessage .= "📋 *DETAIL PESANAN:*\n";
+            $waMessage .= "• *ID Pesanan:* " . $booking->external_id . "\n";
+            $waMessage .= "• *Paket:* " . $tour->title . "\n";
+            $waMessage .= "• *Tgl Perjalanan:* " . \Carbon\Carbon::parse($booking->travel_date)->format('d M Y') . "\n";
+            $waMessage .= "• *Peserta:* " . $booking->qty . " Orang\n";
+            $waMessage .= "• *Total:* Rp " . number_format($booking->total_price, 0, ',', '.') . "\n\n";
+            $waMessage .= "Silakan lakukan pembayaran sesuai instruksi di website. Terima kasih! 🙏";
+
+            \App\Services\WhatsAppService::sendMessage($booking->phone, $waMessage);
+        } catch (\Exception $e) {
+            Log::error('WA Notification Error: ' . $e->getMessage());
+        }
 
         return [
             'booking' => $booking,
-            'snap_token' => $snapToken,
+            'snap_token' => null,
             'order_id' => $orderId,
             'gross_amount' => $grossAmount,
             'tour' => $tour,
