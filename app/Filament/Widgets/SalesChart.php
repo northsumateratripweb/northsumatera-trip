@@ -8,27 +8,23 @@ use Illuminate\Support\Carbon;
 
 class SalesChart extends ChartWidget
 {
-    protected static ?string $heading = 'Grafik Penjualan Mingguan';
+    protected static ?string $heading = 'Grafik Penjualan Bulanan';
 
     protected function getData(): array
     {
         $bookings = Booking::where('payment_status', 'success')
-            ->where('created_at', '>=', Carbon::now()->subDays(7))
-            ->get();
+            ->where('created_at', '>=', Carbon::now()->subDays(30))
+            ->selectRaw('DATE(created_at) as date, SUM(total_price) as total')
+            ->groupBy('date')
+            ->pluck('total', 'date');
 
         $data = [];
         $labels = [];
-        
-        for ($i = 6; $i >= 0; $i--) {
-            $date = Carbon::now()->subDays($i);
-            $labels[] = $date->format('D, d M');
-            
-            $amount = $bookings
-                ->where('created_at', '>=', $date->startOfDay())
-                ->where('created_at', '<=', $date->endOfDay())
-                ->sum('total_price');
-            
-            $data[] = $amount;
+
+        for ($i = 29; $i >= 0; $i--) {
+            $date = Carbon::now()->subDays($i)->format('Y-m-d');
+            $labels[] = Carbon::now()->subDays($i)->format('d M');
+            $data[] = $bookings->get($date, 0);
         }
 
         return [

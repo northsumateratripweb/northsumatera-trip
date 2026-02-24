@@ -1,0 +1,13 @@
+﻿VALIDATION LISTS:
+
+[Status] Formula: Sudah Booking;Sedang berjalan;Selesai
+[Layanan] Formula: Paket Trip;Rent Car
+[Plat Mobil] Formula: 
+[Jenis Mobil] Formula: Avanza       ;Innova;Hiace;Commuter; Hiace Premio;ELF;Alphard ;Bus ;Bus Medium
+[Hotel 1] Formula: Bobocabin Patra ;Samosir Villa; Samosir Cottage  ;Toba Village Inn ;Saulina Resort ;Kama Hotel  ;Kalang Ulu  ;Mikie Holiday  ;Hotel Sibayak  ;Sinabung Resort  ; Marianna Resort  
+[Hotel 2] Formula: Bobocabin Patra ;Samosir Villa; Samosir Cottage  ;Toba Village Inn ;Saulina Resort ;Kama Hotel  ;Kalang Ulu  ;Mikie Holiday  ;Hotel Sibayak  ;Sinabung Resort  ; Marianna Resort  
+[Hotel 3] Formula: 
+[Hotel 4] Formula: 
+[Tiba] Formula: 
+[Flight Balik] Formula: 
+

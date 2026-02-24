@@ -6,7 +6,6 @@ use App\Models\Booking;
 use App\Models\TripData;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
-use Illuminate\Support\Carbon;
 
 class RevenueStatsWidget extends BaseWidget
 {
@@ -31,16 +30,16 @@ class RevenueStatsWidget extends BaseWidget
             ->sum('harga');
 
         return [
-            Stat::make('Pendapatan Hari Ini', 'Rp ' . number_format($todayRevenue, 0, ',', '.'))
+            Stat::make('Pendapatan Hari Ini', 'Rp '.number_format($todayRevenue, 0, ',', '.'))
                 ->icon('heroicon-o-currency-dollar')
                 ->color('success'),
-            Stat::make('Pendapatan Bulan Ini', 'Rp ' . number_format($monthRevenue, 0, ',', '.'))
+            Stat::make('Pendapatan Bulan Ini', 'Rp '.number_format($monthRevenue, 0, ',', '.'))
                 ->icon('heroicon-o-chart-bar')
                 ->color('info'),
-            Stat::make('Pendapatan Tahun Ini', 'Rp ' . number_format($yearRevenue, 0, ',', '.'))
+            Stat::make('Pendapatan Tahun Ini', 'Rp '.number_format($yearRevenue, 0, ',', '.'))
                 ->icon('heroicon-o-banknotes')
                 ->color('warning'),
-            Stat::make('Total dari Data Trip', 'Rp ' . number_format($tripDataRevenue, 0, ',', '.'))
+            Stat::make('Total dari Data Trip', 'Rp '.number_format($tripDataRevenue, 0, ',', '.'))
                 ->icon('heroicon-o-calendar-days')
                 ->color('primary'),
         ];

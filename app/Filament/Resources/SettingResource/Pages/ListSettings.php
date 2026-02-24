@@ -4,7 +4,6 @@ namespace App\Filament\Resources\SettingResource\Pages;
 
 use App\Filament\Resources\SettingResource;
 use App\Models\Setting;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 
 class ListSettings extends ListRecords
@@ -13,18 +12,12 @@ class ListSettings extends ListRecords
 
     protected function getHeaderActions(): array
     {
-        return [
-            Actions\CreateAction::make()
-                ->after(function () {
-                    // Ensure only one setting exists
-                    Setting::firstOrCreateDefault();
-                }),
-        ];
+        return [];
     }
 
-    protected function getRedirectUrl(): string
+    public function mount(): void
     {
         $setting = Setting::firstOrCreateDefault();
-        return SettingResource::getUrl('edit', ['record' => $setting->id]);
+        redirect(SettingResource::getUrl('edit', ['record' => $setting->id]));
     }
 }

@@ -19,7 +19,9 @@ class TourResource extends Resource
 {
     protected static ?string $model = Tour::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-map';
+    protected static ?string $navigationIcon  = 'heroicon-o-globe-alt';
+    protected static ?string $navigationGroup = 'Katalog';
+    protected static ?int    $navigationSort  = 1;
     protected static ?string $navigationLabel = 'Paket Wisata';
 
     public static function form(Form $form): Form
@@ -68,6 +70,11 @@ class TourResource extends Resource
                     RichEditor::make('itinerary')
                         ->label('Itinerari Perjalanan')
                         ->required()
+                        ->columnSpanFull(),
+                    TextInput::make('itinerary_url')
+                        ->label('Link Google Drive Itinerary')
+                        ->placeholder('https://drive.google.com/...')
+                        ->url()
                         ->columnSpanFull(),
                 ]),
 
@@ -146,5 +153,16 @@ class TourResource extends Resource
             'edit' => Pages\EditTour::route('/{record}/edit'),
         ];
     }
-}
 
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+        if (! $user) {
+            return false;
+        }
+
+        $role = $user->role ?? 'super_admin';
+
+        return in_array($role, ['super_admin', 'marketing']);
+    }
+}

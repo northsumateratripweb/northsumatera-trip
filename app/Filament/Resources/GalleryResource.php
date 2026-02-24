@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\GalleryResource\Pages;
 use App\Models\Gallery;
-use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -22,7 +21,9 @@ class GalleryResource extends Resource
     protected static ?string $model = Gallery::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-photo';
-    protected static ?string $navigationLabel = 'Manajemen Galeri';
+    protected static ?string $navigationGroup = 'Katalog';
+    protected static ?int $navigationSort = 3;
+    protected static ?string $navigationLabel = 'Galeri Foto';
 
     public static function form(Form $form): Form
     {
@@ -33,6 +34,10 @@ class GalleryResource extends Resource
                         TextInput::make('title')
                             ->label('Judul')
                             ->maxLength(255),
+                        TextInput::make('category')
+                            ->label('Kategori')
+                            ->maxLength(255)
+                            ->placeholder('Contoh: Danau Toba, Medan City Tour'),
                         TextInput::make('image_url')
                             ->label('URL Gambar')
                             ->url()
@@ -69,6 +74,9 @@ class GalleryResource extends Resource
                     ->label('Judul')
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('category')
+                    ->label('Kategori')
+                    ->searchable(),
                 TextColumn::make('order')
                     ->label('Urutan')
                     ->sortable(),
@@ -82,6 +90,15 @@ class GalleryResource extends Resource
             ->filters([
                 Tables\Filters\TernaryFilter::make('is_active')
                     ->label('Status Aktif'),
+                Tables\Filters\SelectFilter::make('category')
+                    ->label('Kategori')
+                    ->options(fn () => \App\Models\Gallery::query()
+                        ->select('category')
+                        ->whereNotNull('category')
+                        ->distinct()
+                        ->orderBy('category')
+                        ->pluck('category', 'category')
+                        ->toArray()),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
@@ -102,5 +119,17 @@ class GalleryResource extends Resource
             'create' => Pages\CreateGallery::route('/create'),
             'edit' => Pages\EditGallery::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+        if (! $user) {
+            return false;
+        }
+
+        $role = $user->role ?? 'super_admin';
+
+        return in_array($role, ['super_admin', 'marketing']);
     }
 }

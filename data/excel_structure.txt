@@ -1,0 +1,66 @@
+﻿HEADERS:
+C1=Tanggal
+C2=Nama Pelanggan
+C3=Status
+C4=Nomor HP
+C5=Nama Driver
+C6=Layanan
+C7=Plat Mobil
+C8=Jenis Mobil
+C9=Drone
+C10=Jumlah Hari
+C11=Penumpang
+C12=Hotel 1
+C13=Hotel 2
+C14=Hotel 3
+C15=Hotel 4
+C16=Harga
+C17=Deposit
+C18=Pelunasan
+C19=Tiba
+C20=Flight Balik
+
+ROW2:
+C1=09/02/2026
+C2=
+C3=
+C4=
+C5=
+C6=Paket Trip
+C7=
+C8=
+C9=FALSE
+C10=
+C11=
+C12=Pilihan Lain Tulis Saja
+C13=Pilihan Lain Tulis Saja
+C14=Pilihan Lain Tulis Saja
+C15=Pilihan Lain Tulis Saja
+C16=
+C17=
+C18=
+C19=
+C20=
+
+ROW3:
+C1=
+C2=
+C3=
+C4=
+C5=
+C6=
+C7=
+C8=
+C9=FALSE
+C10=
+C11=
+C12=
+C13=
+C14=
+C15=
+C16=
+C17=
+C18=
+C19=
+C20=
+

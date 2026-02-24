@@ -21,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\ValidatePostSize::class,
             \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
             \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
+            \App\Http\Middleware\SetSecurityHeaders::class,
         ]);
 
         // Default "web" and "api" middleware groups
@@ -28,12 +29,13 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Cookie\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
+            \App\Http\Middleware\SetLocale::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            // CSRF protection disabled to simplify testing / local usage.
-            // \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
+            \Illuminate\Foundation\Http\Middleware\ValidateCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
         ]);
+
 
         $middleware->group('api', [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
@@ -59,5 +61,7 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withExceptions(function (Exceptions $exceptions): void {
         //
     })
+    ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule) {
+        $schedule->command('trip:send-followup')->dailyAt('09:00');
+    })
     ->create();
-

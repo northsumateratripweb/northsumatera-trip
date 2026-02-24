@@ -1,322 +1,655 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="dark">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    
-    <title>NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara</title>
-    <meta name="description" content="Portal wisata profesional untuk menjelajahi keindahan Danau Toba, Berastagi, dan Bukit Lawang.">
-    
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600,700,800" rel="stylesheet" />
+@extends('layouts.main')
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-          darkMode: 'class',
-          theme: {
-            extend: {
-              colors: {
-                clifford: '#da373d',
-              }
-            }
-          }
-        }
-    </script>
+@section('title', 'NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara Terbaik')
+@section('meta_description', 'Jelajahi keindahan Sumatera Utara dengan paket wisata Danau Toba, Berastagi, dan Medan terbaik. Sewa mobil premium dan layanan tour profesional.')
+@section('meta_keywords', 'wisata sumut, danau toba tour, paket wisata medan, sewa mobil medan murah, trip berastagi, liburan sumatera utara')
 
+@section('content')
+    @push('styles')
     <style>
-        /* Custom Animations & Styles */
-        @keyframes fade-up {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        @media (max-width: 640px) {
+            .hero-title { font-size: 2.25rem !important; line-height: 1.2 !important; }
+            #tourModal .p-8 { padding: 1.5rem !important; }
+            #tripsContainer { grid-template-cols: repeat(2, minmax(0, 1fr)) !important; }
         }
-        .animate-fade-up { animation: fade-up 0.8s ease-out forwards; }
-        .glass { background: rgba(22, 22, 21, 0.8); backdrop-filter: blur(12px); }
-        .text-gradient { background: linear-gradient(to right, #FF4433, #f53003); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #3E3E3A; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #FF4433; }
     </style>
-</head>
-<body class="bg-[#0a0a0a] text-[#EDEDEC] antialiased font-['Instrument_Sans']">
+    @endpush
+    <section class="relative min-h-[85vh] md:min-h-screen flex items-center justify-center pt-32 md:pt-40 overflow-hidden bg-slate-50 dark:bg-slate-950 transition-colors duration-700">
+    @php
+        $isMobile = request()->header('User-Agent') && (strpos(strtolower(request()->header('User-Agent')), 'mobile') !== false);
+    @endphp
+        <!-- Subtle Refined Background -->
+        <div class="absolute inset-0 z-0 pointer-events-none opacity-40">
+            <div class="absolute top-0 right-0 w-[60%] h-[60%] bg-blue-100/50 dark:bg-blue-900/10 blur-[120px] rounded-full"></div>
+            <div class="absolute bottom-0 left-0 w-[50%] h-[50%] bg-blue-50/50 dark:bg-indigo-900/5 blur-[100px] rounded-full"></div>
+        </div>
 
-    <nav class="fixed w-full z-[100] border-b border-[#3E3E3A] glass transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8">
-            <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center">
-                    <a href="/" class="text-xl font-extrabold tracking-tighter">
-                        NorthSumatera<span class="text-[#FF4433]">Trip</span>
-                    </a>
-                </div>
-
-                <div class="hidden md:flex items-center gap-8">
-                    <a href="/" class="text-sm font-medium hover:text-[#FF4433]">{{ __('common.home') }}</a>
-                    <a href="#tours" class="text-sm font-medium hover:text-[#FF4433]">{{ __('common.tours') }}</a>
-                    <a href="#rental" class="text-sm font-medium hover:text-[#FF4433]">{{ __('common.car_rental') }}</a>
-                    <a href="#gallery" class="text-sm font-medium hover:text-[#FF4433]">{{ __('common.gallery') }}</a>
-                    <a href="#contact" class="text-sm font-medium hover:text-[#FF4433]">{{ __('common.contact') }}</a>
+        <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+            <div class="text-left py-8 lg:py-0">
+                <div class="inline-flex items-center gap-2.5 px-3.5 py-1.5 md:px-5 md:py-2 rounded-full bg-blue-50 border border-blue-100 mb-6 md:mb-8 animate-fade-up shadow-sm">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-500 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-blue-600"></span>
+                    </span>
+                    <span class="text-[11px] font-black uppercase tracking-[0.2em] text-blue-700">{{ App\Helpers\SettingsHelper::heroBadge() }}</span>
                 </div>
                 
-                <div class="flex items-center gap-4">
-                    <x-language-switcher />
-                    <a href="/admin" class="bg-[#FF4433] px-6 py-2 rounded-full text-sm font-bold">Admin</a>
-                </div>
-            </div>
-        </div>
-    </nav>
+                <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-slate-900 dark:text-white leading-[1.05] tracking-tight mb-8">
+                    {{ App\Helpers\SettingsHelper::heroTitle() }}
+                </h1>
+                
+                <p class="max-w-xl text-base md:text-xl text-slate-600 dark:text-slate-400 mb-10 md:mb-12 leading-relaxed animate-fade-up font-medium" style="animation-delay: 0.2s">
+                    {{ App\Helpers\SettingsHelper::heroSubtitle() }}
+                </p>
 
-    <section class="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden">
-        <div class="absolute inset-0 z-0">
-            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-[#FF4433]/10 blur-[150px] rounded-full animate-pulse"></div>
-            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-[#1D0002]/40 blur-[150px] rounded-full"></div>
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#161615] border border-[#3E3E3A] mb-8 animate-fade-up">
-                <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF4433] opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#FF4433]"></span>
-                </span>
-                <span class="text-xs font-bold uppercase tracking-widest text-[#A1A09A]">Open Booking 2026</span>
-            </div>
-            
-            <h1 class="text-6xl md:text-8xl font-black mb-8 leading-[1.1] animate-fade-up" style="animation-delay: 0.1s">
-                Jelajahi <span class="text-gradient">Eksotisme</span> <br>Sumatera Utara
-            </h1>
-            
-            <p class="max-w-2xl mx-auto text-lg md:text-xl text-[#A1A09A] mb-12 leading-relaxed animate-fade-up" style="animation-delay: 0.2s">
-                Partner perjalanan terpercaya untuk mengeksplorasi destinasi ikonik di Sumatera Utara dengan layanan premium dan harga kompetitif.
-            </p>
-
-            <div class="flex flex-col md:flex-row items-center justify-center gap-4 animate-fade-up" style="animation-delay: 0.3s">
-                <a href="#tours" class="w-full md:w-auto px-10 py-4 bg-white text-[#1C1C1A] rounded-xl font-bold text-lg hover:bg-[#eeeeec] transition transform hover:scale-105 shadow-2xl">
-                    Pilih Paket Wisata
-                </a>
-                <a href="#about" class="w-full md:w-auto px-10 py-4 bg-transparent border-2 border-[#3E3E3A] text-white rounded-xl font-bold text-lg hover:border-[#FF4433] transition">
-                    Pelajari Layanan
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-20 border-y border-[#3E3E3A] bg-[#161615]/30">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-            <div>
-                <div class="text-4xl font-black text-white mb-2">50+</div>
-                <div class="text-sm text-[#A1A09A] uppercase tracking-widest font-bold">Destinasi</div>
-            </div>
-            <div>
-                <div class="text-4xl font-black text-white mb-2">1k+</div>
-                <div class="text-sm text-[#A1A09A] uppercase tracking-widest font-bold">Happy Travelers</div>
-            </div>
-            <div>
-                <div class="text-4xl font-black text-white mb-2">4.9/5</div>
-                <div class="text-sm text-[#A1A09A] uppercase tracking-widest font-bold">Rating</div>
-            </div>
-            <div>
-                <div class="text-4xl font-black text-white mb-2">24/7</div>
-                <div class="text-sm text-[#A1A09A] uppercase tracking-widest font-bold">Support</div>
-            </div>
-        </div>
-    </section>
-
-    <section id="tours" class="py-32 px-6">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
-                <div class="max-w-2xl">
-                    <h2 class="text-4xl font-black mb-4">Paket Wisata <span class="text-[#FF4433]">Unggulan</span></h2>
-                    <p class="text-[#A1A09A]">Dipilih secara khusus untuk memberikan pengalaman terbaik di setiap sudut Sumatera Utara.</p>
-                </div>
-                <div class="h-1 w-24 bg-[#FF4433] hidden md:block"></div>
-            </div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                @forelse($tours as $tour)
-                    <a href="{{ route('tour.show', $tour->slug) }}" class="group bg-[#161615] rounded-3xl overflow-hidden border border-[#3E3E3A] hover:border-[#FF4433]/50 transition-all duration-500 hover:-translate-y-3">
-                        <div class="relative overflow-hidden aspect-[4/3]">
-                            <img src="{{ asset('storage/' . $tour->thumbnail) }}" alt="{{ $tour->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
-                            <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent opacity-80"></div>
-                        </div>
-
-                        <div class="p-8">
-                            <div class="flex items-center text-[#FF4433] text-xs font-bold uppercase tracking-widest mb-2">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path></svg>
-                                {{ $tour->location }}
-                            </div>
-                            
-                            <h3 class="text-2xl font-bold mb-3 group-hover:text-[#FF4433] transition-colors line-clamp-2">{{ $tour->title }}</h3>
-                            
-                            <div class="flex items-center gap-2 text-[#A1A09A] text-sm font-semibold">
-                                <svg class="w-4 h-4 text-[#FF4433]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                {{ $tour->duration_days }} Hari
-                            </div>
-                        </div>
+                <div class="flex flex-wrap items-center gap-4">
+                    <a href="#tours" class="px-8 py-4 bg-blue-600 text-white rounded-full font-black text-sm lg:text-base hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20">
+                        {{ __t('home_cta_booking') ?? 'Pesan Sekarang' }}
                     </a>
+                    <a href="{{ route('rental') }}" class="px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-full font-black text-sm lg:text-base hover:bg-slate-50 transition-all">
+                        {{ __t('nav_rental') ?? 'Sewa Mobil' }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="hidden lg:block relative animate-fade-up" style="animation-delay: 0.2s">
+                <!-- Main Hero Image -->
+                <div class="parallax-el relative z-10 rounded-[48px] overflow-hidden border-[12px] border-white dark:border-slate-800 shadow-2xl transition-all duration-1000 group hover:scale-[1.02]" data-speed="0.01">
+                    <img src="{{ App\Helpers\SettingsHelper::heroImage() ?? 'https://images.unsplash.com/photo-1571732117565-d01449b803f2?q=80&w=1200' }}" alt="Pemandangan Indah Danau Toba Sumatera Utara" class="w-full aspect-[4/5] object-cover transition-transform duration-1000 group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-gradient-to-t from-blue-900/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                </div>
+                
+                <!-- Floating Badge 1 -->
+                <div class="parallax-el absolute top-0 -left-10 z-20 glass p-6 rounded-[32px] shadow-2xl animate-fade-up" style="animation-duration: 6s" data-speed="0.04">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-500/30">
+                            <svg width="24" height="24" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-black text-blue-600 dark:text-blue-400 uppercase tracking-widest">Trust</p>
+                            <p class="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Verified Partner</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Floating Badge 2 -->
+                <div class="parallax-el absolute bottom-0 -right-10 z-20 glass p-6 rounded-[32px] shadow-2xl animate-fade-up" style="animation-duration: 8s; animation-delay: 1s" data-speed="0.03">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-white dark:bg-slate-700 rounded-2xl flex items-center justify-center text-blue-600 shadow-sm border border-slate-100 dark:border-white/10">
+                            <svg width="24" height="24" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <div>
+                            <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Support</p>
+                            <p class="text-xs font-black text-slate-900 dark:text-white uppercase tracking-tight">Expert Guides</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    @if(isset($banners) && $banners->count())
+        <section class="py-10 bg-slate-50 dark:bg-slate-950">
+            <div class="max-w-7xl mx-auto px-6 grid gap-6 md:grid-cols-3">
+                @foreach($banners as $banner)
+                    <div class="relative overflow-hidden rounded-[32px] border border-slate-200/80 bg-slate-50 group">
+                        @if($banner->image)
+                            <div class="h-40 overflow-hidden">
+                                <img src="{{ str_starts_with($banner->image, 'http') ? $banner->image : asset('storage/' . $banner->image) }}" alt="{{ $banner->title }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" loading="lazy">
+                            </div>
+                        @endif
+                        <div class="p-6 space-y-3">
+                            <h3 class="text-lg font-black text-slate-900">{{ $banner->title }}</h3>
+                            @if($banner->subtitle)
+                                <p class="text-sm text-slate-500">{{ $banner->subtitle }}</p>
+                            @endif
+                            @if($banner->button_link && $banner->button_text)
+                                <a href="{{ $banner->button_link }}" class="inline-flex items-center gap-2 px-4 py-2 rounded-2xl bg-blue-600 text-white text-xs font-black uppercase tracking-[0.2em] hover:bg-blue-700 transition-colors" aria-label="{{ $banner->button_text }}">
+                                    {{ $banner->button_text }}
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </a>
+                            @endif
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </section>
+    @endif
+
+    <section class="py-16 md:py-24 bg-white dark:bg-slate-900 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-50/50 blur-3xl rounded-full -mr-32 -mt-32"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12">
+                @forelse($stats as $stat)
+                    <div class="text-center group">
+                        <div class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2">{{ $stat->value }}</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">{{ $stat->label }}</div>
+                    </div>
                 @empty
-                    <div class="col-span-full py-24 text-center bg-[#161615] rounded-[40px] border-2 border-dashed border-[#3E3E3A]">
-                        <p class="text-[#A1A09A] text-xl">Database paket masih kosong, silakan input via Admin Dashboard.</p>
+                    <div class="text-center group">
+                        <div class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2">50+</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Destinasi Pilihan</div>
+                    </div>
+                    <div class="text-center group">
+                        <div class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2">1.2k+</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Wisatawan Puas</div>
+                    </div>
+                    <div class="text-center group">
+                        <div class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2">4.9/5</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Rating Layanan</div>
+                    </div>
+                    <div class="text-center group">
+                        <div class="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-2">24/7</div>
+                        <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black">Bantuan Cepat</div>
                     </div>
                 @endforelse
             </div>
         </div>
     </section>
 
-    <section id="rental" class="py-24 px-6">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-bold mb-8">Rental Mobil Medan</h2>
+    <section id="tours" class="py-20 md:py-32 bg-slate-50/50 dark:bg-slate-950/50 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 md:gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">{{ __t('home_popular_tours') ?? 'Paket Tour Terpopuler' }}</h2>
+                    <p class="text-slate-500 text-lg">{{ __t('home_popular_tours_subtitle') ?? 'Pilih dari berbagai paket wisata yang telah kami kurasi khusus untuk kenyamanan dan pengalaman tak terlupakan Anda.' }}</p>
+                </div>
+                <a href="{{ route('packages') }}" class="text-blue-600 font-bold hover:underline flex items-center gap-2" aria-label="Lihat Semua Paket Wisata">
+                    {{ __t('home_link_all_packages') ?? 'Lihat Semua Paket' }}
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($cars as $car)
-                <div class="bg-gray-800 rounded-lg shadow-lg overflow-hidden">
-                    <a href="{{ route('car.show', $car->id) }}">
-                        <img src="{{ $car->thumbnail ?? '/storage/default-car.jpg' }}" alt="{{ $car->name }}" class="w-full h-48 object-cover">
-                    </a>
-                    <div class="p-5">
-                        <h3 class="text-xl font-semibold"><a href="{{ route('car.show', $car->id) }}">{{ $car->name }}</a></h3>
-                        <p class="text-sm text-gray-400 mt-1">Kapasitas: {{ $car->capacity }} orang</p>
-                        <p class="text-sm text-gray-400">Transmisi: {{ $car->transmission ?? '-' }}</p>
-                        <p class="mt-3 text-lg font-bold">Rp {{ number_format($car->price_per_day,0,',','.') }} / hari</p>
-                        <div class="mt-4">
-                            <a href="https://wa.me/{{ env('WHATSAPP_NUMBER') }}?text={{ urlencode('Halo, saya mau sewa ' . $car->name) }}" class="inline-block w-full text-center bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 rounded">Pesan via WhatsApp</a>
+            <div class="bg-white dark:bg-slate-900 rounded-[40px] p-8 md:p-12 mb-20 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800 relative overflow-hidden group">
+                <form method="get" class="relative z-10">
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-end">
+                        <div class="lg:col-span-4">
+                            <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4 ml-1">Destinasi</label>
+                            <input type="text" name="q" value="{{ $filters['q'] ?? '' }}" placeholder="Danau Toba, Berastagi..." class="w-full bg-slate-50 border border-slate-100 dark:bg-slate-800 dark:border-slate-700 rounded-2xl px-6 py-4.5 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-bold text-slate-700 dark:text-slate-200">
+                        </div>
+                        <div class="lg:col-span-3">
+                            <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4 ml-1">Lokasi</label>
+                            <input type="text" name="location" value="{{ $filters['location'] ?? '' }}" placeholder="Semua Lokasi" class="w-full bg-slate-50 border border-slate-100 dark:bg-slate-800 dark:border-slate-700 rounded-2xl px-6 py-4.5 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-bold text-slate-700 dark:text-slate-200">
+                        </div>
+                        <div class="lg:col-span-2">
+                            <label class="block text-[11px] font-black text-slate-400 uppercase tracking-widest mb-4 ml-1">Urutan</label>
+                            <select name="sort" class="w-full bg-slate-50 border border-slate-100 dark:bg-slate-800 dark:border-slate-700 rounded-2xl px-6 py-4.5 focus:bg-white focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 outline-none transition-all font-bold text-slate-700 dark:text-slate-200 appearance-none">
+                                <option value="popular" @selected(($filters['sort'] ?? '')==='popular')>Terpopuler</option>
+                                <option value="cheapest" @selected(($filters['sort'] ?? '')==='cheapest')>Termurah</option>
+                                <option value="latest" @selected(($filters['sort'] ?? '')==='latest')>Terbaru</option>
+                            </select>
+                        </div>
+                        <div class="lg:col-span-3 text-right">
+                            <button type="submit" class="w-full bg-blue-600 text-white rounded-2xl py-4.5 font-black text-sm uppercase tracking-widest hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all">
+                                Cari Paket
+                            </button>
                         </div>
                     </div>
-                </div>
-                @endforeach
+                </form>
             </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                @forelse($tours as $tour)
+                    <div class="group bg-white dark:bg-slate-900 rounded-[48px] overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-all duration-500 flex flex-col h-full">
+                        <div class="relative overflow-hidden aspect-[4/3] m-4 rounded-[40px]">
+                            <img src="{{ $tour->image_url }}" loading="lazy" alt="{{ $tour->title }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
+                            
+                            <div class="absolute top-5 left-5">
+                                <div class="bg-white/95 backdrop-blur-md px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest text-blue-600 shadow-sm flex items-center gap-2">
+                                    {{ $tour->duration_days }} Hari
+                                </div>
+                            </div>
+
+                            @if($tour->is_popular)
+                                <div class="absolute top-5 right-5">
+                                    <div class="bg-amber-400 px-4 py-2 rounded-2xl text-[10px] font-black uppercase tracking-widest text-white shadow-sm">
+                                        Populer
+                                    </div>
+                                </div>
+                            @endif
+                        </div>
+
+                        <div class="p-8 pt-2 flex flex-col flex-grow">
+                            <h3 class="text-2xl font-black mb-4 group-hover:text-blue-600 transition-colors line-clamp-2 leading-tight tracking-tight text-slate-900 dark:text-white">
+                                {{ $tour->title }}
+                            </h3>
+                            
+                            <div class="mt-auto pt-8 border-t border-slate-50 dark:border-slate-800 flex items-center justify-between">
+                                <div>
+                                    <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest mb-1">{{ __t('packages_label_starting_from') ?? 'Mulai Dari' }}</p>
+                                    <p class="text-2xl font-black text-slate-900 dark:text-white">Rp {{ number_format($tour->price, 0, ',', '.') }}</p>
+                                </div>
+                                <a href="{{ route('tour.show', $tour->slug) }}" class="w-14 h-14 rounded-full bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 shadow-lg shadow-blue-500/20 transition-all">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                @empty
+                    <div class="col-span-full py-24 text-center bg-white rounded-[40px] border-2 border-dashed border-slate-200">
+                        <div class="w-20 h-20 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <svg class="w-10 h-10 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </div>
+                        <p class="text-slate-400 font-bold">Belum ada paket wisata yang sesuai kriteria.</p>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-32 bg-[#161615]">
+
+    <section id="rental" class="py-32 bg-white dark:bg-slate-900 relative overflow-hidden reveal">
+        <div class="absolute bottom-0 left-0 w-96 h-96 bg-blue-50/50 blur-[120px] rounded-full -ml-48 -mb-48"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 mb-6 transition-colors">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Premium Fleet</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">Sewa Mobil <span class="text-blue-500">Premium</span></h2>
+                <p class="text-slate-500 text-lg">Jelajahi Sumatera Utara dengan armada terbaru dan supir berpengalaman yang siap mengantar Anda dengan aman dan nyaman.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                @foreach($cars as $car)
+                <div class="group bg-white dark:bg-slate-900 rounded-[48px] border border-slate-100 dark:border-slate-800 hover:shadow-2xl transition-all duration-500 flex flex-col h-full overflow-hidden">
+                    <div class="relative overflow-hidden aspect-[16/10] m-4 rounded-[40px]">
+                        <img src="{{ $car->image_url }}" alt="{{ $car->name }}" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                        <div class="absolute bottom-5 right-5">
+                            <span class="bg-blue-600 text-white px-5 py-2.5 rounded-2xl text-[10px] font-black uppercase tracking-widest shadow-xl">
+                                Rp {{ number_format($car->price_per_day, 0, ',', '.') }} <span class="opacity-70">/ Hari</span>
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="px-10 pb-10 pt-4 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white mb-6 group-hover:text-blue-600 transition-colors leading-tight">{{ $car->name }}</h3>
+                        
+                        <div class="grid grid-cols-2 gap-4 mb-8">
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Kapasitas</span>
+                                <span class="text-sm font-black text-slate-700 dark:text-slate-300">{{ $car->capacity }} Penumpang</span>
+                            </div>
+                            <div class="flex flex-col gap-1">
+                                <span class="text-[9px] font-black text-slate-400 uppercase tracking-widest">Transmisi</span>
+                                <span class="text-sm font-black text-slate-700 dark:text-slate-300">Manual / AT</span>
+                            </div>
+                        </div>
+                        
+                        <a href="{{ route('car.show', $car->id) }}" class="w-full py-5 border-2 border-slate-900 dark:border-slate-700 text-slate-900 dark:text-white rounded-full font-black text-xs uppercase tracking-widest flex items-center justify-center gap-3 hover:bg-slate-900 hover:text-white dark:hover:bg-slate-700 transition-all mt-auto">
+                            Detail Mobil
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                        </a>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32 bg-slate-50/50 dark:bg-slate-950/50 reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 mb-6 transition-colors">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Travel Blog</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">Inspirasi <span class="text-gradient">Perjalanan</span></h2>
+                <p class="text-slate-500 text-lg">Temukan tips, panduan, dan cerita menarik dari destinasi terbaik di Sumatera Utara.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+                @foreach($posts as $post)
+                    <div class="group bg-white dark:bg-slate-900 rounded-[48px] overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-2xl transition-all duration-700 flex flex-col h-full">
+                        <div class="relative overflow-hidden aspect-[16/10] m-4 rounded-[40px]">
+                            <img src="{{ $post->image_url }}" alt="{{ $post->title }}" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" loading="lazy">
+                        </div>
+                        <div class="px-10 pb-10 pt-4 flex flex-col flex-grow">
+                            <div class="flex items-center gap-3 text-slate-400 text-[10px] font-black uppercase tracking-widest mb-4">
+                                <span>{{ $post->created_at->format('d M Y') }}</span>
+                            </div>
+                            <h3 class="text-2xl font-black mb-8 group-hover:text-blue-600 transition-colors leading-tight text-slate-900 dark:text-white line-clamp-2">{{ $post->title }}</h3>
+                            <a href="{{ route('post.show', $post->slug) }}" class="mt-auto flex items-center gap-3 text-blue-600 font-black text-[11px] uppercase tracking-widest hover:translate-x-2 transition-transform" aria-label="Baca Selengkapnya: {{ $post->title }}">
+                                Baca Detail
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-32 bg-white dark:bg-slate-900 relative overflow-hidden reveal">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-20">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 mb-6 transition-colors">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Common Questions</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">Pertanyaan yang <span class="text-gradient">Sering Diajukan</span></h2>
+                <p class="text-slate-500 text-lg leading-relaxed">Semua yang perlu Anda ketahui tentang layanan dan proses booking kami.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                @forelse($faqs as $faq)
+                    <div class="p-10 bg-white dark:bg-slate-900 rounded-[48px] border border-slate-100 dark:border-slate-800 transition-all duration-500">
+                        <h4 class="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-start gap-4">
+                            <span class="w-10 h-10 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-xs font-black">Q</span>
+                            {{ $faq->question }}
+                        </h4>
+                        <p class="text-slate-500 dark:text-slate-400 text-base leading-relaxed ml-14">{{ $faq->answer }}</p>
+                    </div>
+                @empty
+                    @php
+                        $defaultFaqs = [
+                            ['q' => 'Bagaimana cara memesan paket tour atau rental mobil?', 'a' => 'Anda dapat memesan langsung melalui website ini dengan memilih paket yang diinginkan, mengisi formulir pemesanan, dan melakukan konfirmasi pembayaran via WhatsApp.'],
+                            ['q' => 'Apakah harga paket sudah termasuk tiket pesawat?', 'a' => 'Harga yang tertera umumnya hanya mencakup layanan darat (land arrangement) di Sumatera Utara. Tiket pesawat dari kota asal tidak termasuk dalam paket standar kami.'],
+                            ['q' => 'Apa saja metode pembayaran yang tersedia?', 'a' => 'Kami mendukung pembayaran melalui Transfer Bank (Mandiri/BCA) dan scan QRIS. Konfirmasi pembayaran dilakukan dengan mengirimkan bukti transfer via WhatsApp.'],
+                            ['q' => 'Apakah ada layanan penjemputan di Bandara Kualanamu?', 'a' => 'Ya, semua paket tour dan rental mobil kami sudah termasuk layanan penjemputan dan pengantaran kembali ke Bandara Internasional Kualanamu (KNO).'],
+                        ];
+                    @endphp
+                    @foreach($defaultFaqs as $faq)
+                        <div class="p-10 bg-white dark:bg-slate-900 rounded-[48px] border border-slate-100 dark:border-slate-800 transition-all duration-500">
+                            <h4 class="text-xl font-black text-slate-900 dark:text-white mb-6 flex items-start gap-4">
+                                <span class="w-10 h-10 rounded-2xl bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center shrink-0 text-xs font-black">Q</span>
+                                {{ $faq['q'] }}
+                            </h4>
+                            <p class="text-slate-500 dark:text-slate-400 text-base leading-relaxed ml-14">{{ $faq['a'] }}</p>
+                        </div>
+                    @endforeach
+                @endforelse
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-32 bg-slate-50/50 dark:bg-slate-950/50 reveal">
         <div class="max-w-7xl mx-auto px-6">
             <div class="text-center max-w-3xl mx-auto mb-20">
-                <h2 class="text-4xl font-black mb-6 uppercase tracking-tighter">Kenapa Memilih <span class="text-[#FF4433]">Kami?</span></h2>
-                <p class="text-[#A1A09A]">Kami menjamin kualitas setiap aspek perjalanan Anda, didukung oleh tim berpengalaman dan teknologi manajemen terkini.</p>
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 mb-6 transition-colors">
+                    <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Testimonials</span>
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight text-slate-900">Apa Kata <span class="text-gradient">Mereka?</span></h2>
+                <p class="text-slate-500 text-lg">Kepercayaan Anda adalah prioritas kami. Berikut adalah pengalaman mereka bersama NorthSumateraTrip.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
-                <div class="p-10 rounded-[32px] bg-[#0a0a0a] border border-[#3E3E3A] hover:border-[#FF4433] transition group">
-                    <div class="w-14 h-14 bg-[#FF4433]/10 text-[#FF4433] rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#FF4433] group-hover:text-white transition">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                @forelse($reviews as $review)
+                    <div class="p-10 bg-white dark:bg-slate-900 rounded-[48px] border border-slate-100 dark:border-slate-800 transition-all duration-500">
+                        <div class="flex gap-1 text-amber-400 mb-8">
+                            @for($i=0; $i<$review->rating; $i++)
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            @endfor
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-10 italic">"{{ $review->comment }}"</p>
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-lg">
+                                {{ substr($review->customer_name, 0, 1) }}
+                            </div>
+                            <div>
+                                <h4 class="text-base font-black text-slate-900 dark:text-white">{{ $review->customer_name }}</h4>
+                                <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest">{{ $review->tour->location ?? 'Sumatera Utara' }}</p>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="text-xl font-bold mb-4">Tepat Waktu</h4>
-                    <p class="text-[#A1A09A] text-sm leading-relaxed">Itinerari yang terencana presisi memastikan Anda tidak melewatkan momen berharga di destinasi pilihan.</p>
-                </div>
-                
-                <div class="p-10 rounded-[32px] bg-[#0a0a0a] border border-[#3E3E3A] hover:border-[#FF4433] transition group">
-                    <div class="w-14 h-14 bg-[#FF4433]/10 text-[#FF4433] rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#FF4433] group-hover:text-white transition">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                @empty
+                    <div class="p-10 bg-white dark:bg-slate-900 rounded-[48px] border border-slate-100 dark:border-slate-800 transition-all duration-500">
+                        <div class="flex gap-1 text-amber-400 mb-8">
+                            @for($i=0; $i<5; $i++)
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                            @endfor
+                        </div>
+                        <p class="text-slate-600 dark:text-slate-400 font-medium leading-relaxed mb-10 italic">"Layanan yang sangat memuaskan, driver tepat waktu dan sangat ramah."</p>
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 rounded-2xl bg-blue-100 dark:bg-blue-900/40 flex items-center justify-center text-blue-600 dark:text-blue-400 font-black text-lg">A</div>
+                            <div>
+                                <h4 class="text-base font-black text-slate-900 dark:text-white">Agus Santoso</h4>
+                                <p class="text-[10px] text-slate-400 font-black uppercase tracking-widest">Medan, Indonesia</p>
+                            </div>
+                        </div>
                     </div>
-                    <h4 class="text-xl font-bold mb-4">Aman & Terpercaya</h4>
-                    <p class="text-[#A1A09A] text-sm leading-relaxed">Asuransi perjalanan dan armada yang selalu prima menjadi standar operasional wajib kami.</p>
-                </div>
-
-                <div class="p-10 rounded-[32px] bg-[#0a0a0a] border border-[#3E3E3A] hover:border-[#FF4433] transition group">
-                    <div class="w-14 h-14 bg-[#FF4433]/10 text-[#FF4433] rounded-2xl flex items-center justify-center mb-8 group-hover:bg-[#FF4433] group-hover:text-white transition">
-                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                    </div>
-                    <h4 class="text-xl font-bold mb-4">Layanan Cepat</h4>
-                    <p class="text-[#A1A09A] text-sm leading-relaxed">Sistem booking berbasis web terintegrasi memudahkan Anda memesan tour dalam hitungan detik.</p>
-                </div>
+                @endforelse
             </div>
         </div>
     </section>
 
-    <section class="py-24 px-6 border-t border-[#3E3E3A]">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-3xl font-black mb-12 border-l-4 border-[#FF4433] pl-4">Tips & Berita Wisata</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                @foreach($posts as $post)
-                    <div class="bg-[#161615] rounded-2xl border border-[#3E3E3A] overflow-hidden">
-                        <img src="{{ asset('storage/' . $post->thumbnail) }}" class="w-full h-48 object-cover">
-                        <div class="p-6">
-                            <span class="text-xs font-bold text-[#FF4433] uppercase">{{ $post->category }}</span>
-                            <h3 class="text-xl font-bold mt-2 mb-4">{{ $post->title }}</h3>
-                            <a href="{{ route('post.show', $post->slug) }}" class="text-white font-bold text-sm underline underline-offset-4 hover:text-[#FF4433] transition">Baca Selengkapnya</a>
-                        </div>
+    <!-- Gallery Section -->
+    @if(isset($galleries) && $galleries->count() > 0)
+    <section class="py-32 bg-white dark:bg-slate-900 reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30 mb-6 transition-colors">
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Visual Journey</span>
                     </div>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900">{{ __t('home_gallery_title') ?? 'Galeri Wisata' }}</h2>
+                    <p class="text-slate-500 text-lg mt-4 font-medium">{{ __t('home_gallery_subtitle') ?? 'Kilasan keindahan alam dan momen berharga tamu selama menjelajahi Sumatera Utara.' }}</p>
+                </div>
+                <a href="{{ route('gallery.index') }}" class="text-blue-600 font-black text-xs uppercase tracking-widest hover:underline flex items-center gap-2 group" aria-label="Lihat Galeri Lengkap">
+                    Lihat Galeri Lengkap
+                    <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8">
+                @foreach($galleries as $gallery)
+                <div class="group relative rounded-[48px] overflow-hidden aspect-square md:aspect-auto md:h-[400px] border border-slate-100 dark:border-slate-800 shadow-sm first:md:col-span-2">
+                    <img src="{{ str_starts_with($gallery->image_url, 'http') ? $gallery->image_url : asset('storage/' . $gallery->image_url) }}" alt="{{ $gallery->title }}" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-10">
+                        <span class="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-3">{{ $gallery->category }}</span>
+                        <h4 class="text-2xl font-black text-white leading-tight translate-y-4 group-hover:translate-y-0 transition-transform duration-500">{{ $gallery->title }}</h4>
+                    </div>
+                </div>
                 @endforeach
             </div>
         </div>
     </section>
+    @endif
+    
+    <!-- Instagram Feed Section -->
+    @if(isset($socialFeeds) && $socialFeeds->count() > 0)
+    <section class="py-32 bg-slate-50 dark:bg-slate-950 relative overflow-hidden reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-rose-50 dark:bg-rose-900/20 border border-rose-100 dark:border-rose-800/30 mb-6">
+                        <span class="text-[10px] font-black uppercase tracking-[0.2em] text-rose-600">Social Proof</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900">Momen Seru <span class="text-rose-500">@NorthSumateraTrip</span></h2>
+                    <p class="text-slate-500 text-lg mt-4 leading-relaxed font-medium">Ikuti perjalanan tamu kami menjelajahi keindahan alam Sumatera Utara melalui Instagram.</p>
+                </div>
+                <a href="https://instagram.com/northsumateratrip" target="_blank" class="inline-flex items-center gap-3 px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl text-xs font-black uppercase tracking-widest text-slate-600 dark:text-slate-300 hover:bg-rose-50 dark:hover:bg-rose-900/30 hover:border-rose-200 dark:hover:border-rose-800 hover:text-rose-600 transition-all duration-300 shadow-sm">
+                    Follow Instagram
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                </a>
+            </div>
 
-    <x-footer />
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+                @foreach($socialFeeds as $feed)
+                <a href="{{ $feed->instagram_url ?? '#' }}" target="_blank" class="group relative aspect-square rounded-[48px] overflow-hidden bg-slate-200 border border-slate-200/60 shadow-sm transition-all duration-700">
+                    <img src="{{ asset('storage/' . $feed->image) }}" alt="Instagram Feed" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" loading="lazy">
+                    <div class="absolute inset-0 bg-rose-600/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center p-8">
+                        <div class="text-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
+                            <svg class="w-12 h-12 text-white mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                            </svg>
+                            <p class="text-white font-black text-[10px] uppercase tracking-widest">Instagram</p>
+                        </div>
+                    </div>
+                </a>
+                @endforeach
+            </div>
+        </div>
+    <!-- CTA Footer Section -->
+    <section class="py-32 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="relative bg-slate-900 dark:bg-slate-950 rounded-[64px] p-16 md:p-32 overflow-hidden border border-slate-800 shadow-2xl text-center">
+                <div class="relative z-10 max-w-4xl mx-auto">
+                    <h2 class="text-4xl md:text-7xl font-black text-white mb-10 leading-[1.1] tracking-tight">
+                        {{ App\Helpers\SettingsHelper::ctaTitle() }}
+                    </h2>
+                    <p class="text-slate-400 text-lg md:text-2xl leading-relaxed mb-16 max-w-2xl mx-auto">
+                        {{ App\Helpers\SettingsHelper::ctaSubtitle() }}
+                    </p>
+                    
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="https://wa.me/{{ App\Helpers\SettingsHelper::whatsappNumber() }}" target="_blank" class="px-12 py-6 bg-white text-slate-900 rounded-full font-black text-lg hover:bg-slate-100 transition-all shadow-xl">
+                            {{ App\Helpers\SettingsHelper::ctaButtonText() }}
+                        </a>
+                        <a href="#tours" class="px-12 py-6 border-2 border-white/20 text-white rounded-full font-black text-lg hover:bg-white/5 transition-all">
+                            Lihat Paket Wisata
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+                    <div class="hidden lg:flex lg:justify-end">
+                        <div class="relative w-full max-w-[420px] aspect-square bg-slate-800 rounded-[48px] overflow-hidden border border-slate-700 shadow-2xl rotate-2">
+                             <img src="https://images.unsplash.com/photo-1571732117565-d01449b803f2?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="Sumatera Adventure">
+                             <div class="absolute inset-0 flex items-center justify-center p-12">
+                                <div class="text-center">
+                                    <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-[32px] flex items-center justify-center mx-auto mb-6 border border-white/20">
+                                        <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                    </div>
+                                    <p class="text-white font-black text-2xl tracking-tighter">Premium Travel Agency</p>
+                                    <div class="flex justify-center gap-1 mt-4">
+                                        @for($i=0; $i<5; $i++)
+                                        <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        @endfor
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    @endif
 
     <!-- Tour Modal -->
-    <div id="tourModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4">
-        <div class="bg-[#161615] rounded-3xl border border-[#3E3E3A] max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+    <div id="tourModal" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[150] flex items-center justify-center p-4">
+        <div class="bg-white rounded-[40px] border border-slate-200 max-w-2xl w-full max-h-[90vh] overflow-hidden flex flex-col shadow-2xl animate-fade-up">
             <!-- Header -->
-            <div class="sticky top-0 bg-[#161615] border-b border-[#3E3E3A] p-6 flex justify-between items-center">
-                <h2 id="modalTitle" class="text-2xl font-bold text-white"></h2>
-                <button onclick="closeTourModal()" class="text-[#A1A09A] hover:text-white transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            <div class="bg-white border-b border-slate-100 p-6 md:p-8 flex justify-between items-center">
+                <div>
+                    <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1">Booking Package</p>
+                    <h2 id="modalTitle" class="text-2xl font-black text-slate-900 tracking-tight"></h2>
+                </div>
+                <button onclick="closeTourModal()" class="w-12 h-12 bg-slate-50 text-slate-400 hover:text-rose-500 hover:bg-rose-50 rounded-2xl flex items-center justify-center transition-all duration-300" aria-label="Tutup Detail Paket">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
                 </button>
             </div>
 
             <!-- Content -->
-            <div class="p-8 space-y-6">
+            <div class="p-8 space-y-8 overflow-y-auto custom-scrollbar">
                 <!-- Trips Selection -->
                 <div>
-                    <label class="block text-sm font-bold uppercase tracking-widest text-[#A1A09A] mb-3">Pilih Trip (A-H)</label>
-                    <div id="tripsContainer" class="grid grid-cols-4 gap-2">
+                    <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4 ml-1">Pilih Kategori Trip</label>
+                    <div id="tripsContainer" class="grid grid-cols-4 gap-3">
                         <!-- Dynamically populated -->
                     </div>
                 </div>
 
-                <!-- People Count -->
-                <div>
-                    <label class="block text-sm font-bold uppercase tracking-widest text-[#A1A09A] mb-3">Jumlah Orang</label>
-                    <select id="peopleCount" class="w-full bg-[#0a0a0a] border border-[#3E3E3A] rounded-xl px-4 py-3 text-white font-bold focus:border-[#1e88e5] transition">
-                        <option value="1">1 Orang</option>
-                        <option value="2">2 Orang</option>
-                        <option value="3">3 Orang</option>
-                        <option value="4">4 Orang</option>
-                        <option value="5">5 Orang</option>
-                        <option value="6">6 Orang</option>
-                        <option value="7">7 Orang</option>
-                        <option value="8">8 Orang</option>
-                    </select>
-                </div>
-
-                <!-- Price Display -->
-                <div class="bg-[#0a0a0a] border border-[#3E3E3A] rounded-xl p-4">
-                    <div class="flex justify-between items-center">
-                        <span class="text-[#A1A09A]">Total Harga:</span>
-                        <span id="totalPrice" class="text-2xl font-black text-[#FF4433]">Rp 0</span>
+                <!-- Customer Details -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+                    <div class="md:col-span-2">
+                        <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Nama Lengkap</label>
+                        <input type="text" id="customerName" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition placeholder:font-medium placeholder:text-slate-300" placeholder="John Doe" required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Nomor WhatsApp</label>
+                        <input type="tel" id="customerWhatsapp" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition placeholder:font-medium placeholder:text-slate-300" placeholder="0812..." required>
+                    </div>
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Tanggal Perjalanan</label>
+                        <input type="date" id="travelDate" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition text-slate-600" required>
                     </div>
                 </div>
 
-                <!-- Description -->
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-3">Deskripsi</h3>
-                    <div id="modalDescription" class="text-[#A1A09A] text-sm leading-relaxed prose prose-invert max-w-none"></div>
+                <!-- Hotel & Extra Details -->
+                <div class="space-y-6">
+                    <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Informasi Perjalanan & Hotel</label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <input type="text" id="hotel_1" placeholder="Hotel 1" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:border-blue-500 outline-none transition">
+                        <input type="text" id="hotel_2" placeholder="Hotel 2" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:border-blue-500 outline-none transition">
+                        <input type="text" id="hotel_3" placeholder="Hotel 3" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:border-blue-500 outline-none transition">
+                        <input type="text" id="hotel_4" placeholder="Hotel 4" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:border-blue-500 outline-none transition">
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="flight_balik" placeholder="Info Penerbangan (Contoh: GA-123 18:00)" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:border-blue-500 outline-none transition">
+                        <textarea id="notes" placeholder="Catatan Tambahan..." rows="1" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-bold focus:border-blue-500 outline-none transition"></textarea>
+                    </div>
                 </div>
 
-                <!-- Itinerary -->
-                <div>
-                    <h3 class="text-lg font-bold text-white mb-3">Itinerari</h3>
-                    <div id="modalItinerary" class="text-[#A1A09A] text-sm leading-relaxed prose prose-invert max-w-none"></div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- People Count -->
+                    <div>
+                        <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-4 ml-1">Jumlah Orang</label>
+                        <div class="relative">
+                            <select id="peopleCount" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-4 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition appearance-none cursor-pointer">
+                                @for($i=1; $i<=10; $i++)
+                                    <option value="{{ $i }}">{{ $i }} Orang</option>
+                                @endfor
+                                <option value="more">Lainnya (Grup)</option>
+                            </select>
+                            <div class="absolute right-5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Price Display -->
+                    <div class="bg-blue-50/50 border border-blue-100 rounded-[32px] p-6 flex flex-col justify-center">
+                        <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1">Estimasi Total</p>
+                        <div id="totalPrice" class="text-3xl font-black text-slate-900">Rp 0</div>
+                    </div>
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="flex flex-col gap-3 pt-6 border-t border-[#3E3E3A]">
-                    <button id="bookNowBtn" class="w-full bg-[#1e88e5] hover:bg-[#1565c0] text-white font-black py-4 rounded-xl transition-all transform hover:scale-[1.03] shadow-xl shadow-blue-900/20">
-                        BOOK NOW
-                    </button>
-                    <a id="whatsappBtn" href="#" target="_blank" class="w-full bg-[#43A047] hover:bg-[#2e7d32] text-white font-black py-4 rounded-xl transition-all transform hover:scale-[1.03] text-center shadow-xl shadow-green-900/20">
-                        WHATSAPP
-                    </a>
+                <!-- Tabs -->
+                <div x-data="{ tab: 'description' }" class="space-y-6">
+                    <div class="flex gap-2 p-1.5 bg-slate-100 rounded-2xl w-fit">
+                        <button @click="tab = 'description'" :class="tab === 'description' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'" class="px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300">Deskripsi</button>
+                        <button @click="tab = 'itinerary'" :class="tab === 'itinerary' ? 'bg-white text-blue-600 shadow-sm' : 'text-slate-500 hover:text-slate-700'" class="px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all duration-300">Itinerari</button>
+                    </div>
+
+                    <div x-show="tab === 'description'" x-transition class="text-slate-500 text-sm leading-relaxed prose prose-blue max-w-none">
+                        <div id="modalDescription"></div>
+                    </div>
+                    
+                    <div x-show="tab === 'itinerary'" x-transition class="text-slate-500 text-sm leading-relaxed prose prose-blue max-w-none">
+                        <div id="modalItinerary"></div>
+                    </div>
                 </div>
+            </div>
+
+            <div class="p-8 bg-slate-50 border-t border-slate-100 flex flex-col gap-4">
+                <button id="bookNowBtn" class="w-full btn-primary text-white font-black py-5 rounded-[24px] flex items-center justify-center gap-3 text-[11px] uppercase tracking-[0.2em] disabled:opacity-50 disabled:cursor-not-allowed group relative overflow-hidden" onclick="handleBookingClick()">
+                    <span id="btnText" class="flex items-center gap-3">
+                        📍 BUAT PESANAN
+                        <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </span>
+                    <div id="btnLoading" class="hidden absolute inset-0 bg-blue-700 flex items-center justify-center">
+                        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                </button>
+                <button id="whatsappBtn" onclick="handleWhatsappClick()" class="w-full py-5 bg-[#25D366] text-white rounded-[24px] font-black text-[11px] uppercase tracking-[0.2em] transition-all flex items-center justify-center gap-3 hover:bg-[#20ba5a] shadow-lg shadow-emerald-500/20" aria-label="Pesan via WhatsApp">
+                    <span id="waBtnText" class="flex items-center gap-3">
+                        <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.544.918 3.513 1.404 5.289 1.405 5.451 0 9.886-4.434 9.889-9.885.002-2.641-1.026-5.124-2.895-6.995-1.868-1.871-4.354-2.9-6.997-2.9-5.453 0-9.888 4.435-9.891 9.886-.001 2.04.536 4.032 1.554 5.768l-1.023 3.732 3.824-.999zm11.366-5.438c-.312-.156-1.848-.912-2.134-1.017-.286-.104-.494-.156-.701.156-.207.312-.804 1.017-.986 1.225-.182.208-.364.234-.676.078-.312-.156-1.318-.486-2.51-1.548-.928-.827-1.554-1.849-1.736-2.161-.182-.312-.02-.481.136-.636.141-.14.312-.364.468-.546.156-.182.208-.312.312-.52.104-.208.052-.39-.026-.546-.078-.156-.701-1.691-.961-2.313-.253-.607-.511-.524-.701-.534-.181-.01-.389-.012-.597-.012-.208 0-.546.078-.831.39-.286.312-1.091 1.067-1.091 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"></path></svg>
+                        Pesan dari WhatsApp
+                    </span>
+                </button>
             </div>
         </div>
     </div>
+@endsection
 
-    <!-- Midtrans Snap Script -->
-    <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}"></script>
+@push('scripts')
 
     <script>
         let currentTour = null;
@@ -336,7 +669,7 @@
             if (trips && Object.keys(trips).length > 0) {
                 Object.entries(trips).forEach(([key, tripData]) => {
                     const btn = document.createElement('button');
-                    btn.className = 'bg-[#3E3E3A] hover:bg-[#1e88e5] text-white font-bold py-2 rounded-lg transition trip-btn';
+                    btn.className = 'bg-slate-50 hover:bg-blue-50 text-slate-400 hover:text-blue-600 border border-slate-100 hover:border-blue-200 font-black py-4 rounded-2xl transition-all duration-300 trip-btn text-xs tracking-widest';
                     btn.textContent = key.toUpperCase();
                     btn.dataset.tripId = key;
                     btn.dataset.tripPrice = tripData.price || 0;
@@ -344,7 +677,7 @@
                     container.appendChild(btn);
                 });
             } else {
-                container.innerHTML = '<p class="col-span-4 text-[#A1A09A] text-center py-4">Tidak ada pilihan trip</p>';
+                container.innerHTML = '<p class="col-span-4 text-slate-400 text-center py-8 font-bold">Tidak ada pilihan trip</p>';
             }
 
             // Load description and itinerary
@@ -353,16 +686,11 @@
                 .then(html => {
                     const parser = new DOMParser();
                     const doc = parser.parseFromString(html, 'text/html');
-                    
-                    document.getElementById('modalDescription').innerHTML = (doc.querySelector('[data-description]')?.innerHTML || '').substring(0, 500);
-                    document.getElementById('modalItinerary').innerHTML = (doc.querySelector('[data-itinerary]')?.innerHTML || '').substring(0, 500);
-                })
-                .catch(() => {
-                    document.getElementById('modalDescription').textContent = 'Deskripsi tidak tersedia';
-                    document.getElementById('modalItinerary').textContent = 'Itinerari tidak tersedia';
+                    const desc = doc.getElementById('tourDescription')?.innerHTML || '';
+                    const itin = doc.getElementById('tourItinerary')?.innerHTML || '';
+                    document.getElementById('modalDescription').innerHTML = desc;
+                    document.getElementById('modalItinerary').innerHTML = itin;
                 });
-
-            updatePrice();
         }
 
         function closeTourModal() {
@@ -371,13 +699,17 @@
         }
 
         function selectTrip(event) {
-            document.querySelectorAll('.trip-btn').forEach(btn => btn.classList.remove('bg-[#1e88e5]'));
-            event.target.classList.add('bg-[#1e88e5]');
+            document.querySelectorAll('.trip-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-lg', 'shadow-blue-500/20');
+                btn.classList.add('bg-slate-50', 'text-slate-400', 'border-slate-100');
+            });
+            event.target.classList.remove('bg-slate-50', 'text-slate-400', 'border-slate-100');
+            event.target.classList.add('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-lg', 'shadow-blue-500/20');
             updatePrice();
         }
 
         function updatePrice() {
-            const selectedTrip = document.querySelector('.trip-btn.bg-[#1e88e5]');
+            const selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
             const people = parseInt(document.getElementById('peopleCount').value) || 1;
             
             if (selectedTrip) {
@@ -387,10 +719,17 @@
             }
         }
 
-        document.getElementById('peopleCount').addEventListener('change', updatePrice);
+        const peopleCountInput = document.getElementById('peopleCount');
+        if (peopleCountInput) {
+            peopleCountInput.addEventListener('change', updatePrice);
+        }
 
-        document.getElementById('bookNowBtn').addEventListener('click', function() {
-            const selectedTrip = document.querySelector('.trip-btn.bg-[#1e88e5]');
+        function handleBookingClick() {
+            const btn = document.getElementById('bookNowBtn');
+            const btnText = document.getElementById('btnText');
+            const btnLoading = document.getElementById('btnLoading');
+            
+            const selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
             if (!selectedTrip) {
                 alert('Silakan pilih trip terlebih dahulu');
                 return;
@@ -400,6 +739,23 @@
             const tripId = selectedTrip.dataset.tripId;
             const price = parseInt(selectedTrip.dataset.tripPrice);
             const total = price * people;
+
+            // Get Form Data
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const whatsapp = document.getElementById('customerWhatsapp').value;
+            const date = document.getElementById('travelDate').value;
+
+            // Simple Validation
+            if (!name || !phone || !whatsapp || !date) {
+                alert('Mohon lengkapi semua data diri (termasuk No. WhatsApp) dan tanggal perjalanan.');
+                return;
+            }
+
+            // Change button state
+            btn.disabled = true;
+            btnText.classList.add('invisible');
+            btnLoading.classList.remove('hidden');
 
             // Perform checkout via AJAX
             fetch('{{ route("checkout", ":id") }}'.replace(':id', currentTour.slug), {
@@ -411,52 +767,80 @@
                 body: JSON.stringify({
                     trip_id: tripId,
                     qty: people,
-                    customer_name: 'Customer',
-                    email: 'customer@test.com',
-                    phone: '08000000000',
-                    travel_date: new Date().toISOString().split('T')[0],
+                    customer_name: name,
+                    phone: phone,
+                    customer_whatsapp: whatsapp,
+                    travel_date: date,
+                    hotel_1: document.getElementById('hotel_1')?.value,
+                    hotel_2: document.getElementById('hotel_2')?.value,
+                    hotel_3: document.getElementById('hotel_3')?.value,
+                    hotel_4: document.getElementById('hotel_4')?.value,
+                    tiba: document.getElementById('tiba')?.value,
+                    flight_balik: document.getElementById('flight_balik')?.value,
+                    notes: document.getElementById('notes')?.value
                 })
             })
             .then(response => response.json())
             .then(data => {
-                if (data.snap_token) {
-                    window.snap.pay(data.snap_token, {
-                        onSuccess: function(result) {
-                            alert('Pembayaran Berhasil!');
-                            closeTourModal();
-                            window.location.href = '/';
-                        },
-                        onPending: function(result) {
-                            alert('Pembayaran Menunggu Konfirmasi');
-                        },
-                        onError: function(result) {
-                            alert('Pembayaran Gagal!');
-                        }
-                    });
+                if (data.success) {
+                    // Manual Payment Success Logic
+                    const bank = data.payment_info.bank_details;
+                    let paymentMsg = `Pesanan Berhasil!\n\nID Pesanan: ${data.order_id}\nTotal: Rp ${data.gross_amount.toLocaleString('id-ID')}\n\nPembayaran via Transfer:\n`;
+                    
+                    if (bank.bank_1.name) {
+                        paymentMsg += `${bank.bank_1.name}: ${bank.bank_1.account} a/n ${bank.bank_1.holder}\n`;
+                    }
+                    if (bank.bank_2.name) {
+                        paymentMsg += `${bank.bank_2.name}: ${bank.bank_2.account} a/n ${bank.bank_2.holder}\n`;
+                    }
+                    
+                    alert(paymentMsg + '\nInstruksi lengkap telah dikirim ke WhatsApp Anda.');
+                    closeTourModal();
+                    window.location.href = '{{ route("home") }}';
                 } else {
-                    alert('Gagal membuat token pembayaran');
+                    alert('Gagal membuat pesanan: ' + (data.message || 'Unknown error'));
+                    btn.disabled = false;
+                    btnText.classList.remove('invisible');
+                    btnLoading.classList.add('hidden');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
                 alert('Terjadi kesalahan. Silakan coba lagi.');
+                btn.disabled = false;
+                btnText.classList.remove('invisible');
+                btnLoading.classList.add('hidden');
             });
-        });
+        }
 
-        document.getElementById('whatsappBtn').addEventListener('click', function(e) {
-            const selectedTrip = document.querySelector('.trip-btn.bg-[#1e88e5]');
+        function handleWhatsappClick() {
+            const selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
             if (!selectedTrip) {
-                e.preventDefault();
                 alert('Silakan pilih trip terlebih dahulu');
                 return;
             }
 
             const people = document.getElementById('peopleCount').value;
             const tripId = selectedTrip.dataset.tripId;
-            const message = `Halo, saya tertarik dengan paket *${currentTour.title}* - Trip ${tripId.toUpperCase()} untuk ${people} orang. Silakan informasikan detailnya.`;
+            const price = parseInt(selectedTrip.dataset.tripPrice);
+            const total = price * people;
             
-            this.href = `https://wa.me/{{ env('WHATSAPP_NUMBER') }}?text=${encodeURIComponent(message)}`;
-        });
+            // Get Form Data (Optional for WhatsApp, but good for context)
+            const name = document.getElementById('customerName').value || 'Pelanggan';
+            const date = document.getElementById('travelDate').value || 'Belum ditentukan';
+            const tiba = document.getElementById('tiba').value || '-';
+            const h1 = document.getElementById('hotel_1').value || '-';
+            const notes = document.getElementById('notes').value || '-';
+
+            const message = `Halo NorthSumateraTrip,\n\nSaya ingin memesan paket:\n*${currentTour.title}*\n\nDetail Pesanan:\n- Trip: ${tripId.toUpperCase()}\n- Jumlah: ${people} orang\n- Tanggal Trip: ${date}\n- Tanggal Tiba: ${tiba}\n- Hotel 1: ${h1}\n- Nama: ${name}\n- Catatan: ${notes}\n\nTotal: Rp ${total.toLocaleString('id-ID')}\n\nMohon info selanjutnya.`;
+            
+            const whatsappUrl = `https://wa.me/{{ App\Helpers\SettingsHelper::whatsappNumber() }}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Expose functions to global scope
+        window.handleBookingClick = handleBookingClick;
+        window.handleWhatsappClick = handleWhatsappClick;
 
         // Close modal when clicking outside
         document.getElementById('tourModal').addEventListener('click', function(e) {
@@ -465,8 +849,4 @@
             }
         });
     </script>
-
-</body>
-</html>
-
-    <x-floating-whatsapp />
+@endpush

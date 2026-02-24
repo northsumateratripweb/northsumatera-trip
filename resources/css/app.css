@@ -1,3 +1,185 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --bg-main: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-muted: #f1f5f9;
+    --text-main: #0f172a;
+    --text-sub: #475569;
+    --border-color: #e2e8f0;
+    --primary: 217 91% 60%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+}
+
+.dark {
+    --bg-main: #020617;
+    --bg-surface: #0f172a;
+    --bg-muted: #1e293b;
+    --text-main: #f8fafc;
+    --text-sub: #94a3b8;
+    --border-color: #1e293b;
+}
+
+@layer base {
+    body {
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        @apply antialiased scroll-smooth;
+    }
+
+    body.noise-bg::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        pointer-events: none;
+        opacity: 0.03;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+
+    .dark body.noise-bg::before {
+        opacity: 0.05;
+    }
+}
+
+@layer utilities {
+    .text-gradient {
+        @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600;
+    }
+
+    .animate-float {
+        animation: float 6s ease-in-out infinite;
+    }
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0px);
+        }
+
+        50% {
+            transform: translateY(-20px);
+        }
+    }
+}
+
+@layer components {
+    .glass {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        transition: all 0.7s ease;
+    }
+
+    .dark .glass {
+        background: rgba(15, 23, 42, 0.7);
+        border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .glass-nav {
+        background-color: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(24px);
+        border-bottom: 1px solid rgba(226, 232, 240, 0.3);
+        transition: all 0.7s ease;
+    }
+
+    .dark .glass-nav {
+        background-color: rgba(2, 6, 23, 0.8);
+        border-color: rgba(255, 255, 255, 0.03);
+    }
+
+    .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.75rem;
+        padding: 1.25rem 2.5rem;
+        border-radius: 1.5rem;
+        font-weight: 900;
+        color: white;
+        font-size: 0.875rem;
+        letter-spacing: 0.1em;
+        transition: all 0.5s ease;
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        box-shadow: 0 20px 40px -10px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-primary:hover {
+        transform: translateY(-5px) scale(1.02);
+        box-shadow: 0 30px 60px -12px rgba(37, 99, 235, 0.4);
+    }
+
+    .card-premium {
+        position: relative;
+        background-color: white;
+        border-radius: 3rem;
+        border: 1px solid rgba(226, 232, 240, 0.5);
+        transition: all 0.7s ease;
+        overflow: hidden;
+    }
+
+    .dark .card-premium {
+        background-color: #0f172a;
+        border-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .card-premium:hover {
+        transform: translateY(-1rem);
+        box-shadow: 0 40px 80px -15px rgba(0, 0, 0, 0.1);
+    }
+
+    .reveal {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-up {
+    animation: fade-up 0.8s ease-in-out forwards;
+}
+
+@keyframes fade-up {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3b82f6;
+}

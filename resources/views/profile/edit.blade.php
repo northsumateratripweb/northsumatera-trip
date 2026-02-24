@@ -1,29 +1,32 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Profile') }}
-        </h2>
-    </x-slot>
+@extends('layouts.main')
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+@section('title', 'Edit Profil | NorthSumateraTrip')
+
+@section('content')
+    <main class="pt-32 pb-20 px-6">
+        <div class="max-w-4xl mx-auto space-y-8">
+            <div class="reveal">
+                <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">Pengaturan <span class="text-blue-700">Profil</span></h1>
+                <p class="text-slate-500 font-medium">Kelola informasi akun dan keamanan Anda di sini.</p>
+            </div>
+
+            <div class="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-slate-100 reveal">
                 <div class="max-w-xl">
                     @include('profile.partials.update-profile-information-form')
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="bg-white p-8 md:p-12 rounded-[40px] shadow-xl border border-slate-100 reveal">
                 <div class="max-w-xl">
                     @include('profile.partials.update-password-form')
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="bg-rose-50 p-8 md:p-12 rounded-[40px] shadow-xl border border-rose-100 reveal">
                 <div class="max-w-xl">
                     @include('profile.partials.delete-user-form')
                 </div>
             </div>
         </div>
-    </div>
-</x-app-layout>
+    </main>
+@endsection

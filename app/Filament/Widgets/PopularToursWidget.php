@@ -16,22 +16,23 @@ class PopularToursWidget extends BaseWidget
         $popularTours = Booking::select('tour_id')
             ->selectRaw('COUNT(*) as total_bookings')
             ->where('payment_status', 'success')
+            ->whereNotNull('tour_id')
             ->groupBy('tour_id')
             ->orderByDesc('total_bookings')
             ->limit(3)
+            ->with('tour')
             ->get();
 
         $stats = [];
-        foreach ($popularTours as $booking) {
-            $tour = Tour::find($booking->tour_id);
-            if ($tour) {
+        foreach ($popularTours as $item) {
+            if ($item->tour) {
                 $stats[] = Stat::make(
-                    $tour->title,
-                    $booking->total_bookings . ' pemesanan'
+                    $item->tour->title,
+                    $item->total_bookings.' pemesanan'
                 )
-                ->description('Total: ' . $booking->total_bookings)
-                ->icon('heroicon-o-map')
-                ->color('success');
+                    ->description('Total: '.$item->total_bookings)
+                    ->icon('heroicon-o-map')
+                    ->color('success');
             }
         }
 

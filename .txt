@@ -1,0 +1,205 @@
+// Kekurangan umum aplikasi – diperinci & ditambah sebanyak mungkin
+// 1. Tidak ada fitur autentikasi (login/logout) sehingga siapa pun bisa mengakses semua data.
+//    • Tidak ada MFA (Multi-Factor Authentication) untuk akun admin.
+//    • Tidak ada session timeout otomatis; cookie tetap aktif selamanya.
+//    • Tidak ada brute-force protection (CAPTCHA, account lockout).
+//    • Tidak ada OAuth2 / SSO sehingga user harus buat password baru lagi.
+//    • Tidak ada role-based access control (RBAC); semua user bisa baca/tulis/hapus.
+//    • Tidak ada password policy (panjang, kompleksitas, history).
+//    • Tidak ada secure flag / HttpOnly / SameSite pada cookie.
+//    • Tidak ada refresh token & access token terpisah.
+//    • Tidak ada audit “who-is-doing-what” pada setiap transaksi.
+//    • Tidak ada self-service password reset; admin harus reset manual.
+//
+// 2. Tidak ada validasi input, rentan terhadap serangan injeksi SQL/XSS.
+//    • Tidak ada allow-list karakter pada form nama, email, telepon.
+//    • Tidak ada Content Security Policy (CSP) header.
+//    • Tidak ada output encoding saat data ditampilkan kembali ke browser.
+//    • Tidak ada parameterized query; masih pakai string concat.
+//    • Tidak ada validasi tipe file upload (malware bisa terselip).
+//    • Tidak ada maximum length pada input; bisa dipakai DoS via payload besar.
+//    • Tidak ada validasi whitelist domain pada redirect URL.
+//    • Tidak ada CSRF token pada form state-changing.
+//    • Tidak ada rate-limit pada API publik.
+//    • Tidak ada sanitasi JSONP callback (bisa jadi XSS).
+//
+// 3. Tidak ada enkripsi data sensitif (password, token, dsb.).
+//    • Password disimpan plain-text / md5 di database.
+//    • Tidak ada field-level encryption untuk NIK, kartu kredit.
+//    • Tidak ada TLS 1.3; masih pakai SSLv3.
+//    • Tidak ada encryption at rest pada backup S3/Bucket.
+//    • Tidak ada key rotation policy; kunci tetap sama bertahun-tahun.
+//    • Tidak ada HMAC untuk menandai integritas payload.
+//    • Tidak ada secure random generator; masih pakai Math.random().
+//    • Tidak ada hardware security module (HSM) untuk CA root key.
+//    • Tidak ada client-side encryption sebelum data dikirim.
+//    • Tidak ada disk encryption pada laptop developer (bila kehilangan).
+//
+// 4. Tidak ada penanganan error yang konsisten; aplikasi bisa crash tanpa pesan yang jelas.
+//    • Stack trace penuh terlihat di layar user (bocor informasi path).
+//    • Tidak ada error boundary di React/Vue; halaman putih total.
+//    • Tidak ada fallback default value bila microservice down.
+//    • Tidak ada retry mechanism dengan exponential backoff.
+//    • Tidak ada circuit breaker; request ngantri menumpuk sampai timeout.
+//    • Tidak ada alert ke Slack/PagerDuty bila error > threshold.
+//    • Tidak ada user-friendly message (hanya “Error 500”).
+//    • Tidak ada correlation ID; sulit trace request lintas service.
+//    • Tidak ada graceful degradation (matikan fitur non-kritis).
+//    • Tidak ada health check endpoint untuk load balancer.
+//
+// 5. Tidak ada logging atau audit trail, sulit melacak kejadian saat terjadi masalah.
+//    • Log hanya di console; hilang saat container restart.
+//    • Tidak ada centralized logging (ELK, Loki, CloudWatch).
+//    • Tidak ada log level (DEBUG, INFO, WARN, ERROR).
+//    • Tidak ada redaction untuk data sensitif di log.
+//    • Tidak ada log retention policy; disk penuh.
+//    • Tidak ada structured log (JSON); sulit diparse.
+//    • Tidak ada correlation ID sehingga chain event terputus.
+//    • Tidak ada WORM (Write-Once-Read-Many) untuk audit log.
+//    • Tidak ada tamper detection (checksum / HMAC).
+//    • Tidak ada dashboard real-time untuk KPI error rate.
+//
+// 6. UI/UX belum responsif, tampilan rusak di layar kecil.
+//    • Tidak ada viewport meta tag; zoom default desktop.
+//    • Tidak ada progressive web app (PWA) manifest.
+//    • Tidak ada offline page (service worker).
+//    • Tidak ada dark mode / high-contrast mode.
+//    • Tidak ada keyboard navigation (tab order, skip link).
+//    • Tidak ada aria-label untuk screen reader.
+//    • Tidak ada lazy-load image; halaman berat di 3G.
+//    • Tidak ada touch gesture (swipe) untuk galeri.
+//    • Tidak ada right-to-left (RTL) support untuk Arab.
+//    • Tidak ada skeleton screen; user melihat blank putih.
+//
+// 7. Kode tidak terdokumentasi, sulit dipelihara atau dikembangkan oleh tim lain.
+//    • Tidak ada ADR (Architecture Decision Record).
+//    • Tidak ada swagger/openapi spec untuk API.
+//    • Tidak ada README cara menjalankan di local.
+//    • Tidak ada inline comment untuk regex/complex algo.
+//    • Tidak ada storybook untuk komponen UI.
+//    • Tidak ada package/dependency diagram (C4 model).
+//    • Tidak ada runbook untuk disaster recovery.
+//    • Tidak ada on-boarding guide untuk junior dev.
+//    • Tidak ada changelog / semantic versioning.
+//    • Tidak ada knowledge base (Confluence) yang up to date.
+//
+// 8. Tidak ada unit/integration test, perubahan kecil bisa merusak fitur lain.
+//    • Coverage < 30 %; critical path tidak tersentuh.
+//    • Tidak ada mutation testing untuk quality gate.
+//    • Tidak ada contract test (Pact) antara service.
+//    • Tidak ada visual regression test (Percy).
+//    • Tidak ada performance benchmark test.
+//    • Tidak ada security test (SAST/DAST) di pipeline.
+//    • Tidak ada chaos engineering (random kill pod).
+//    • Tidak ada canary test sebelum 100 % rollout.
+//    • Tidak ada rollback otomatis bila error rate naik.
+//    • Tidak ada parallel test; build lama > 30 menit.
+//
+// 9. Kinerja buruk saat data besar, tidak ada pagination atau lazy-loading.
+//    • SELECT * tanpa LIMIT; 10 juta row di-load ke RAM.
+//    • Tidak ada database index pada kolom pencarian.
+//    • Tidak ada query result cache (Redis).
+//    • Tidak ada CDN untuk asset statis.
+//    • Tidak ada image compression (WebP/AVIF).
+//    • Tidak ada HTTP/2 push atau server push.
+//    • Tidak ada batch processing; N+1 API call.
+//    • Tidak ada data archiving; table membesar tak terkendali.
+//    • Tidak ada read replica untuk query berat.
+//    • Tidak ada vertical/horizontal shard untuk skala besar.
+//
+// 10. Tidak ada backup otomatis, risiko kehilangan data tinggi.
+//     • Backup hanya manual saat ingat; bisa lupa berbulan-bulan.
+//     • Tidak ada point-in-time recovery (PITR).
+//     • Tidak ada cross-region replication (bencana alam).
+//     • Tidak ada backup test restore; backup ternyata korup.
+//     • Tidak ada encryption pada file backup.
+//     • Tidak ada object lock (AWS S3) untuk ransomware protection.
+//     • Tidak ada retention tier (hot/warm/cold).
+//     • Tidak ada differential backup; full backup 1 TB tiap hari.
+//     • Tidak ada checksum untuk validasi integritas.
+//     • Tidak ada runbook restore yang terverifikasi.
+//
+// 11. Tidak ada rate-limiting, rentan terhadap DoS/brute-force.
+//     • Tidak ada per-IP rate limit (nginx limit_req_zone).
+//     • Tidak ada per-user rate limit (API quota).
+//     • Tidak ada exponential backoff header (Retry-After).
+//     • Tidak ada geographic blocking untuk negara tidak relevan.
+//     • Tidak ada CAPTCHA setelah salah password 3×.
+//     • Tidak ada WAF (Web Application Firewall).
+//     • Tidak ada blacklist IP otomatis dari threat intel.
+//     • Tidak ada bot detection (User-Agent anomaly).
+//     • Tidak ada queue (Kafka/SQS) untuk menampung lonjakan.
+//     • Tidak ada auto-scaling group; CPU 100 % crash.
+//
+// 12. Dependensi tidak di-update, mengandung kerentanan keamanan yang diketahui.
+//     • Masih pakai library yang sudah EOL (end-of-life).
+//     • Tidak ada vulnerability scanning (Dependabot, Snyk).
+//     • Tidak ada lockfile integrity check (npm ci).
+//     • Tidak ada reproducible build (different hash tiap mesin).
+//     • Tidak ada private registry; langsung dari internet.
+//     • Tidak ada signing verification (cosign, sigstore).
+//     • Tidak ada SBOM (Software Bill of Materials).
+//     • Tidak ada canary dependency update; langsung ke prod.
+//     • Tidak ada end-to-end test setelah update.
+//     • Tidak ada rollback plan bila update menyebabkan bug.
+//
+// 13. Tidak ada multi-bahasa atau lokalisasi, sulit dipakai pengguna global.
+//     • Hard-coded string Bahasa Indonesia di kode.
+//     • Tidak ada pluralization rule (1 apple vs 3 apples).
+//     • Tidak ada RTL layout untuk Arab/Hebrew.
+//     • Tidak ada timezone handling; semua pakai WIB.
+//     • Tidak ada number format (1.000,00 vs 1,000.00).
+//     • Tidak ada date format (DD/MM/YYYY vs MM/DD/YYYY).
+//     • Tidak ada legal disclaimer per negara.
+//     • Tidak ada auto-detect bahasa dari browser.
+//     • Tidak ada translation memory untuk konsistensi.
+//     • Tidak ada crowdin/POEditor workflow untuk translator.
+//
+// 14. Tidak ada mode offline, gangguan jaringan langsung memutus alur kerja.
+//     • Tidak ada service worker cache untuk halaman utama.
+//     • Tidak ada IndexedDB untuk menyimpan draft form.
+//     • Tidak ada background sync saat koneksi kembali.
+//     • Tidak ada queue pekerjaan di local storage.
+//     • Tidak ada conflict resolution (last-write-wins vs merge).
+//     • Tidak ada notification “Anda sedang offline”.
+//     • Tidak ada fallback ke SMS/telp bila online gagal.
+//     • Tidak ada optimistic UI; loading spinner terus menerus.
+//     • Tidak ada pre-cache vital resource (app shell).
+//     • Tidak ada periodic background update (PWABuilder).
+//
+// 15. Tidak ada integrasi CI/CD, deployment masih manual dan rawan human-error.
+//     • Build di laptop developer lalu FTP ke server.
+//     • Tidak ada unit test gate; kode gagal test tetap ke prod.
+//     • Tidak ada blue/green deployment; downtime saat copy file.
+//     • Tidak ada infrastructure as code (Terraform/CloudFormation).
+//     • Tidak ada secret management (masih pakai .env email).
+//     • Tidak ada automated database migration rollback.
+//     • Tidak ada smoke test otomatis pasca deployment.
+//     • Tidak ada approval gate (manual) di pipeline.
+//     • Tidak ada canary analysis dengan metrics (Prometheus).
+//     • Tidak ada GitOps; perubahan langsung edit di server.
+//
+// 16. Tambahan umum lainnya (lanjutan):
+//     • Tidak ada privacy by design (GDPR, CCPA).
+//     • Tidak ada data retention & delete schedule.
+//     • Tidak ada consent management (cookie banner).
+//     • Tidak ada penetration testing berkala.
+//     • Tidak ada security awareness training untuk dev.
+//     • Tidak ada code review checklist (OWASP Top 10).
+//     • Tidak ada SLA/SLO yang jelas kepada user.
+//     • Tidak ada status page (status.domain.com) transparan.
+//     • Tidak ada biaya monitoring; tagihan cloud membengkak tak terasa.
+//     • Tidak ada green IT; server idle 90 % tetap nyala 24/7.
+//     • Tidak ada accessibility (WCAG 2.2) untuk difabel.
+//     • Tidak ada ethical AI review bila pakai ML.
+//     • Tidak ada open-source license audit; terancam tuntuan hukum.
+//     • Tidak ada data anonymization untuk staging.
+//     • Tidak ada zero-trust network; VPC terbuka lebar.
+//     • Tidak ada patch management schedule; OS kernel jadul.
+//     • Tidak ada DR (Disaster Recovery) drill tiap semester.
+//     • Tidak ada employee off-boarding checklist; akses aktif selamanya.
+//     • Tidak ada secure coding guideline tertulis.
+//     • Tidak ada continuous learning culture; teknologi stagnan.
+//
+// Catatan: daftar di atas bisa dipakai sebagai checklist keamanan,
+// performa, dan maintainability saat merancang ulang aplikasi.

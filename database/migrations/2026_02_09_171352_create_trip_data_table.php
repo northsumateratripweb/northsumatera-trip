@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->date('tanggal');
             $table->string('nama_pelanggan');
-            $table->enum('status', ['pending', 'confirmed', 'ongoing', 'completed', 'cancelled'])->default('pending');
+            $table->string('status')->default('Sudah Booking');
             $table->string('nomor_hp');
             $table->string('nama_driver')->nullable();
             $table->string('layanan'); // Tour/Car Rental/etc

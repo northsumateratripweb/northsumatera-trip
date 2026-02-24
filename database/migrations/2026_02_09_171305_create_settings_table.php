@@ -23,6 +23,9 @@ return new class extends Migration
             $table->string('secondary_color')->default('#f53003');
             $table->string('hero_image')->nullable();
             $table->string('logo')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
             $table->timestamps();
         });
     }

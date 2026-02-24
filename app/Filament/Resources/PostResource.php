@@ -3,21 +3,21 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\PostResource\Pages;
-use App\Filament\Resources\PostResource\RelationManagers;
 use App\Models\Post;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class PostResource extends Resource
 {
     protected static ?string $model = Post::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon  = 'heroicon-o-newspaper';
+    protected static ?string $navigationGroup = 'Konten';
+    protected static ?int    $navigationSort  = 1;
+    protected static ?string $navigationLabel = 'Artikel / Blog';
 
     public static function form(Form $form): Form
     {
@@ -76,5 +76,17 @@ class PostResource extends Resource
             'create' => Pages\CreatePost::route('/create'),
             'edit' => Pages\EditPost::route('/{record}/edit'),
         ];
+    }
+
+    public static function canAccess(): bool
+    {
+        $user = auth()->user();
+        if (! $user) {
+            return false;
+        }
+
+        $role = $user->role ?? 'super_admin';
+
+        return in_array($role, ['super_admin', 'marketing']);
     }
 }

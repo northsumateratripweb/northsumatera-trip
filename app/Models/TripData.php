@@ -3,10 +3,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TripChecklist;
 
 class TripData extends Model
 {
     protected $fillable = [
+        'booking_id',
         'tanggal',
         'nama_pelanggan',
         'status',
@@ -40,4 +42,14 @@ class TripData extends Model
         'deposit' => 'decimal:2',
         'pelunasan' => 'decimal:2',
     ];
+
+    public function checklists()
+    {
+        return $this->hasMany(TripChecklist::class);
+    }
+
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class);
+    }
 }

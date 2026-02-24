@@ -1,7 +1,6 @@
 @php
-    use App\Models\BusinessSetting;
-    $setting = BusinessSetting::get();
-    $whatsapp = $setting->whatsapp ?? env('WHATSAPP_NUMBER', '6282200000000');
+    $whatsapp = App\Helpers\SettingsHelper::whatsappNumber();
+    $setting = App\Models\BusinessSetting::get();
     $company = $setting->company_name ?? config('app.name', 'NorthSumateraTrip');
 @endphp
 

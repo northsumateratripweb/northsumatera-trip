@@ -2,7 +2,6 @@
 
 namespace App\Filament\Widgets;
 
-use App\Models\Booking;
 use App\Models\Tour;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -11,7 +10,8 @@ use Filament\Widgets\TableWidget as BaseWidget;
 class PopularToursTableWidget extends BaseWidget
 {
     protected static ?string $heading = 'Daftar Paket Paling Laris';
-    protected int | string | array $columnSpan = 'full';
+
+    protected int|string|array $columnSpan = 'full';
 
     public function table(Table $table): Table
     {
