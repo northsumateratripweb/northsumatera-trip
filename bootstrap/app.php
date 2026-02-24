@@ -21,8 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\ValidatePostSize::class,
             \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
             \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-            // \App\Http\Middleware\SetSecurityHeaders::class,
-// \App\Http\Middleware\SetTechnicalHeaders::class,
+            \App\Http\Middleware\SecurityHeaders::class,
+            \App\Http\Middleware\PerformanceMonitoring::class,
         ]);
         // Default "web" and "api" middleware groups
         $middleware->group('web', [
@@ -59,9 +59,28 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
-        //
+        // Integrate Sentry for error tracking
+        $exceptions->reportable(function (Throwable $e) {
+            if (app()->bound('sentry')) {
+                app('sentry')->captureException($e);
+            }
+        });
     })
     ->withSchedule(function (\Illuminate\Console\Scheduling\Schedule $schedule) {
+        // Daily backup at 2 AM
+        $schedule->command('backup:clean')->daily()->at('01:00');
+        $schedule->command('backup:run')->daily()->at('02:00');
+        
+        // Send follow-up emails
         $schedule->command('trip:send-followup')->dailyAt('09:00');
+        
+        // Monitor backup health
+        $schedule->command('backup:monitor')->daily()->at('03:00');
+        
+        // Health check every hour
+        $schedule->command('health:check --notify')->hourly();
+        
+        // Clear old logs weekly
+        $schedule->command('logs:clear --days=30')->weekly();
     })
     ->create();
