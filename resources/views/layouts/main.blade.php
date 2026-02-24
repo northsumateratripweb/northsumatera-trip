@@ -8,8 +8,8 @@
     <!-- ⚡ Dark mode: apply BEFORE render to avoid flash -->
     <script>
         (function() {
-            const saved = localStorage.getItem('theme');
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             if (saved === 'dark' || (!saved && prefersDark)) {
                 document.documentElement.classList.add('dark');
             } else {

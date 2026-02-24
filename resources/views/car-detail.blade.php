@@ -287,10 +287,10 @@
 <script>
     function handleCarBooking(e) {
         e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
-        const data = {};
-        formData.forEach((value, key) => data[key] = value);
+        var form = e.target;
+        var formData = new FormData(form);
+        var data = {};
+        formData.forEach(function(value, key) { data[key] = value; });
 
         if (!document.getElementById('termsCheck').checked) {
             showNotification('Silakan setujui Syarat & Ketentuan untuk melanjutkan.', 'error');
