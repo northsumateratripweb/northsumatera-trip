@@ -22,7 +22,7 @@ $maxWidth = [
             let selector = 'a, button, input:not([type=\'hidden\']), textarea, select, details, [tabindex]:not([tabindex=\'-1\'])'
             return [...$el.querySelectorAll(selector)]
                 // All non-disabled elements...
-                .filter(el => ! el.hasAttribute('disabled'))
+                .filter(function(el) { return ! el.hasAttribute('disabled') })
         },
         firstFocusable() { return this.focusables()[0] },
         lastFocusable() { return this.focusables().slice(-1)[0] },
@@ -31,10 +31,10 @@ $maxWidth = [
         nextFocusableIndex() { return (this.focusables().indexOf(document.activeElement) + 1) % (this.focusables().length + 1) },
         prevFocusableIndex() { return Math.max(0, this.focusables().indexOf(document.activeElement)) -1 },
     }"
-    x-init="$watch('show', value => {
+    x-init="$watch('show', function(value) {
         if (value) {
             document.body.classList.add('overflow-y-hidden');
-            {{ $attributes->has('focusable') ? 'setTimeout(() => firstFocusable().focus(), 100)' : '' }}
+            {{ $attributes->has('focusable') ? 'setTimeout(function() { firstFocusable().focus(); }, 100)' : '' }}
         } else {
             document.body.classList.remove('overflow-y-hidden');
         }

@@ -512,16 +512,16 @@
         document.addEventListener("DOMContentLoaded", reveal);
     </script>
     <script>
-        let currentTrip = null;
-        let currentOrderId = null;
-        const csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
-        const csrf_token = csrfTokenElement ? csrfTokenElement.content : '';
+        var currentTrip = null;
+        var currentOrderId = null;
+        var csrfTokenElement = document.querySelector('meta[name="csrf-token"]');
+        var csrf_token = csrfTokenElement ? csrfTokenElement.content : '';
 
         // Session Storage Keys
-        const BOOKING_CLICK_KEY = `booking_clicks_{{ $tour->id }}`;
-        const WHATSAPP_CLICK_KEY = `whatsapp_clicks_{{ $tour->id }}`;
-        const ORDER_ID_KEY = `order_id_{{ $tour->id }}`;
-        const SELECTED_TRIP_ID_KEY = `selected_trip_{{ $tour->id }}`;
+        var BOOKING_CLICK_KEY = "booking_clicks_{{ $tour->id }}";
+        var WHATSAPP_CLICK_KEY = "whatsapp_clicks_{{ $tour->id }}";
+        var ORDER_ID_KEY = "order_id_{{ $tour->id }}";
+        var SELECTED_TRIP_ID_KEY = "selected_trip_{{ $tour->id }}";
 
         // Initialize clicks on load
         try {
@@ -533,14 +533,16 @@
         }
 
         // Leading-edge debounce implementation
-        function debounce(func, wait = 300) {
-            let timeout;
-            return function(...args) {
-                const context = this;
-                const later = function() {
+        function debounce(func, wait) {
+            if (wait === undefined) wait = 300;
+            var timeout;
+            return function() {
+                var args = arguments;
+                var context = this;
+                var later = function() {
                     timeout = null;
                 };
-                const callNow = !timeout;
+                var callNow = !timeout;
                 clearTimeout(timeout);
                 timeout = setTimeout(later, wait);
                 if (callNow) func.apply(context, args);
@@ -550,15 +552,15 @@
         window.handleBookingClick = function() {
             if (!currentTrip) {
                 showNotification('Silakan pilih tipe trip terlebih dahulu', 'error');
-                const container = document.getElementById('tripsContainer');
+                var container = document.getElementById('tripsContainer');
                 if (container) {
                     container.classList.add('animate-bounce');
-                    setTimeout(() => container.classList.remove('animate-bounce'), 1000);
+                    setTimeout(function() { container.classList.remove('animate-bounce'); }, 1000);
                 }
                 return Promise.resolve();
             }
 
-            const clicks = parseInt(sessionStorage.getItem(BOOKING_CLICK_KEY)) || 0;
+            var clicks = parseInt(sessionStorage.getItem(BOOKING_CLICK_KEY)) || 0;
             
             if (clicks === 0) {
                 return createOrder('booking');
@@ -571,15 +573,15 @@
         window.handleWhatsappClick = function() {
             if (!currentTrip) {
                 showNotification('Silakan pilih tipe trip terlebih dahulu', 'error');
-                const container = document.getElementById('tripsContainer');
+                var container = document.getElementById('tripsContainer');
                 if (container) {
                     container.classList.add('animate-bounce');
-                    setTimeout(() => container.classList.remove('animate-bounce'), 1000);
+                    setTimeout(function() { container.classList.remove('animate-bounce'); }, 1000);
                 }
                 return Promise.resolve();
             }
 
-            const clicks = parseInt(sessionStorage.getItem(WHATSAPP_CLICK_KEY)) || 0;
+            var clicks = parseInt(sessionStorage.getItem(WHATSAPP_CLICK_KEY)) || 0;
             
             if (clicks === 0) {
                 return createOrder('whatsapp');
@@ -593,43 +595,51 @@
             if (!button) return;
             
             // UI Visual Feedback
-            document.querySelectorAll('.trip-btn').forEach(btn => {
+            var btns = document.querySelectorAll('.trip-btn');
+            for (var i = 0; i < btns.length; i++) {
+                var btn = btns[i];
                 btn.classList.remove('border-blue-700', 'bg-blue-50', 'ring-4', 'ring-blue-700/10');
-                btn.querySelector('span').classList.remove('text-blue-700');
-                btn.querySelector('span').classList.add('text-slate-600');
-            });
+                var span = btn.querySelector('span');
+                if (span) {
+                    span.classList.remove('text-blue-700');
+                    span.classList.add('text-slate-600');
+                }
+            }
             
             button.classList.add('border-blue-700', 'bg-blue-50', 'ring-4', 'ring-blue-700/10');
-            button.querySelector('span').classList.remove('text-slate-600');
-            button.querySelector('span').classList.add('text-blue-700');
+            var selectedSpan = button.querySelector('span');
+            if (selectedSpan) {
+                selectedSpan.classList.remove('text-slate-600');
+                selectedSpan.classList.add('text-blue-700');
+            }
             
-            const tripId = button.dataset.tripId;
-            const price = parseInt(button.dataset.tripPrice);
+            var tripId = button.dataset.tripId;
+            var price = parseInt(button.dataset.tripPrice);
             
             // Save to session storage
             sessionStorage.setItem(SELECTED_TRIP_ID_KEY, tripId);
             
             // Get trip details from tour data
-            const tripData = @json($tour->trips);
-            const trip = tripData[tripId];
+            var tripData = @json($tour->trips);
+            var trip = tripData[tripId];
             
             // Update global currentTrip
             currentTrip = { id: tripId, price: price, data: trip };
             
             // Show trip details with animation
-            const tripDetails = document.getElementById('tripDetails');
+            var tripDetails = document.getElementById('tripDetails');
             if (tripDetails) {
                 tripDetails.classList.add('opacity-0', 'translate-y-2');
                 
-                setTimeout(() => {
-                    const detailsHtml = `
-                        <div class="flex items-center gap-3 mb-2">
-                            <svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                            <span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Detail Trip</span>
-                        </div>
-                        <strong class="text-slate-900 text-sm block mb-1">${trip.name || 'Tipe ' + tripId.toUpperCase()}</strong>
-                        <p class="text-[11px] leading-relaxed">${trip.includes || ''}</p>
-                    `;
+                setTimeout(function() {
+                    var detailsHtml = 
+                        '<div class="flex items-center gap-3 mb-2">' +
+                            '<svg class="w-5 h-5 text-blue-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>' +
+                            '<span class="text-[10px] font-black uppercase tracking-widest text-slate-400">Detail Trip</span>' +
+                        '</div>' +
+                        '<strong class="text-slate-900 text-sm block mb-1">' + (trip.name || 'Tipe ' + tripId.toUpperCase()) + '</strong>' +
+                        '<p class="text-[11px] leading-relaxed">' + (trip.includes || '') + '</p>';
+                    
                     tripDetails.innerHTML = detailsHtml;
                     tripDetails.classList.remove('opacity-0', 'translate-y-2');
                     tripDetails.classList.add('transition-all', 'duration-300');
@@ -672,21 +682,21 @@
         }
 
         function updatePrice() {
-            const peopleCountElement = document.getElementById('peopleCount');
-            const totalPriceElement = document.getElementById('totalPrice');
+            var peopleCountElement = document.getElementById('peopleCount');
+            var totalPriceElement = document.getElementById('totalPrice');
             
             if (!peopleCountElement || !totalPriceElement) return;
 
-            const people = parseInt(peopleCountElement.value) || 0;
+            var people = parseInt(peopleCountElement.value) || 0;
 
             // Jika trip belum dipilih atau jumlah orang 0, tampilkan Rp 0
             if (!currentTrip || people <= 0) {
-                totalPriceElement.textContent = `Rp 0`;
+                totalPriceElement.textContent = 'Rp 0';
                 return;
             }
             
-            const total = currentTrip.price * people;
-            totalPriceElement.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+            var total = currentTrip.price * people;
+            totalPriceElement.textContent = 'Rp ' + total.toLocaleString('id-ID');
         }
 
         function updateWhatsappLink() {
@@ -696,15 +706,15 @@
         // --- NEW PHASE 2 JS LOGIC ---
         
         function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
+            navigator.clipboard.writeText(text).then(function() {
                 showNotification('Link berhasil disalin ke clipboard!', 'success');
-            }).catch(err => {
+            }).catch(function(err) {
                 console.error('Gagal menyalin: ', err);
             });
         }
 
         function updateStepper(step) {
-            const progress = document.getElementById('stepperProgress');
+            var progress = document.getElementById('stepperProgress');
             if (!progress) return;
 
             // Update Progress Bar
@@ -713,30 +723,38 @@
             if (step === 3) progress.style.width = '100%';
 
             // Update Icons & Text
-            for (let i = 1; i <= 3; i++) {
-                const icon = document.getElementById(`step${i}Icon`);
-                const text = document.getElementById(`step${i}Text`) || document.querySelector(`div:has(#step${i}Icon) span`);
+            for (var i = 1; i <= 3; i++) {
+                var icon = document.getElementById('step' + i + 'Icon');
+                var text = document.getElementById('step' + i + 'Text') || document.querySelector('div:has(#step' + i + 'Icon) span');
                 
                 if (i <= step) {
-                    icon.classList.remove('bg-slate-100', 'text-slate-400');
-                    icon.classList.add('bg-blue-700', 'text-white', 'shadow-lg', 'shadow-blue-500/30');
-                    if (text) text.classList.add('text-blue-700');
-                    if (text) text.classList.remove('text-slate-400');
+                    if (icon) {
+                        icon.classList.remove('bg-slate-100', 'text-slate-400');
+                        icon.classList.add('bg-blue-700', 'text-white', 'shadow-lg', 'shadow-blue-500/30');
+                    }
+                    if (text) {
+                        text.classList.add('text-blue-700');
+                        text.classList.remove('text-slate-400');
+                    }
                 } else {
-                    icon.classList.add('bg-slate-100', 'text-slate-400');
-                    icon.classList.remove('bg-blue-700', 'text-white', 'shadow-lg', 'shadow-blue-500/30');
-                    if (text) text.classList.remove('text-blue-700');
-                    if (text) text.classList.add('text-slate-400');
+                    if (icon) {
+                        icon.classList.add('bg-slate-100', 'text-slate-400');
+                        icon.classList.remove('bg-blue-700', 'text-white', 'shadow-lg', 'shadow-blue-500/30');
+                    }
+                    if (text) {
+                        text.classList.remove('text-blue-700');
+                        text.classList.add('text-slate-400');
+                    }
                 }
             }
         }
 
         // Listen for inputs to update to step 2
-        document.addEventListener('DOMContentLoaded', () => {
-            ['customerName', 'customerPhone', 'travelDate'].forEach(id => {
-                const el = document.getElementById(id);
+        document.addEventListener('DOMContentLoaded', function() {
+            ['customerName', 'customerPhone', 'travelDate'].forEach(function(id) {
+                var el = document.getElementById(id);
                 if (el) {
-                    el.addEventListener('input', () => {
+                    el.addEventListener('input', function() {
                         if (currentTrip && el.value.trim() !== '') {
                             updateStepper(2);
                         }
@@ -752,13 +770,14 @@
                 return Promise.resolve();
             }
 
-            const name = document.getElementById('customerName').value.trim();
-            const phone = document.getElementById('customerPhone').value.trim();
-            const whatsapp = document.getElementById('customerWhatsapp').value.trim();
-            const peopleCountElement = document.getElementById('peopleCount');
-            const people = parseInt(peopleCountElement.value);
-            const date = document.getElementById('travelDate').value;
-            const useDrone = document.querySelector('input[name="use_drone"]:checked')?.value || '0';
+            var name = document.getElementById('customerName').value.trim();
+            var phone = document.getElementById('customerPhone').value.trim();
+            var whatsapp = document.getElementById('customerWhatsapp').value.trim();
+            var peopleCountElement = document.getElementById('peopleCount');
+            var people = parseInt(peopleCountElement.value);
+            var date = document.getElementById('travelDate').value;
+            var droneEl = document.querySelector('input[name="use_drone"]:checked');
+            var useDrone = droneEl ? droneEl.value : '0';
 
             if (!name || !phone || !whatsapp || isNaN(people) || people <= 0 || !date) {
                 showNotification('Silakan isi semua data dengan lengkap (termasuk No. WhatsApp)', 'error');
@@ -770,8 +789,9 @@
                 return Promise.resolve();
             }
 
-            const total = currentTrip.price * people;
-            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+            var total = currentTrip.price * people;
+            var csrfTokenEl = document.querySelector('meta[name="csrf-token"]');
+            var csrfToken = csrfTokenEl ? csrfTokenEl.content : '';
 
             return fetch('{{ route("checkout", $tour->id) }}', {
                 method: 'POST',
@@ -791,25 +811,26 @@
                     use_drone: useDrone,
                     travel_date: date,
                     gross_amount: total,
-                    hotel_1: document.getElementById('hotel_1')?.value,
-                    hotel_2: document.getElementById('hotel_2')?.value,
-                    hotel_3: document.getElementById('hotel_3')?.value,
-                    hotel_4: document.getElementById('hotel_4')?.value,
-                    tiba: document.getElementById('tiba')?.value,
-                    flight_balik: document.getElementById('flight_balik')?.value,
-                    notes: document.getElementById('notes')?.value,
-                    hp_field: document.querySelector('input[name="hp_field"]')?.value
+                    hotel_1: (document.getElementById('hotel_1') || {}).value || '',
+                    hotel_2: (document.getElementById('hotel_2') || {}).value || '',
+                    hotel_3: (document.getElementById('hotel_3') || {}).value || '',
+                    hotel_4: (document.getElementById('hotel_4') || {}).value || '',
+                    tiba: (document.getElementById('tiba') || {}).value || '',
+                    flight_balik: (document.getElementById('flight_balik') || {}).value || '',
+                    notes: (document.getElementById('notes') || {}).value || '',
+                    hp_field: (document.querySelector('input[name="hp_field"]') || {}).value || ''
                 })
             })
-            .then(async response => {
+            .then(function(response) {
                 if (response.status === 419) {
                     throw new Error('Sesi telah berakhir (CSRF mismatch). Silakan segarkan halaman (refresh) dan coba lagi.');
                 }
-                const data = await response.json();
-                if (!response.ok) throw new Error(data.message || 'Terjadi kesalahan sistem');
-                return data;
+                return response.json().then(function(data) {
+                    if (!response.ok) throw new Error(data.message || 'Terjadi kesalahan sistem');
+                    return data;
+                });
             })
-            .then(data => {
+            .then(function(data) {
                 if (data.success) {
                     currentOrderId = data.order_id;
                     sessionStorage.setItem(ORDER_ID_KEY, currentOrderId);
@@ -829,16 +850,17 @@
                     showNotification('Gagal membuat pesanan: ' + data.message, 'error');
                 }
             })
-            .catch(error => {
+            .catch(function(error) {
                 showNotification(error.message, 'error');
-                throw error; // Re-throw to be caught by Alpine finally
+                throw error;
             });
         }
 
         function processPayment() {
             if (currentOrderId) {
-                const people = parseInt(document.getElementById('peopleCount').value) || 0;
-                const total = currentTrip ? currentTrip.price * people : 0;
+                var peopleCountEl = document.getElementById('peopleCount');
+                var people = parseInt(peopleCountEl ? peopleCountEl.value : '0') || 0;
+                var total = currentTrip ? currentTrip.price * people : 0;
                 showManualPaymentModal(currentOrderId, total);
             } else {
                 createOrder('booking');
@@ -849,7 +871,7 @@
             const modalOrderId = document.getElementById('modalOrderId');
             const modalTotalAmount = document.getElementById('modalTotalAmount');
             if (modalOrderId) modalOrderId.textContent = orderId;
-            if (modalTotalAmount) modalTotalAmount.textContent = `Rp ${amount.toLocaleString('id-ID')}`;
+            if (modalTotalAmount) modalTotalAmount.textContent = 'Rp ' + amount.toLocaleString('id-ID');
             
             const modal = document.getElementById('paymentModal');
             if (modal) {
@@ -868,10 +890,10 @@
             }
         }
 
-        function copyToClipboard(text, label) {
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification(`Nomor Rekening ${label} berhasil disalin!`, 'success');
-            }).catch(() => {
+        function copyToClipboardRekening(text, label) {
+            navigator.clipboard.writeText(text).then(function() {
+                showNotification('Nomor Rekening ' + label + ' berhasil disalin!', 'success');
+            }).catch(function() {
                 showNotification('Gagal menyalin. Silakan salin manual.', 'error');
             });
         }
@@ -880,27 +902,31 @@
             redirectToWhatsapp('Bukti Transfer');
         }
 
-        function redirectToWhatsapp(suffix = '') {
-            const name = document.getElementById('customerName').value || 'Pengunjung';
-            const people = document.getElementById('peopleCount').value || '1';
-            const date = document.getElementById('travelDate').value || '-';
-            const tripName = currentTrip ? (currentTrip.id.toUpperCase()) : 'General';
-            const total = currentTrip ? currentTrip.price * (parseInt(people) || 0) : 0;
+        function redirectToWhatsapp(suffix) {
+            if (suffix === undefined) suffix = '';
+            var nameEl = document.getElementById('customerName');
+            var name = nameEl ? nameEl.value : 'Pengunjung';
+            var peopleEl = document.getElementById('peopleCount');
+            var people = peopleEl ? peopleEl.value : '1';
+            var dateEl = document.getElementById('travelDate');
+            var date = dateEl ? dateEl.value : '-';
+            var tripName = currentTrip ? currentTrip.id.toUpperCase() : 'General';
+            var total = currentTrip ? currentTrip.price * (parseInt(people) || 0) : 0;
 
-            let message = `Halo NorthSumateraTrip 👋\n\nSaya ingin konfirmasi pesanan saya.\n\n`;
-            message += `🧾 ID Pesanan: ${currentOrderId ?? '-'}\n`;
-            message += `📦 Paket: {{ $tour->title }}\n`;
-            message += `👤 Nama: ${name}\n`;
-            message += `💰 Total Bayar: Rp ${total.toLocaleString('id-ID')}\n\n`;
+            var message = "Halo NorthSumateraTrip 👋\n\nSaya ingin konfirmasi pesanan saya.\n\n";
+            message += "🧾 ID Pesanan: " + (currentOrderId || '-') + "\n";
+            message += "📦 Paket: {{ $tour->title }}\n";
+            message += "👤 Nama: " + name + "\n";
+            message += "💰 Total Bayar: Rp " + total.toLocaleString('id-ID') + "\n\n";
             
             if (suffix) {
-                message += `Saya ingin mengirimkan *${suffix}*.\n\n`;
+                message += "Saya ingin mengirimkan *" + suffix + "*.\n\n";
             } else {
-                message += `Mohon info selanjutnya untuk proses pembayaran. Terima kasih 🙏`;
+                message += "Mohon info selanjutnya untuk proses pembayaran. Terima kasih 🙏";
             }
             
-            const whatsappNumber = '{{ App\Helpers\SettingsHelper::whatsappNumber() }}'.replace(/\D/g, '');
-            window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            var whatsappNumber = '{{ App\Helpers\SettingsHelper::whatsappNumber() }}'.replace(/\D/g, '');
+            window.open('https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(message), '_blank');
         }
 
         function createLoadingElement() {
@@ -922,52 +948,53 @@
 
         function updateButtonState(type) {
             if (type === 'booking') {
-                const btnText = document.getElementById('btnText');
+                var btnText = document.getElementById('btnText');
                 if (btnText) {
-                    btnText.innerHTML = `💳 LIHAT INSTRUKSI BAYAR <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>`;
+                    btnText.innerHTML = '💳 LIHAT INSTRUKSI BAYAR <svg class="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>';
                     btnText.classList.add('animate-pulse');
                 }
             } else if (type === 'whatsapp') {
-                const waBtnText = document.getElementById('waBtnText');
+                var waBtnText = document.getElementById('waBtnText');
                 if (waBtnText) {
-                    waBtnText.innerHTML = `<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.544.918 3.513 1.404 5.289 1.405 5.451 0 9.886-4.434 9.889-9.885.002-2.641-1.026-5.124-2.895-6.995-1.868-1.871-4.354-2.9-6.997-2.9-5.453 0-9.888 4.435-9.891 9.886-.001 2.04.536 4.032 1.554 5.768l-1.023 3.732 3.824-.999zm11.366-5.438c-.312-.156-1.848-.912-2.134-1.017-.286-.104-.494-.156-.701.156-.207.312-.804 1.017-.986 1.225-.182.208-.364.234-.676.078-.312-.156-1.318-.486-2.51-1.548-.928-.827-1.554-1.849-1.736-2.161-.182-.312-.02-.481.136-.636.141-.14.312-.364.468-.546.156-.182.208-.312.312-.52.104-.208.052-.39-.026-.546-.078-.156-.701-1.691-.961-2.313-.253-.607-.511-.524-.701-.534-.181-.01-.389-.012-.597-.012-.208 0-.546.078-.831.39-.286.312-1.091 1.067-1.091 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg> KONFIRMASI LAGI VIA WHATSAPP`;
+                    waBtnText.innerHTML = '<svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.5-5.688-1.448l-6.305 1.652zm6.599-3.835c1.544.918 3.513 1.404 5.289 1.405 5.451 0 9.886-4.434 9.889-9.885.002-2.641-1.026-5.124-2.895-6.995-1.868-1.871-4.354-2.9-6.997-2.9-5.453 0-9.888 4.435-9.891 9.886-.001 2.04.536 4.032 1.554 5.768l-1.023 3.732 3.824-.999zm11.366-5.438c-.312-.156-1.848-.912-2.134-1.017-.286-.104-.494-.156-.701.156-.207.312-.804 1.017-.986 1.225-.182.208-.364.234-.676.078-.312-.156-1.318-.486-2.51-1.548-.928-.827-1.554-1.849-1.736-2.161-.182-.312-.02-.481.136-.636.141-.14.312-.364.468-.546.156-.182.208-.312.312-.52.104-.208.052-.39-.026-.546-.078-.156-.701-1.691-.961-2.313-.253-.607-.511-.524-.701-.534-.181-.01-.389-.012-.597-.012-.208 0-.546.078-.831.39-.286.312-1.091 1.067-1.091 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.076 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/></svg> KONFIRMASI LAGI VIA WHATSAPP';
                     waBtnText.classList.add('animate-pulse');
                 }
             }
         }
 
-        function showNotification(message, type = 'success') {
-            const toast = document.createElement('div');
-            toast.className = `fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl text-white font-bold text-sm shadow-2xl z-[300] transition-all duration-500 transform translate-y-20 opacity-0`;
+        function showNotification(message, type) {
+            if (type === undefined) type = 'success';
+            var toast = document.createElement('div');
+            toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl text-white font-bold text-sm shadow-2xl z-[300] transition-all duration-500 transform translate-y-20 opacity-0';
             toast.style.backgroundColor = type === 'success' ? '#10B981' : '#EF4444';
             toast.innerHTML = message;
             document.body.appendChild(toast);
             
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.classList.remove('translate-y-20', 'opacity-0');
             }, 100);
 
-            setTimeout(() => {
+            setTimeout(function() {
                 toast.classList.add('translate-y-20', 'opacity-0');
-                setTimeout(() => toast.remove(), 500);
+                setTimeout(function() { toast.remove(); }, 500);
             }, 3000);
         }
 
         // Initialize state based on session
-        document.addEventListener('DOMContentLoaded', () => {
-            const bClicks = parseInt(sessionStorage.getItem(BOOKING_CLICK_KEY));
-            const wClicks = parseInt(sessionStorage.getItem(WHATSAPP_CLICK_KEY));
-            const savedTripId = sessionStorage.getItem(SELECTED_TRIP_ID_KEY);
+        document.addEventListener('DOMContentLoaded', function() {
+            var bClicks = parseInt(sessionStorage.getItem(BOOKING_CLICK_KEY)) || 0;
+            var wClicks = parseInt(sessionStorage.getItem(WHATSAPP_CLICK_KEY)) || 0;
+            var savedTripId = sessionStorage.getItem(SELECTED_TRIP_ID_KEY);
             currentOrderId = sessionStorage.getItem(ORDER_ID_KEY);
             
             if (savedTripId) {
-                const tripBtn = document.querySelector(`.trip-btn[data-trip-id="${savedTripId}"]`);
+                var tripBtn = document.querySelector('.trip-btn[data-trip-id="' + savedTripId + '"]');
                 if (tripBtn) selectTrip(tripBtn);
             }
             
             if (bClicks === 1) updateButtonState('booking');
             if (wClicks === 1) updateButtonState('whatsapp');
-            updateWishlistUI();
+            if (typeof updateWishlistUI === 'function') updateWishlistUI();
         });
     </script>
 @endpush

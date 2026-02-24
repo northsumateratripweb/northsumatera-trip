@@ -237,10 +237,10 @@
 
     <script>
         // Magic Link Handler: Auto-submit if parameters exist
-        window.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const orderId = urlParams.get('order_id');
-            const phone = urlParams.get('phone');
+        window.addEventListener('DOMContentLoaded', function() {
+            var urlParams = new URLSearchParams(window.location.search);
+            var orderId = urlParams.get('order_id');
+            var phone = urlParams.get('phone');
             
             if (orderId && phone && !@json(isset($booking))) {
                 document.querySelector('input[name="order_id"]').value = orderId;
@@ -250,13 +250,13 @@
         });
 
         function copyToClipboard(text, label) {
-            navigator.clipboard.writeText(text).then(() => {
-                const alertBox = document.createElement('div');
+            navigator.clipboard.writeText(text).then(function() {
+                var alertBox = document.createElement('div');
                 alertBox.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 bg-slate-900 text-white rounded-2xl text-xs font-bold z-50 animate-in fade-in slide-in-from-bottom-5';
-                alertBox.textContent = `Nomor Rekening ${label} berhasil disalin!`;
+                alertBox.textContent = 'Nomor Rekening ' + label + ' berhasil disalin!';
                 document.body.appendChild(alertBox);
-                setTimeout(() => alertBox.remove(), 3000);
-            }).catch(() => {
+                setTimeout(function() { alertBox.remove(); }, 3000);
+            }).catch(function() {
                 alert('Gagal menyalin. Silakan salin manual.');
             });
         }

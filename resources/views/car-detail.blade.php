@@ -299,7 +299,8 @@
 
         data.action = 'payment'; 
 
-        const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;
+        var csrfEl = document.querySelector('meta[name="csrf-token"]');
+        var csrfToken = csrfEl ? csrfEl.content : '';
 
         return fetch(form.action, {
             method: 'POST',
@@ -311,22 +312,23 @@
             },
             body: JSON.stringify(data)
         })
-        .then(async response => {
+        .then(function(response) {
             if (response.status === 419) {
                 throw new Error('Sesi telah berakhir (CSRF mismatch). Silakan segarkan halaman (refresh) dan coba lagi.');
             }
-            const resData = await response.json();
-            if (!response.ok) throw new Error(resData.message || 'Terjadi kesalahan sistem');
-            return resData;
+            return response.json().then(function(resData) {
+                if (!response.ok) throw new Error(resData.message || 'Terjadi kesalahan sistem');
+                return resData;
+            });
         })
-        .then(resData => {
+        .then(function(resData) {
             if (resData.success) {
                 showManualPaymentModal(resData.order_id, resData.gross_amount);
             }
         })
-        .catch(error => {
+        .catch(function(error) {
             showNotification(error.message, 'error');
-            throw error; // Re-throw for Alpine finally
+            throw error;
         });
     }
 
@@ -334,54 +336,55 @@
 
     function showManualPaymentModal(orderId, amount) {
         document.getElementById('modalOrderId').textContent = orderId;
-        document.getElementById('modalTotalAmount').textContent = `Rp ${amount.toLocaleString('id-ID')}`;
+        document.getElementById('modalTotalAmount').textContent = 'Rp ' + amount.toLocaleString('id-ID');
         
-        const modal = document.getElementById('paymentModal');
+        var modal = document.getElementById('paymentModal');
         modal.classList.remove('hidden');
         modal.classList.add('flex');
         document.body.style.overflow = 'hidden';
     }
 
     function closePaymentModal() {
-        const modal = document.getElementById('paymentModal');
+        var modal = document.getElementById('paymentModal');
         modal.classList.add('hidden');
         modal.classList.remove('flex');
         document.body.style.overflow = '';
     }
 
     function copyToClipboard(text, bank) {
-        navigator.clipboard.writeText(text).then(() => {
-            showNotification(`Nomor rekening ${bank} berhasil disalin!`, 'success');
+        navigator.clipboard.writeText(text).then(function() {
+            showNotification('Nomor rekening ' + bank + ' berhasil disalin!', 'success');
         });
     }
 
-    function showNotification(message, type = 'success') {
-        const toast = document.createElement('div');
-        toast.className = `fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl text-white font-bold text-sm shadow-2xl z-[300] transition-all duration-500 transform translate-y-20 opacity-0`;
+    function showNotification(message, type) {
+        if (type === undefined) type = 'success';
+        var toast = document.createElement('div');
+        toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 px-8 py-4 rounded-2xl text-white font-bold text-sm shadow-2xl z-[300] transition-all duration-500 transform translate-y-20 opacity-0';
         toast.style.backgroundColor = type === 'success' ? '#10B981' : '#EF4444';
         toast.innerHTML = message;
         document.body.appendChild(toast);
         
-        setTimeout(() => {
+        setTimeout(function() {
             toast.classList.remove('translate-y-20', 'opacity-0');
         }, 100);
 
-        setTimeout(() => {
+        setTimeout(function() {
             toast.classList.add('translate-y-20', 'opacity-0');
-            setTimeout(() => toast.remove(), 500);
+            setTimeout(function() { toast.remove(); }, 500);
         }, 3000);
     }
 
     function redirectToWhatsappFromModal() {
-        const orderId = document.getElementById('modalOrderId').textContent;
-        const total = document.getElementById('modalTotalAmount').textContent;
-        const name = document.querySelector('input[name="customer_name"]').value;
-        const carName = "{{ $car->name }}";
+        var orderId = document.getElementById('modalOrderId').textContent;
+        var total = document.getElementById('modalTotalAmount').textContent;
+        var name = document.querySelector('input[name="customer_name"]').value;
+        var carName = "{{ $car->name }}";
         
-        const message = `Halo NorthSumateraTrip 👋\n\nSaya ingin konfirmasi pembayaran sewa mobil.\n\n🧾 ID Pesanan: ${orderId}\n🚗 Unit: ${carName}\n💰 Total: ${total}\n👤 Nama: ${name}\n\nMohon bantuannya ya! Terima kasih 🙏`;
+        var message = 'Halo NorthSumateraTrip \u{1F44B}\n\nSaya ingin konfirmasi pembayaran sewa mobil.\n\n\u{1F9FE} ID Pesanan: ' + orderId + '\n\u{1F697} Unit: ' + carName + '\n\u{1F4B0} Total: ' + total + '\n\u{1F464} Nama: ' + name + '\n\nMohon bantuannya ya! Terima kasih \u{1F64F}';
         
-        const waNumber = "{{ preg_replace('/\D/', '', \App\Helpers\SettingsHelper::whatsappNumber()) }}";
-        window.open(`https://wa.me/${waNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        var waNumber = "{{ preg_replace('/\D/', '', \App\Helpers\SettingsHelper::whatsappNumber()) }}";
+        window.open('https://wa.me/' + waNumber + '?text=' + encodeURIComponent(message), '_blank');
     }
 </script>
 @endpush

@@ -154,9 +154,9 @@
 
     <script>
         function copyToClipboard(text, label) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert(`Nomor Rekening ${label} berhasil disalin!`);
-            }).catch(() => {
+            navigator.clipboard.writeText(text).then(function() {
+                alert('Nomor Rekening ' + label + ' berhasil disalin!');
+            }).catch(function() {
                 alert('Gagal menyalin. Silakan salin manual.');
             });
         }

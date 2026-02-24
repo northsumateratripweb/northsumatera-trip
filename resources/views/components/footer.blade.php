@@ -89,7 +89,7 @@
 
 <!-- Floating Action Button (Back to Top) -->
 <div x-data="{ show: false }" 
-     x-init="window.addEventListener('scroll', () => { show = window.pageYOffset > 500 })"
+     x-init="window.addEventListener('scroll', function() { show = window.pageYOffset > 500 })"
      x-show="show"
      x-transition:enter="transition ease-out duration-300"
      x-transition:enter-start="opacity-0 translate-y-10"

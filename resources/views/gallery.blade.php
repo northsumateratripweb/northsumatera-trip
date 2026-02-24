@@ -37,7 +37,7 @@
         <div x-data="{ 
             open: false, 
             currentIndex: 0,
-            images: {{ $galleries->map(fn($g) => ['url' => $g->image_url, 'title' => $g->title, 'category' => $g->category])->toJson() }},
+            images: {{ $galleries->map(function($g) { return ['url' => $g->image_url, 'title' => $g->title, 'category' => $g->category]; })->toJson() }},
             
             showLightbox(index) {
                 this.currentIndex = index;
@@ -110,16 +110,16 @@
                     <!-- Image -->
                     <div class="relative max-w-7xl w-full h-full flex flex-col items-center justify-center gap-12" @click.stop>
                         <div class="relative w-full h-[75vh] flex items-center justify-center">
-                            <img :src="images[currentIndex]?.url" 
+                            <img :src="images[currentIndex] ? images[currentIndex].url : ''" 
                                  :key="currentIndex"
                                  class="max-h-full max-w-full rounded-[40px] shadow-2xl object-contain animate-in zoom-in-95 duration-500" />
                         </div>
                         
                         <div class="text-center group">
-                            <h4 x-text="images[currentIndex]?.title" class="text-white text-3xl md:text-5xl font-black tracking-tight mb-4 uppercase"></h4>
+                            <h4 x-text="images[currentIndex] ? images[currentIndex].title : ''" class="text-white text-3xl md:text-5xl font-black tracking-tight mb-4 uppercase"></h4>
                             <div class="inline-flex items-center gap-4">
                                 <span class="w-8 h-px bg-white/20"></span>
-                                <p class="text-white/40 text-xs font-black uppercase tracking-[0.4em]" x-text="`${currentIndex + 1} / ${images.length}`"></p>
+                                <p class="text-white/40 text-xs font-black uppercase tracking-[0.4em]" x-text="(currentIndex + 1) + ' / ' + images.length"></p>
                                 <span class="w-8 h-px bg-white/20"></span>
                             </div>
                         </div>

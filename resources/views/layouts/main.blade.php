@@ -101,7 +101,7 @@
     <!-- NAVBAR                                                  -->
     <!-- ═══════════════════════════════════════════════════════ -->
     <nav x-data="{ mobileMenu: false, isScrolled: false }" 
-         x-init="window.addEventListener('scroll', () => { isScrolled = window.scrollY > 10 })"
+         x-init="window.addEventListener('scroll', function() { isScrolled = window.scrollY > 10 })"
          :class="{ 'bg-white dark:bg-slate-900 shadow-sm border-b border-slate-100 dark:border-slate-800 py-4': isScrolled || !request()->routeIs('home'), 'bg-transparent py-6 md:py-10': !isScrolled && request()->routeIs('home') }"
          class="fixed w-full top-0 left-0 z-[100] transition-all duration-500">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -282,139 +282,143 @@
     <script>
         /* ─── Dark Mode ─────────────────────────────────────── */
         function toggleTheme() {
-            const html = document.documentElement;
-            const isDark = html.classList.toggle('dark');
+            var html = document.documentElement;
+            var isDark = html.classList.toggle('dark');
             localStorage.setItem('theme', isDark ? 'dark' : 'light');
             updateThemeIcons(isDark);
             updateGlow(isDark);
         }
 
         function updateGlow(isDark) {
-            const glow = document.getElementById('dm-glow');
+            var glow = document.getElementById('dm-glow');
             if (glow) glow.style.opacity = isDark ? '1' : '0';
         }
 
         function updateThemeIcons(isDark) {
-            const sun  = document.getElementById('iconSun');
-            const moon = document.getElementById('iconMoon');
-            const mobileLabel = document.getElementById('mobileThemeLabel');
-            const mobileIcon  = document.getElementById('mobileThemeIcon');
+            var sun  = document.getElementById('iconSun');
+            var moon = document.getElementById('iconMoon');
+            var mobileLabel = document.getElementById('mobileThemeLabel');
+            var mobileIcon  = document.getElementById('mobileThemeIcon');
 
             if (isDark) {
-                sun?.classList.remove('hidden');
-                moon?.classList.add('hidden');
+                if (sun)  sun.classList.remove('hidden');
+                if (moon) moon.classList.add('hidden');
                 if (mobileLabel) mobileLabel.textContent = 'Mode Terang';
-                if (mobileIcon) mobileIcon.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`;
+                if (mobileIcon) mobileIcon.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>';
             } else {
-                sun?.classList.add('hidden');
-                moon?.classList.remove('hidden');
+                if (sun)  sun.classList.add('hidden');
+                if (moon) moon.classList.remove('hidden');
                 if (mobileLabel) mobileLabel.textContent = 'Mode Gelap';
-                if (mobileIcon) mobileIcon.innerHTML = `<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>`;
+                if (mobileIcon) mobileIcon.innerHTML = '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>';
             }
         }
 
         /* ─── Wishlist ──────────────────────────────────────── */
         function openWishlist() {
-            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            var wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
             if (wishlist.length === 0) {
                 alert('Wishlist Anda masih kosong');
                 return;
             }
-            let html = '<div class="space-y-3 max-h-[55vh] overflow-y-auto custom-scrollbar pr-2">';
-            wishlist.forEach(item => {
-                html += `
-                    <div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-100 dark:border-slate-600">
-                        <img src="${item.thumb}" class="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0">
-                        <div class="flex-1 min-w-0">
-                            <h4 class="font-black text-slate-900 dark:text-white text-sm truncate">${item.title}</h4>
-                            <a href="/tour/${item.id}" class="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Lihat Detail</a>
-                        </div>
-                        <button onclick="removeFromWishlist(${item.id})" class="p-2 text-slate-400 hover:text-rose-500 transition-colors flex-shrink-0 tap-target">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
-                `;
+            var html = '<div class="space-y-3 max-h-[55vh] overflow-y-auto custom-scrollbar pr-2">';
+            wishlist.forEach(function(item) {
+                html += '<div class="flex items-center gap-3 p-3 bg-slate-50 dark:bg-slate-700/50 rounded-2xl border border-slate-100 dark:border-slate-600">' +
+                    '<img src="' + item.thumb + '" class="w-14 h-14 rounded-xl object-cover shadow-sm flex-shrink-0">' +
+                    '<div class="flex-1 min-w-0">' +
+                        '<h4 class="font-black text-slate-900 dark:text-white text-sm truncate">' + item.title + '</h4>' +
+                        '<a href="/tour/' + item.id + '" class="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Lihat Detail</a>' +
+                    '</div>' +
+                    '<button onclick="removeFromWishlist(' + item.id + ')" class="p-2 text-slate-400 hover:text-rose-500 transition-colors flex-shrink-0 tap-target">' +
+                        '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>' +
+                    '</button>' +
+                '</div>';
             });
             html += '</div>';
 
-            const overlay = document.createElement('div');
+            var overlay = document.createElement('div');
             overlay.id = 'wishlistOverlay';
             overlay.className = 'fixed inset-0 z-[200] bg-slate-900/60 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-6';
-            overlay.innerHTML = `
-                <div class="bg-white dark:bg-slate-800 rounded-t-[32px] sm:rounded-[32px] w-full sm:max-w-md p-6 sm:p-8 shadow-2xl animate-fade-up sm:animate-scale-in">
-                    <div class="w-10 h-1 bg-slate-200 dark:bg-slate-600 rounded-full mx-auto mb-6 sm:hidden"></div>
-                    <div class="flex items-center justify-between mb-6">
-                        <h3 class="text-xl font-black text-slate-900 dark:text-white">Wishlist <span class="text-blue-500">Saya</span></h3>
-                        <button onclick="document.getElementById('wishlistOverlay').remove()" class="w-9 h-9 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>
-                        </button>
-                    </div>
-                    ${html}
-                    <button onclick="document.getElementById('wishlistOverlay').remove()" class="w-full mt-6 py-3.5 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors">Tutup</button>
-                </div>
-            `;
+            overlay.innerHTML =
+                '<div class="bg-white dark:bg-slate-800 rounded-t-[32px] sm:rounded-[32px] w-full sm:max-w-md p-6 sm:p-8 shadow-2xl animate-fade-up sm:animate-scale-in">' +
+                    '<div class="w-10 h-1 bg-slate-200 dark:bg-slate-600 rounded-full mx-auto mb-6 sm:hidden"></div>' +
+                    '<div class="flex items-center justify-between mb-6">' +
+                        '<h3 class="text-xl font-black text-slate-900 dark:text-white">Wishlist <span class="text-blue-500">Saya</span></h3>' +
+                        '<button onclick="document.getElementById(\'wishlistOverlay\').remove()" class="w-9 h-9 bg-slate-100 dark:bg-slate-700 rounded-full flex items-center justify-center text-slate-500 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors">' +
+                            '<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 18L18 6M6 6l12 12"></path></svg>' +
+                        '</button>' +
+                    '</div>' +
+                    html +
+                    '<button onclick="document.getElementById(\'wishlistOverlay\').remove()" class="w-full mt-6 py-3.5 bg-slate-900 dark:bg-slate-700 text-white rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-slate-800 transition-colors">Tutup</button>' +
+                '</div>';
             overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
             document.body.appendChild(overlay);
         }
 
         function removeFromWishlist(id) {
-            let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            var wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
             wishlist = wishlist.filter(function(item) { return item.id !== id; });
             localStorage.setItem('wishlist', JSON.stringify(wishlist));
             updateWishlistBadge();
-            const overlay = document.getElementById('wishlistOverlay');
+            var overlay = document.getElementById('wishlistOverlay');
             if (overlay) { overlay.remove(); openWishlist(); }
         }
 
         function updateWishlistBadge() {
-            const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-            const badge = document.getElementById('wishlistBadge');
+            var wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+            var badge = document.getElementById('wishlistBadge');
             if (badge) {
                 badge.textContent = wishlist.length;
                 badge.classList.toggle('hidden', wishlist.length === 0);
             }
         }
 
-        /* ─── Scroll Reveal ─────────────────────────────────── */
+        /* ─── Scroll Reveal (throttled) ───────────────────── */
+        var revealTicking = false;
         function reveal() {
-            document.querySelectorAll('.reveal').forEach(function(el) {
-                const top = el.getBoundingClientRect().top;
-                if (top < window.innerHeight - 100) el.classList.add('active');
+            if (revealTicking) return;
+            revealTicking = true;
+            requestAnimationFrame(function() {
+                var els = document.querySelectorAll('.reveal');
+                for (var i = 0; i < els.length; i++) {
+                    var top = els[i].getBoundingClientRect().top;
+                    if (top < window.innerHeight - 80) {
+                        els[i].classList.add('active');
+                    }
+                }
+                revealTicking = false;
+            });
+        }
+
+        /* ─── Premium Mouse Effects (throttled) ──────────── */
+        var mouseTicking = false;
+        function handleMouseMove(e) {
+            if (mouseTicking) return;
+            mouseTicking = true;
+            requestAnimationFrame(function() {
+                document.documentElement.style.setProperty('--mouse-x', e.clientX + 'px');
+                document.documentElement.style.setProperty('--mouse-y', e.clientY + 'px');
+
+                var parallaxEls = document.querySelectorAll('.parallax-el');
+                for (var i = 0; i < parallaxEls.length; i++) {
+                    var el = parallaxEls[i];
+                    var speed = parseFloat(el.dataset.speed) || 0.05;
+                    var x = (window.innerWidth / 2 - e.clientX) * speed;
+                    var y = (window.innerHeight / 2 - e.clientY) * speed;
+                    el.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+                }
+                mouseTicking = false;
             });
         }
 
         /* ─── Init ──────────────────────────────────────────── */
-        /* ─── Premium Effects ─────────────────────────────── */
-        document.addEventListener('mousemove', e => {
-            // Global Mouse Follow for CSS Variables
-            document.documentElement.style.setProperty('--mouse-x', `${e.clientX}px`);
-            document.documentElement.style.setProperty('--mouse-y', `${e.clientY}px`);
-            
-            // Premium Card Glow Logic
-            document.querySelectorAll('.group').forEach(function(group) {
-                const rect = group.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                group.style.setProperty('--mouse-x', `${x}px`);
-                group.style.setProperty('--mouse-y', `${y}px`);
-            });
-
-            // Parallax Floating Logic
-            document.querySelectorAll('.parallax-el').forEach(function(el) {
-                const speed = parseFloat(el.dataset.speed) || 0.05;
-                const x = (window.innerWidth / 2 - e.clientX) * speed;
-                const y = (window.innerHeight / 2 - e.clientY) * speed;
-                el.style.transform = `translate(${x}px, ${y}px)`;
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const isDark = document.documentElement.classList.contains('dark');
+        document.addEventListener('DOMContentLoaded', function() {
+            var isDark = document.documentElement.classList.contains('dark');
             updateThemeIcons(isDark);
             updateGlow(isDark);
             updateWishlistBadge();
             reveal();
             window.addEventListener('scroll', reveal, { passive: true });
+            document.addEventListener('mousemove', handleMouseMove, { passive: true });
         });
     </script>
     @stack('scripts')

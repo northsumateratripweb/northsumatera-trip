@@ -528,42 +528,47 @@
                 @endforeach
             </div>
         </div>
-    <!-- CTA Footer Section -->
-    <section class="py-32 relative overflow-hidden">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="relative bg-slate-900 dark:bg-slate-950 rounded-[64px] p-16 md:p-32 overflow-hidden border border-slate-800 shadow-2xl text-center">
-                <div class="relative z-10 max-w-4xl mx-auto">
-                    <h2 class="text-4xl md:text-7xl font-black text-white mb-10 leading-[1.1] tracking-tight">
-                        {{ App\Helpers\SettingsHelper::ctaTitle() }}
-                    </h2>
-                    <p class="text-slate-400 text-lg md:text-2xl leading-relaxed mb-16 max-w-2xl mx-auto">
-                        {{ App\Helpers\SettingsHelper::ctaSubtitle() }}
-                    </p>
-                    
-                    <div class="flex flex-wrap justify-center gap-6">
-                        <a href="https://wa.me/{{ App\Helpers\SettingsHelper::whatsappNumber() }}" target="_blank" class="px-12 py-6 bg-white text-slate-900 rounded-full font-black text-lg hover:bg-slate-100 transition-all shadow-xl">
-                            {{ App\Helpers\SettingsHelper::ctaButtonText() }}
-                        </a>
-                        <a href="#tours" class="px-12 py-6 border-2 border-white/20 text-white rounded-full font-black text-lg hover:bg-white/5 transition-all">
-                            Lihat Paket Wisata
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
     </section>
-                    <div class="hidden lg:flex lg:justify-end">
-                        <div class="relative w-full max-w-[420px] aspect-square bg-slate-800 rounded-[48px] overflow-hidden border border-slate-700 shadow-2xl rotate-2">
-                             <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover opacity-60" alt="Sumatera Adventure">
-                             <div class="absolute inset-0 flex items-center justify-center p-12">
+
+    <!-- CTA Footer Section -->
+    <section class="py-32 relative overflow-hidden reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="relative bg-slate-900 dark:bg-slate-950 rounded-[64px] p-16 md:p-24 overflow-hidden border border-slate-800 shadow-2xl">
+                <!-- Ambient glow effects -->
+                <div class="absolute top-0 left-1/4 w-[500px] h-[400px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(59,130,246,0.15) 0%, transparent 70%); filter:blur(100px);"></div>
+                <div class="absolute bottom-0 right-1/4 w-[400px] h-[300px] rounded-full pointer-events-none" style="background:radial-gradient(ellipse at center, rgba(99,102,241,0.1) 0%, transparent 70%); filter:blur(100px);"></div>
+
+                <div class="relative z-10 grid lg:grid-cols-5 gap-16 items-center">
+                    <div class="lg:col-span-3 text-center lg:text-left">
+                        <h2 class="text-4xl md:text-6xl font-black text-white mb-8 leading-[1.1] tracking-tight">
+                            {{ App\Helpers\SettingsHelper::ctaTitle() }}
+                        </h2>
+                        <p class="text-slate-400 text-lg md:text-xl leading-relaxed mb-12 max-w-2xl">
+                            {{ App\Helpers\SettingsHelper::ctaSubtitle() }}
+                        </p>
+                        
+                        <div class="flex flex-wrap justify-center lg:justify-start gap-4">
+                            <a href="https://wa.me/{{ App\Helpers\SettingsHelper::whatsappNumber() }}" target="_blank" class="group px-10 py-5 bg-white text-slate-900 rounded-full font-black text-sm uppercase tracking-widest hover:bg-blue-50 transition-all shadow-xl shadow-white/10 flex items-center gap-3">
+                                {{ App\Helpers\SettingsHelper::ctaButtonText() }}
+                                <svg class="w-5 h-5 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                            </a>
+                            <a href="#tours" class="px-10 py-5 border-2 border-white/20 text-white rounded-full font-black text-sm uppercase tracking-widest hover:bg-white/5 hover:border-white/40 transition-all">
+                                Lihat Paket Wisata
+                            </a>
+                        </div>
+                    </div>
+                    <div class="hidden lg:flex lg:col-span-2 justify-end">
+                        <div class="relative w-full max-w-[320px] aspect-square bg-slate-800 rounded-[48px] overflow-hidden border border-slate-700/50 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
+                             <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-50" alt="Sumatera Adventure" loading="lazy">
+                             <div class="absolute inset-0 flex items-center justify-center p-10">
                                 <div class="text-center">
-                                    <div class="w-24 h-24 bg-white/10 backdrop-blur-md rounded-[32px] flex items-center justify-center mx-auto mb-6 border border-white/20">
-                                        <svg class="w-12 h-12 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
+                                    <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-[24px] flex items-center justify-center mx-auto mb-5 border border-white/20">
+                                        <svg class="w-10 h-10 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                                     </div>
-                                    <p class="text-white font-black text-2xl tracking-tighter">Premium Travel Agency</p>
-                                    <div class="flex justify-center gap-1 mt-4">
+                                    <p class="text-white font-black text-lg tracking-tight mb-3">Premium Travel Agency</p>
+                                    <div class="flex justify-center gap-1">
                                         @for($i=0; $i<5; $i++)
-                                        <svg class="w-5 h-5 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                        <svg class="w-4 h-4 text-amber-400 fill-current" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
                                         @endfor
                                     </div>
                                 </div>
@@ -716,23 +721,24 @@
 @push('scripts')
 
     <script>
-        let currentTour = null;
-        let currentTrips = null;
+        var currentTour = null;
+        var currentTrips = null;
 
         function openTourModal(slug, title, days, location, url, trips) {
-            currentTour = { slug, title, days, location, url };
+            currentTour = { slug: slug, title: title, days: days, location: location, url: url };
             currentTrips = trips || {};
 
             document.getElementById('tourModal').classList.remove('hidden');
-            document.getElementById('modalTitle').textContent = `${title} (${days} Hari)`;
+            document.getElementById('modalTitle').textContent = title + ' (' + days + ' Hari)';
 
             // Populate trips
-            const container = document.getElementById('tripsContainer');
+            var container = document.getElementById('tripsContainer');
             container.innerHTML = '';
             
             if (trips && Object.keys(trips).length > 0) {
-                Object.entries(trips).forEach(([key, tripData]) => {
-                    const btn = document.createElement('button');
+                Object.keys(trips).forEach(function(key) {
+                    var tripData = trips[key];
+                    var btn = document.createElement('button');
                     btn.className = 'bg-slate-50 hover:bg-blue-50 text-slate-400 hover:text-blue-600 border border-slate-100 hover:border-blue-200 font-black py-4 rounded-2xl transition-all duration-300 trip-btn text-xs tracking-widest';
                     btn.textContent = key.toUpperCase();
                     btn.dataset.tripId = key;
@@ -748,10 +754,12 @@
             fetch(url)
                 .then(function(response) { return response.text(); })
                 .then(function(html) {
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(html, 'text/html');
-                    const desc = doc.getElementById('tourDescription')?.innerHTML || '';
-                    const itin = doc.getElementById('tourItinerary')?.innerHTML || '';
+                    var parser = new DOMParser();
+                    var doc = parser.parseFromString(html, 'text/html');
+                    var descEl = doc.getElementById('tourDescription');
+                    var itinEl = doc.getElementById('tourItinerary');
+                    var desc = descEl ? descEl.innerHTML : '';
+                    var itin = itinEl ? itinEl.innerHTML : '';
                     document.getElementById('modalDescription').innerHTML = desc;
                     document.getElementById('modalItinerary').innerHTML = itin;
                 });
@@ -763,7 +771,7 @@
         }
 
         function selectTrip(event) {
-            document.querySelectorAll('.trip-btn').forEach(btn => {
+            document.querySelectorAll('.trip-btn').forEach(function(btn) {
                 btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600', 'shadow-lg', 'shadow-blue-500/20');
                 btn.classList.add('bg-slate-50', 'text-slate-400', 'border-slate-100');
             });
@@ -773,42 +781,42 @@
         }
 
         function updatePrice() {
-            const selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
-            const people = parseInt(document.getElementById('peopleCount').value) || 1;
+            var selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
+            var people = parseInt(document.getElementById('peopleCount').value) || 1;
             
             if (selectedTrip) {
-                const price = parseInt(selectedTrip.dataset.tripPrice) || 0;
-                const total = price * people;
-                document.getElementById('totalPrice').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+                var price = parseInt(selectedTrip.dataset.tripPrice) || 0;
+                var total = price * people;
+                document.getElementById('totalPrice').textContent = 'Rp ' + total.toLocaleString('id-ID');
             }
         }
 
-        const peopleCountInput = document.getElementById('peopleCount');
+        var peopleCountInput = document.getElementById('peopleCount');
         if (peopleCountInput) {
             peopleCountInput.addEventListener('change', updatePrice);
         }
 
         function handleBookingClick() {
-            const btn = document.getElementById('bookNowBtn');
-            const btnText = document.getElementById('btnText');
-            const btnLoading = document.getElementById('btnLoading');
+            var btn = document.getElementById('bookNowBtn');
+            var btnText = document.getElementById('btnText');
+            var btnLoading = document.getElementById('btnLoading');
             
-            const selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
+            var selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
             if (!selectedTrip) {
                 alert('Silakan pilih trip terlebih dahulu');
                 return;
             }
 
-            const people = document.getElementById('peopleCount').value;
-            const tripId = selectedTrip.dataset.tripId;
-            const price = parseInt(selectedTrip.dataset.tripPrice);
-            const total = price * people;
+            var people = document.getElementById('peopleCount').value;
+            var tripId = selectedTrip.dataset.tripId;
+            var price = parseInt(selectedTrip.dataset.tripPrice);
+            var total = price * people;
 
             // Get Form Data
-            const name = document.getElementById('customerName').value;
-            const phone = document.getElementById('customerPhone').value;
-            const whatsapp = document.getElementById('customerWhatsapp').value;
-            const date = document.getElementById('travelDate').value;
+            var name = document.getElementById('customerName').value;
+            var phone = document.getElementById('customerPhone').value;
+            var whatsapp = document.getElementById('customerWhatsapp').value;
+            var date = document.getElementById('travelDate').value;
 
             // Simple Validation
             if (!name || !phone || !whatsapp || !date) {
@@ -831,7 +839,7 @@
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || document.querySelector('input[name="_token"]')?.value || ''
+                    'X-CSRF-TOKEN': (document.querySelector('meta[name="csrf-token"]') || {}).content || (document.querySelector('input[name="_token"]') || {}).value || ''
                 },
                 body: JSON.stringify({
                     trip_id: tripId,
@@ -840,28 +848,28 @@
                     phone: phone,
                     customer_whatsapp: whatsapp,
                     travel_date: date,
-                    hotel_1: document.getElementById('hotel_1')?.value,
-                    hotel_2: document.getElementById('hotel_2')?.value,
-                    hotel_3: document.getElementById('hotel_3')?.value,
-                    hotel_4: document.getElementById('hotel_4')?.value,
-                    tiba: document.getElementById('tiba')?.value,
-                    flight_balik: document.getElementById('flight_balik')?.value,
-                    notes: document.getElementById('notes')?.value,
-                    hp_field: document.getElementById('hp_field')?.value
+                    hotel_1: (document.getElementById('hotel_1') || {}).value || '',
+                    hotel_2: (document.getElementById('hotel_2') || {}).value || '',
+                    hotel_3: (document.getElementById('hotel_3') || {}).value || '',
+                    hotel_4: (document.getElementById('hotel_4') || {}).value || '',
+                    tiba: (document.getElementById('tiba') || {}).value || '',
+                    flight_balik: (document.getElementById('flight_balik') || {}).value || '',
+                    notes: (document.getElementById('notes') || {}).value || '',
+                    hp_field: (document.getElementById('hp_field') || {}).value || ''
                 })
             })
             .then(function(response) { return response.json(); })
             .then(function(data) {
                 if (data.success) {
                     // Manual Payment Success Logic
-                    const bank = data.payment_info.bank_details;
-                    let paymentMsg = `Pesanan Berhasil!\n\nID Pesanan: ${data.order_id}\nTotal: Rp ${data.gross_amount.toLocaleString('id-ID')}\n\nPembayaran via Transfer:\n`;
+                    var bank = data.payment_info.bank_details;
+                    var paymentMsg = 'Pesanan Berhasil!\n\nID Pesanan: ' + data.order_id + '\nTotal: Rp ' + data.gross_amount.toLocaleString('id-ID') + '\n\nPembayaran via Transfer:\n';
                     
-                    if (bank.bank_1.name) {
-                        paymentMsg += `${bank.bank_1.name}: ${bank.bank_1.account} a/n ${bank.bank_1.holder}\n`;
+                    if (bank.bank_1 && bank.bank_1.name) {
+                        paymentMsg += bank.bank_1.name + ': ' + bank.bank_1.account + ' a/n ' + bank.bank_1.holder + '\n';
                     }
-                    if (bank.bank_2.name) {
-                        paymentMsg += `${bank.bank_2.name}: ${bank.bank_2.account} a/n ${bank.bank_2.holder}\n`;
+                    if (bank.bank_2 && bank.bank_2.name) {
+                        paymentMsg += bank.bank_2.name + ': ' + bank.bank_2.account + ' a/n ' + bank.bank_2.holder + '\n';
                     }
                     
                     alert(paymentMsg + '\nInstruksi lengkap telah dikirim ke WhatsApp Anda.');
@@ -884,27 +892,27 @@
         }
 
         function handleWhatsappClick() {
-            const selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
+            var selectedTrip = document.querySelector('.trip-btn.bg-blue-600');
             if (!selectedTrip) {
                 alert('Silakan pilih trip terlebih dahulu');
                 return;
             }
 
-            const people = document.getElementById('peopleCount').value;
-            const tripId = selectedTrip.dataset.tripId;
-            const price = parseInt(selectedTrip.dataset.tripPrice);
-            const total = price * people;
+            var people = document.getElementById('peopleCount').value;
+            var tripId = selectedTrip.dataset.tripId;
+            var price = parseInt(selectedTrip.dataset.tripPrice);
+            var total = price * people;
             
-            // Get Form Data (Optional for WhatsApp, but good for context)
-            const name = document.getElementById('customerName').value || 'Pelanggan';
-            const date = document.getElementById('travelDate').value || 'Belum ditentukan';
-            const tiba = document.getElementById('tiba').value || '-';
-            const h1 = document.getElementById('hotel_1').value || '-';
-            const notes = document.getElementById('notes').value || '-';
+            // Get Form Data
+            var name = document.getElementById('customerName').value || 'Pelanggan';
+            var date = document.getElementById('travelDate').value || 'Belum ditentukan';
+            var tiba = (document.getElementById('tiba') || {}).value || '-';
+            var h1 = (document.getElementById('hotel_1') || {}).value || '-';
+            var notes = (document.getElementById('notes') || {}).value || '-';
 
-            const message = `Halo NorthSumateraTrip,\n\nSaya ingin memesan paket:\n*${currentTour.title}*\n\nDetail Pesanan:\n- Trip: ${tripId.toUpperCase()}\n- Jumlah: ${people} orang\n- Tanggal Trip: ${date}\n- Tanggal Tiba: ${tiba}\n- Hotel 1: ${h1}\n- Nama: ${name}\n- Catatan: ${notes}\n\nTotal: Rp ${total.toLocaleString('id-ID')}\n\nMohon info selanjutnya.`;
+            var message = 'Halo NorthSumateraTrip,\n\nSaya ingin memesan paket:\n*' + currentTour.title + '*\n\nDetail Pesanan:\n- Trip: ' + tripId.toUpperCase() + '\n- Jumlah: ' + people + ' orang\n- Tanggal Trip: ' + date + '\n- Tanggal Tiba: ' + tiba + '\n- Hotel 1: ' + h1 + '\n- Nama: ' + name + '\n- Catatan: ' + notes + '\n\nTotal: Rp ' + total.toLocaleString('id-ID') + '\n\nMohon info selanjutnya.';
             
-            const whatsappUrl = `https://wa.me/{{ App\Helpers\SettingsHelper::whatsappNumber() }}?text=${encodeURIComponent(message)}`;
+            var whatsappUrl = 'https://wa.me/{{ App\Helpers\SettingsHelper::whatsappNumber() }}?text=' + encodeURIComponent(message);
             window.open(whatsappUrl, '_blank');
         }
         
