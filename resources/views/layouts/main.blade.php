@@ -22,7 +22,19 @@
     <meta name="description" content="@yield('meta_description', App\Helpers\SettingsHelper::get()->meta_description ?? 'Solusi perjalanan wisata Sumatera Utara terbaik. Paket wisata Danau Toba, Berastagi, Medan, dan sewa mobil premium dengan harga terjangkau.')">
     <meta name="keywords" content="@yield('meta_keywords', App\Helpers\SettingsHelper::get()->meta_keywords ?? 'wisata sumatera utara, paket tour danau toba, sewa mobil medan, trip sumut, berastagi tour, bukit lawang adventure')">
     <meta name="author" content="{{ App\Helpers\SettingsHelper::companyName() }}">
+    <meta name="robots" content="@yield('meta_robots', 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1')">
+    <meta name="googlebot" content="@yield('meta_robots', 'index, follow, max-image-preview:large')">
+    <meta name="language" content="{{ app()->getLocale() }}">
+    <meta name="revisit-after" content="3 days">
+    <meta name="rating" content="general">
+    <meta http-equiv="content-language" content="{{ app()->getLocale() }}">
     <link rel="canonical" href="{{ url()->current() }}">
+    
+    <!-- Hreflang for multi-language support -->
+    <link rel="alternate" hreflang="id" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="en" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="ms" href="{{ url()->current() }}">
+    <link rel="alternate" hreflang="x-default" href="{{ url()->current() }}">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type"        content="website">
@@ -30,13 +42,18 @@
     <meta property="og:title"       content="@yield('title', 'NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara')">
     <meta property="og:description" content="@yield('meta_description', 'Solusi perjalanan wisata Sumatera Utara terbaik. Paket wisata Danau Toba, Berastagi, Medan, dan sewa mobil premium.')">
     <meta property="og:image"       content="@yield('meta_image', asset('images/og-image.jpg'))">
+    <meta property="og:image:width"  content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale"       content="id_ID">
+    <meta property="og:site_name"    content="{{ App\Helpers\SettingsHelper::companyName() }}">
 
     <!-- Twitter -->
-    <meta property="twitter:card"        content="summary_large_image">
-    <meta property="twitter:url"         content="{{ url()->current() }}">
-    <meta property="twitter:title"       content="@yield('title', 'NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara')">
-    <meta property="twitter:description" content="@yield('meta_description', 'Solusi perjalanan wisata Sumatera Utara terbaik. Paket wisata Danau Toba, Berastagi, Medan, dan sewa mobil premium.')">
-    <meta property="twitter:image"       content="@yield('meta_image', asset('images/og-image.jpg'))">
+    <meta name="twitter:card"        content="summary_large_image">
+    <meta name="twitter:url"         content="{{ url()->current() }}">
+    <meta name="twitter:title"       content="@yield('title', 'NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara')">
+    <meta name="twitter:description" content="@yield('meta_description', 'Solusi perjalanan wisata Sumatera Utara terbaik. Paket wisata Danau Toba, Berastagi, Medan, dan sewa mobil premium.')">
+    <meta name="twitter:image"       content="@yield('meta_image', asset('images/og-image.jpg'))">
+    <meta name="twitter:site"        content="@northsumateratrip">
 
     <!-- Favicon & PWA -->
     <link rel="icon" type="image/x-icon" href="{{ App\Helpers\SettingsHelper::favicon() }}">
@@ -55,7 +72,6 @@
 
     <!-- Custom Scripts / JSON-LD -->
     @stack('head')
-    <!-- Deployment Sync: 2026-02-24 13:17 -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     @stack('styles')
@@ -80,6 +96,28 @@
         "{{ App\Helpers\SettingsHelper::facebookUrl() }}",
         "{{ App\Helpers\SettingsHelper::instagramUrl() }}",
         "{{ App\Helpers\SettingsHelper::tiktokUrl() }}"
+      ]
+    }
+    </script>
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Beranda",
+        "item": "{{ url('/') }}"
+      }
+      @if(!request()->routeIs('home'))
+      ,{
+        "@type": "ListItem",
+        "position": 2,
+        "name": "@yield('title')",
+        "item": "{{ url()->current() }}"
+      }
+      @endif
       ]
     }
     </script>

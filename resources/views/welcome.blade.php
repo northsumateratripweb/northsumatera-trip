@@ -194,6 +194,56 @@
         </div>
     </section>
 
+    </section>
+
+    <!-- Why Choose Us Section (Content SEO Boost) -->
+    <section class="py-24 md:py-32 bg-white dark:bg-slate-900 reveal">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 md:gap-24 items-center">
+                <div class="relative">
+                    <div class="absolute -top-10 -left-10 w-32 h-32 bg-blue-50 dark:bg-blue-900/20 rounded-full blur-3xl"></div>
+                    <div class="relative z-10 space-y-8">
+                        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/30">
+                            <span class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600">Keunggulan Kami</span>
+                        </div>
+                        <h2 class="text-4xl md:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.1]">
+                            Solusi Perjalanan Wisata <span class="text-blue-600">Terpercaya</span> di Sumatera Utara
+                        </h2>
+                        <p class="text-slate-500 dark:text-slate-400 text-lg leading-relaxed font-medium">
+                            NorthSumateraTrip adalah agen perjalanan wisata profesional yang berdedikasi untuk memberikan pengalaman liburan terbaik bagi Anda. Kami memahami bahwa setiap perjalanan adalah momen berharga, itulah sebabnya kami menawarkan layanan yang dipersonalisasi dan berkualitas tinggi.
+                        </p>
+                        <div class="grid gap-6">
+                            <div class="flex gap-5 p-6 rounded-3xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 hover:border-blue-200 transition-all">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/20">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-slate-900 dark:text-white mb-1 uppercase text-xs tracking-widest">Layanan Berizin Resmi</h4>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400">Kami beroperasi di bawah PT Jelajah Wisata Sumatera dengan izin resmi, memberikan jaminan keamanan dan profesionalisme.</p>
+                                </div>
+                            </div>
+                            <div class="flex gap-5 p-6 rounded-3xl bg-slate-50 dark:bg-slate-800/50 border border-slate-100 dark:border-slate-800 hover:border-blue-200 transition-all">
+                                <div class="w-12 h-12 rounded-2xl bg-blue-600 flex items-center justify-center text-white shrink-0 shadow-lg shadow-blue-500/20">
+                                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                                </div>
+                                <div>
+                                    <h4 class="font-black text-slate-900 dark:text-white mb-1 uppercase text-xs tracking-widest">Supir & Guide Profesional</h4>
+                                    <p class="text-sm text-slate-500 dark:text-slate-400">Tim lapangan kami sudah sangat berpengalaman menjelajahi medan di Sumatera Utara dan ramah dalam melayani tamu.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden lg:block relative">
+                    <div class="absolute -bottom-10 -right-10 w-48 h-48 bg-blue-100 dark:bg-blue-900/30 rounded-full blur-[100px]"></div>
+                    <div class="relative z-10 rounded-[56px] overflow-hidden border-[12px] border-slate-50 dark:border-slate-800 shadow-2xl rotate-2">
+                        <img src="https://images.unsplash.com/photo-1596402184320-417d7178b2cd?q=80&w=800" alt="Layanan Wisata Profesional Sumatera Utara - NorthSumateraTrip" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="tours" class="py-20 md:py-32 bg-slate-50/50 dark:bg-slate-950/50 reveal">
         <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-16 gap-6 md:gap-8">
@@ -201,7 +251,7 @@
                     <h2 class="text-4xl md:text-5xl font-black mb-6 tracking-tight">{{ __t('home_popular_tours') ?? 'Paket Tour Terpopuler' }}</h2>
                     <p class="text-slate-500 text-lg">{{ __t('home_popular_tours_subtitle') ?? 'Pilih dari berbagai paket wisata yang telah kami kurasi khusus untuk kenyamanan dan pengalaman tak terlupakan Anda.' }}</p>
                 </div>
-                <a href="{{ route('packages') }}" class="text-blue-600 font-bold hover:underline flex items-center gap-2" aria-label="Lihat Semua Paket Wisata">
+                <a href="{{ route('packages') }}" class="text-blue-600 font-bold hover:underline flex items-center gap-2" aria-label="Lihat Semua Paket Wisata Danau Toba dan Medan">
                     {{ __t('home_link_all_packages') ?? 'Lihat Semua Paket' }}
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 </a>
@@ -514,7 +564,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
                 @foreach($socialFeeds as $feed)
                 <a href="{{ $feed->instagram_url ?? '#' }}" target="_blank" class="group relative aspect-square rounded-[48px] overflow-hidden bg-slate-200 border border-slate-200/60 shadow-sm transition-all duration-700">
-                    <img src="{{ asset('storage/' . $feed->image) }}" alt="Instagram Feed" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" loading="lazy">
+                    <img src="{{ asset('storage/' . $feed->image) }}" alt="Momen Wisata Sumatera Utara Bersama NorthSumateraTrip - Instagram Feed" class="w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110" loading="lazy">
                     <div class="absolute inset-0 bg-rose-600/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center p-8">
                         <div class="text-center transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500">
                             <svg class="w-12 h-12 text-white mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -559,7 +609,7 @@
                     </div>
                     <div class="hidden lg:flex lg:col-span-2 justify-end">
                         <div class="relative w-full max-w-[320px] aspect-square bg-slate-800 rounded-[48px] overflow-hidden border border-slate-700/50 shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-700">
-                             <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-50" alt="Sumatera Adventure" loading="lazy">
+                             <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?q=80&w=800&auto=format&fit=crop" class="w-full h-full object-cover opacity-50" alt="Agen Wisata Premium Sumatera Utara - NorthSumateraTrip Adventure" loading="lazy">
                              <div class="absolute inset-0 flex items-center justify-center p-10">
                                 <div class="text-center">
                                     <div class="w-20 h-20 bg-white/10 backdrop-blur-md rounded-[24px] flex items-center justify-center mx-auto mb-5 border border-white/20">

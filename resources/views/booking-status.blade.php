@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Cek Status Booking | NorthSumateraTrip')
+@section('meta_description', 'Pantau status pemesanan paket wisata atau sewa mobil Anda secara real-time. Masukkan ID pesanan Anda untuk melihat detail konfirmasi dan bukti pembayaran.')
 
 @section('content')
     <div class="pt-36 md:pt-44 pb-24 max-w-7xl mx-auto px-6 lg:px-8">

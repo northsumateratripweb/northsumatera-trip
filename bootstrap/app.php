@@ -22,8 +22,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
             \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
             \App\Http\Middleware\SetSecurityHeaders::class,
+            \App\Http\Middleware\SetTechnicalHeaders::class,
         ]);
-
         // Default "web" and "api" middleware groups
         $middleware->group('web', [
             \Illuminate\Cookie\Middleware\EncryptCookies::class,

@@ -15,7 +15,7 @@
             <div class="lg:col-span-5">
                 <a href="/" class="text-2xl font-black tracking-tighter flex items-center gap-2" aria-label="{{ App\Helpers\SettingsHelper::companyName() }} Home">
                     @if(App\Helpers\SettingsHelper::logo())
-                        <img src="{{ App\Helpers\SettingsHelper::logo() }}" alt="{{ App\Helpers\SettingsHelper::companyName() }}" class="h-8 w-auto object-contain">
+                        <img src="{{ App\Helpers\SettingsHelper::logo() }}" alt="{{ App\Helpers\SettingsHelper::companyName() }} - Agen Wisata Sumatera Utara" class="h-8 w-auto object-contain">
                     @else
                         <div class="w-8 h-8 bg-blue-700 rounded-lg flex items-center justify-center">
                             <svg width="20" height="20" class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>

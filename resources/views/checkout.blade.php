@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Checkout - ' . ($tour->title ?? $car->name) . ' - NorthSumateraTrip')
+@section('meta_description', 'Selesaikan pemesanan Anda dengan aman di NorthSumateraTrip. Pilih metode pembayaran dan konfirmasi detail perjalanan Anda untuk petualangan seru di Sumatera Utara.')
 
 @section('content')
     <div class="pt-36 md:pt-44 pb-24 max-w-7xl mx-auto px-6 lg:px-8">

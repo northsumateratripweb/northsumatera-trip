@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('title', 'Kontak Kami - NorthSumateraTrip')
+@section('meta_description', 'Hubungi tim NorthSumateraTrip untuk bantuan pemesanan paket wisata, sewa mobil, atau kustomisasi perjalanan Anda di Sumatera Utara. Layanan pelanggan 24/7.')
 
 @section('content')
     <div class="pt-36 md:pt-44 pb-24 max-w-7xl mx-auto px-6 lg:px-8">
