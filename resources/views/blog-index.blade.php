@@ -3,6 +3,26 @@
 @section('title', 'Blog & Artikel Wisata - NorthSumateraTrip')
 @section('meta_description', 'Temukan tips perjalanan, destinasi tersembunyi, dan panduan wisata terlengkap di Sumatera Utara melalui blog resmi kami.')
 
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "{{ route('home') }}"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Blog",
+    "item": "{{ url()->current() }}"
+  }]
+}
+</script>
+@endpush
+
 @section('content')
     <div class="pt-36 md:pt-44 pb-24 max-w-7xl mx-auto px-6 lg:px-8">
         <!-- Header -->

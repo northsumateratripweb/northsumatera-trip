@@ -2,7 +2,48 @@
 
 @section('title', 'NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara Terbaik')
 @section('meta_description', 'Jelajahi keindahan Sumatera Utara dengan paket wisata Danau Toba, Berastagi, dan Medan terbaik. Sewa mobil premium dan layanan tour profesional.')
-@section('meta_keywords', 'wisata sumut, danau toba tour, paket wisata medan, sewa mobil medan murah, trip berastagi, liburan sumatera utara')
+@section('meta_keywords', 'wisata sumut, danau toba tour, paket wisata medan, sewa mobil medan murah, trip berastagi, liburan sumatera utara, transport medan')
+
+@push('schema')
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "{{ App\Helpers\SettingsHelper::companyName() }}",
+  "image": "{{ App\Helpers\SettingsHelper::heroImage() ?? asset('images/og-image.jpg') }}",
+  "@id": "{{ url('/') }}",
+  "url": "{{ url('/') }}",
+  "telephone": "+{{ App\Helpers\SettingsHelper::whatsappNumber() }}",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Medan, Sumatera Utara",
+    "addressLocality": "Medan",
+    "addressRegion": "Sumatera Utara",
+    "postalCode": "20000",
+    "addressCountry": "ID"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 3.5952,
+    "longitude": 98.6722
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": [
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+      "Sunday"
+    ],
+    "opens": "00:00",
+    "closes": "23:59"
+  }
+}
+</script>
+@endpush
 
 @section('content')
     @push('styles')
@@ -193,7 +234,7 @@
                 @forelse($tours as $tour)
                     <div class="group bg-white dark:bg-slate-900 rounded-[48px] overflow-hidden border border-slate-100 dark:border-slate-800 hover:shadow-2xl hover:shadow-slate-200/50 dark:hover:shadow-none transition-all duration-500 flex flex-col h-full">
                         <div class="relative overflow-hidden aspect-[4/3] m-4 rounded-[40px]">
-                            <img src="{{ $tour->image_url }}" loading="lazy" alt="{{ $tour->title }}" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
+                            <img src="{{ $tour->image_url }}" loading="lazy" alt="Paket Wisata {{ $tour->title }} - NorthSumateraTrip" class="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110">
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                             
                             <div class="absolute top-5 left-5">

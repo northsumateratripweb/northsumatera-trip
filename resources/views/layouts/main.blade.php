@@ -60,6 +60,29 @@
     
     @stack('styles')
     @stack('schema')
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "{{ App\Helpers\SettingsHelper::companyName() }}",
+      "url": "{{ url('/') }}",
+      "logo": "{{ App\Helpers\SettingsHelper::logo() ?? asset('images/logo.png') }}",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+{{ App\Helpers\SettingsHelper::whatsappNumber() }}",
+        "contactType": "customer service",
+        "areaServed": "ID",
+        "availableLanguage": ["Indonesian", "English"]
+      },
+      "sameAs": [
+        "{{ App\Helpers\SettingsHelper::facebookUrl() }}",
+        "{{ App\Helpers\SettingsHelper::instagramUrl() }}",
+        "{{ App\Helpers\SettingsHelper::tiktokUrl() }}"
+      ]
+    }
+    </script>
 </head>
 
 <body class="antialiased font-['Instrument_Sans'] transition-colors duration-300 noise-bg" style="background-color:var(--bg-main); color:var(--text-main);">
@@ -86,7 +109,7 @@
             <a href="/" class="relative group">
                 <div class="flex items-center gap-2 sm:gap-3">
                     @if(App\Helpers\SettingsHelper::logo())
-                        <img src="{{ App\Helpers\SettingsHelper::logo() }}" alt="{{ App\Helpers\SettingsHelper::companyName() }}" class="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110">
+                        <img src="{{ App\Helpers\SettingsHelper::logo() }}" alt="{{ App\Helpers\SettingsHelper::companyName() }} Logo" class="h-10 md:h-12 w-auto object-contain transition-transform duration-500 group-hover:scale-110">
                     @else
                         <div class="w-10 h-10 md:w-12 md:h-12 bg-blue-700 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-blue-500/20 group-hover:scale-110 group-hover:rotate-6 transition-all duration-500">
                             <svg width="24" height="24" class="w-6 h-6 md:w-7 md:h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 012 2v1.5a2.5 2.5 0 01-2.5 2.5h-1.5a2 2 0 01-2-2zm1 15.865V19a2 2 0 114 0v.865M19 16.314a7 7 0 01-8.686 0M3.055 11V10a7.438 7.438 0 011.083-3.865M19 16.314V17a2 2 0 11-4 0v-.686"></path></svg>

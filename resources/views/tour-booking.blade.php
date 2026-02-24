@@ -4,25 +4,48 @@
 @section('meta_description', Str::limit(strip_tags($tour->description), 160))
 @section('meta_image', asset('storage/' . $tour->thumbnail))
 
-@push('head')
+@push('schema')
 <script type="application/ld+json">
 {
-  "@@context": "https://schema.org/",
-  "@@type": "Product",
+  "@context": "https://schema.org/",
+  "@type": "Product",
   "name": "{{ $tour->title }}",
   "image": "{{ asset('storage/' . $tour->thumbnail) }}",
-  "description": "{{ strip_tags($tour->description) }}",
+  "description": "{{ Str::limit(strip_tags($tour->description), 200) }}",
   "brand": {
-    "@@type": "Brand",
+    "@type": "Brand",
     "name": "NorthSumateraTrip"
   },
   "offers": {
-    "@@type": "Offer",
+    "@type": "Offer",
     "url": "{{ url()->current() }}",
     "priceCurrency": "IDR",
     "price": "{{ $tour->price }}",
+    "itemCondition": "https://schema.org/NewCondition",
     "availability": "https://schema.org/InStock"
   }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "{{ route('home') }}"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Paket Wisata",
+    "item": "{{ route('packages') }}"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ $tour->title }}",
+    "item": "{{ url()->current() }}"
+  }]
 }
 </script>
 @endpush

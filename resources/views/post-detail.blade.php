@@ -4,7 +4,7 @@
 @section('meta_description', Str::limit(strip_tags($post->content), 160))
 @section('meta_image', $post->image_url)
 
-@push('head')
+@push('schema')
 <script type="application/ld+json">
 {
   "@context": "https://schema.org/",
@@ -20,11 +20,34 @@
     "name": "NorthSumateraTrip",
     "logo": {
       "@type": "ImageObject",
-      "url": "{{ asset('images/logo.png') }}"
+      "url": "{{ App\Helpers\SettingsHelper::logo() ?? asset('images/logo.png') }}"
     }
   },
   "datePublished": "{{ $post->created_at->toIso8601String() }}",
+  "dateModified": "{{ $post->updated_at->toIso8601String() }}",
   "description": "{{ Str::limit(strip_tags($post->content), 160) }}"
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Home",
+    "item": "{{ route('home') }}"
+  },{
+    "@type": "ListItem",
+    "position": 2,
+    "name": "Blog",
+    "item": "{{ route('blog.index') }}"
+  },{
+    "@type": "ListItem",
+    "position": 3,
+    "name": "{{ $post->title }}",
+    "item": "{{ url()->current() }}"
+  }]
 }
 </script>
 @endpush
