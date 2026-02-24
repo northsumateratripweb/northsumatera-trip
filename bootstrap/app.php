@@ -21,8 +21,8 @@ return Application::configure(basePath: dirname(__DIR__))
             \Illuminate\Http\Middleware\ValidatePostSize::class,
             \Illuminate\Foundation\Http\Middleware\TrimStrings::class,
             \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-            \App\Http\Middleware\SetSecurityHeaders::class,
-            \App\Http\Middleware\SetTechnicalHeaders::class,
+            // \App\Http\Middleware\SetSecurityHeaders::class,
+// \App\Http\Middleware\SetTechnicalHeaders::class,
         ]);
         // Default "web" and "api" middleware groups
         $middleware->group('web', [

@@ -17,9 +17,7 @@ class TourController extends Controller
 
     public function index(Request $request)
     {
-        $filters = $request->only(['q', 'location', 'sort']);
-        $data = $this->tourService->getLandingPageData($filters);
-        return view('welcome', $data); 
+        return "HELLO FROM CONTROLLER";
     }
 
     public function show($slug)

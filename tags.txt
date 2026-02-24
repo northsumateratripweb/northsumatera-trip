@@ -1,0 +1,53 @@
+﻿@{LineNumber=3; Line=@section('title', 'NorthSumateraTrip | Solusi Perjalanan Wisata Sumatera Utara Terbaik')}
+@{LineNumber=4; Line=@section('meta_description', 'Jelajahi keindahan Sumatera Utara dengan paket wisata Danau Toba, Berastagi, dan Medan terbaik. Sewa mobil premium dan layanan tour profesional.')}
+@{LineNumber=5; Line=@section('meta_keywords', 'wisata sumut, danau toba tour, paket wisata medan, sewa mobil medan murah, trip berastagi, liburan sumatera utara, transport medan')}
+@{LineNumber=7; Line=@push('schema')}
+@{LineNumber=51; Line=@endpush}
+@{LineNumber=53; Line=@section('content')}
+@{LineNumber=54; Line=    @push('styles')}
+@{LineNumber=62; Line=    @endpush}
+@{LineNumber=138; Line=    @if(isset($banners) && $banners->count())}
+@{LineNumber=141; Line=                @foreach($banners as $banner)}
+@{LineNumber=143; Line=                        @if($banner->image)}
+@{LineNumber=147; Line=                        @endif}
+@{LineNumber=150; Line=                            @if($banner->subtitle)}
+@{LineNumber=152; Line=                            @endif}
+@{LineNumber=153; Line=                            @if($banner->button_link && $banner->button_text)}
+@{LineNumber=158; Line=                            @endif}
+@{LineNumber=161; Line=                @endforeach}
+@{LineNumber=164; Line=    @endif}
+@{LineNumber=170; Line=                @forelse($stats as $stat)}
+@{LineNumber=192; Line=                @endforelse}
+@{LineNumber=287; Line=                @forelse($tours as $tour)}
+@{LineNumber=299; Line=                            @if($tour->is_popular)}
+@{LineNumber=305; Line=                            @endif}
+@{LineNumber=331; Line=                @endforelse}
+@{LineNumber=349; Line=                @foreach($cars as $car)}
+@{LineNumber=380; Line=                @endforeach}
+@{LineNumber=396; Line=                @foreach($posts as $post)}
+@{LineNumber=412; Line=                @endforeach}
+@{LineNumber=429; Line=                @forelse($faqs as $faq)}
+@{LineNumber=446; Line=                    @foreach($defaultFaqs as $faq)}
+@{LineNumber=454; Line=                    @endforeach}
+@{LineNumber=455; Line=                @endforelse}
+@{LineNumber=472; Line=                @forelse($reviews as $review)}
+@{LineNumber=475; Line=                            @for($i=0; $i<$review->rating; $i++)}
+@{LineNumber=477; Line=                            @endfor}
+@{LineNumber=493; Line=                            @for($i=0; $i<5; $i++)}
+@{LineNumber=495; Line=                            @endfor}
+@{LineNumber=506; Line=                @endforelse}
+@{LineNumber=512; Line=    @if(isset($galleries) && $galleries->count() > 0)}
+@{LineNumber=530; Line=                @foreach($galleries as $gallery)}
+@{LineNumber=538; Line=                @endforeach}
+@{LineNumber=542; Line=    @endif}
+@{LineNumber=545; Line=    @if(isset($socialFeeds) && $socialFeeds->count() > 0)}
+@{LineNumber=563; Line=                @foreach($socialFeeds as $feed)}
+@{LineNumber=576; Line=                @endforeach}
+@{LineNumber=618; Line=                                        @for($i=0; $i<5; $i++)}
+@{LineNumber=620; Line=                                        @endfor}
+@{LineNumber=630; Line=    @endif}
+@{LineNumber=702; Line=                                @for($i=1; $i<=10; $i++)}
+@{LineNumber=704; Line=                                @endfor}
+@{LineNumber=767; Line=@endsection}
+@{LineNumber=769; Line=@push('scripts')}
+@{LineNumber=978; Line=@endpush}
