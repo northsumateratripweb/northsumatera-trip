@@ -348,7 +348,20 @@
                                 @for($i=1; $i<=10; $i++)
                                     <option value="{{ $i }}">{{ $i }} Orang</option>
                                 @endfor
-                            </select>
+                             </select>
+                        </div>
+
+                        <!-- Honeypot -->
+                        <div class="hidden" aria-hidden="true">
+                            <input type="text" name="hp_field" value="" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <!-- Terms & Conditions Checkbox -->
+                        <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 p-6 rounded-3xl flex items-start gap-4">
+                            <input type="checkbox" id="termsCheck" class="w-6 h-6 mt-1 rounded-lg border-slate-200 dark:border-slate-700 text-blue-600 focus:ring-blue-500/20 transition-all cursor-pointer">
+                            <label for="termsCheck" class="text-[11px] font-bold text-slate-500 dark:text-slate-400 leading-relaxed cursor-pointer">
+                                Saya menyetujui <a href="{{ route('legal.terms') }}" target="_blank" class="text-blue-600 hover:underline">Syarat & Ketentuan</a> serta memberikan izin penggunaan data sesuai kebijakan <a href="{{ route('legal.privacy') }}" target="_blank" class="text-blue-600 hover:underline">Privasi</a>.
+                            </label>
                         </div>
                         
                         <textarea id="notes" placeholder="Catatan Tambahan (Optional)" rows="2" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-100 dark:border-slate-700 rounded-[32px] px-8 py-5 text-sm font-bold focus:border-blue-700 outline-none transition-all resize-none"></textarea>
@@ -726,6 +739,11 @@
 
             if (!name || !phone || !whatsapp || isNaN(people) || people <= 0 || !date) {
                 showNotification('Silakan isi semua data dengan lengkap (termasuk No. WhatsApp)', 'error');
+                return Promise.resolve();
+            }
+
+            if (!document.getElementById('termsCheck').checked) {
+                showNotification('Silakan setujui Syarat & Ketentuan untuk melanjutkan.', 'error');
                 return Promise.resolve();
             }
 

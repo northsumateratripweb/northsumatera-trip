@@ -13,16 +13,16 @@ class RevenueStatsWidget extends BaseWidget
 
     protected function getStats(): array
     {
-        $todayRevenue = Booking::where('payment_status', 'success')
+        $todayRevenue = Booking::where('payment_status', 'paid')
             ->whereDate('created_at', today())
             ->sum('total_price');
 
-        $monthRevenue = Booking::where('payment_status', 'success')
+        $monthRevenue = Booking::where('payment_status', 'paid')
             ->whereMonth('created_at', now()->month)
             ->whereYear('created_at', now()->year)
             ->sum('total_price');
 
-        $yearRevenue = Booking::where('payment_status', 'success')
+        $yearRevenue = Booking::where('payment_status', 'paid')
             ->whereYear('created_at', now()->year)
             ->sum('total_price');
 

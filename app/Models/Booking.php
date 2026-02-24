@@ -24,6 +24,7 @@ class Booking extends Model
         'status',
         'payment_status',
         'payment_link',
+        'payment_proof',
         'external_id',
         'nama_driver',
         'plat_mobil',

@@ -104,6 +104,13 @@ class BookingResource extends Resource
                         Forms\Components\TextInput::make('payment_link')
                             ->label('Link Bukti Pembayaran (Optional)')
                             ->url(),
+                        Forms\Components\FileUpload::make('payment_proof')
+                            ->label('Bukti Transfer (Upload)')
+                            ->directory('payment_proofs')
+                            ->image()
+                            ->openable()
+                            ->downloadable()
+                            ->columnSpanFull(),
                     ])->columns(2),
 
                 Forms\Components\Section::make('Informasi Operasional (Verval)')
@@ -209,6 +216,11 @@ class BookingResource extends Resource
                     ->label('Total')
                     ->money('IDR')
                     ->sortable(),
+                Tables\Columns\ImageColumn::make('payment_proof')
+                    ->label('Bukti')
+                    ->circular()
+                    ->placeholder('Belum ada')
+                    ->openable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
                     ->color(fn (?string $state): string => match ($state) {

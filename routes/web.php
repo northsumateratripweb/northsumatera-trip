@@ -29,6 +29,7 @@ Route::match(['get', 'post'], '/car-checkout/{id}', [CarBookingController::class
 // Booking Status
 Route::get('/booking-status', [BookingStatusController::class, 'index'])->name('booking.status');
 Route::post('/booking-status', [BookingStatusController::class, 'check'])->name('booking.check')->middleware('throttle:5,1');
+Route::post('/booking-status/{id}/upload-proof', [BookingStatusController::class, 'uploadProof'])->name('booking.upload-proof')->middleware('throttle:3,1');
 
 Route::get('/blog/{slug}', function ($slug) {
     $post = \App\Models\Post::where('slug', $slug)->firstOrFail();

@@ -33,6 +33,24 @@ class CarBookingController extends Controller
         $orderId = $request->order_id ?? ('CAR-'.uniqid());
         $duration = $request->duration ?? 1;
         $grossAmount = $car->price_per_day * $duration;
+        $newStartDate = $request->travel_date ?? now()->format('Y-m-d');
+        $newEndDate = \Carbon\Carbon::parse($newStartDate)->addDays($duration)->format('Y-m-d');
+
+        // Check Availability
+        $isBooked = Booking::where('car_id', $car->id)
+            ->where('payment_status', 'paid') // Only check confirmed bookings
+            ->where(function($query) use ($newStartDate, $newEndDate) {
+                $query->whereRaw('DATE_ADD(travel_date, INTERVAL duration_days DAY) > ?', [$newStartDate])
+                      ->where('travel_date', '<', $newEndDate);
+            })
+            ->exists();
+
+        if ($isBooked) {
+            if ($request->expectsJson()) {
+                return response()->json(['error' => 'Maaf, unit ini sudah terbooking pada tanggal tersebut. Silakan pilih tanggal lain atau unit lainnya.'], 400);
+            }
+            return back()->with('error', 'Maaf, unit ini sudah terbooking pada tanggal tersebut.');
+        }
 
         try {
             $booking = null;
@@ -111,8 +129,8 @@ class CarBookingController extends Controller
         
         $waMessage .= "📱 *KONFIRMASI:*\n";
         $waMessage .= "Setelah transfer, mohon kirimkan bukti pembayaran ke nomor ini.\n\n";
-        $waMessage .= "Cek status pesanan Anda di:\n";
-        $waMessage .= route('booking.status') . "?order_id=" . $booking->external_id . "\n\n";
+        $waMessage .= "Cek status & kirim bukti bayar di sini:\n";
+        $waMessage .= route('booking.check') . "?order_id=" . $booking->external_id . "&phone=" . $booking->phone . "\n\n";
         $waMessage .= "--- \n";
         $waMessage .= "Unit akan disiapkan setelah pembayaran dikonfirmasi. Terima kasih! 🙏";
 

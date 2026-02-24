@@ -561,13 +561,22 @@
                         <input type="text" id="customerName" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition placeholder:font-medium placeholder:text-slate-300" placeholder="John Doe" required>
                     </div>
                     <div>
+                        <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Nomor Telepon</label>
+                        <input type="tel" id="customerPhone" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition placeholder:font-medium placeholder:text-slate-300" placeholder="0812..." required>
+                    </div>
+                    <div>
                         <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Nomor WhatsApp</label>
                         <input type="tel" id="customerWhatsapp" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition placeholder:font-medium placeholder:text-slate-300" placeholder="0812..." required>
                     </div>
-                    <div>
+                    <div class="md:col-span-2">
                         <label class="block text-[10px] font-black uppercase tracking-[0.2em] text-slate-400 mb-2 ml-1">Tanggal Perjalanan</label>
                         <input type="date" id="travelDate" class="w-full bg-slate-50 border border-slate-200 rounded-2xl px-5 py-3 text-slate-900 font-bold focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 outline-none transition text-slate-600" required>
                     </div>
+                </div>
+
+                <!-- Honeypot -->
+                <div class="hidden" aria-hidden="true">
+                    <input type="text" id="hp_field" value="" tabindex="-1" autocomplete="off">
                 </div>
 
                 <!-- Hotel & Extra Details -->
@@ -607,6 +616,14 @@
                         <p class="text-[10px] font-black uppercase tracking-[0.2em] text-blue-600 mb-1">Estimasi Total</p>
                         <div id="totalPrice" class="text-3xl font-black text-slate-900">Rp 0</div>
                     </div>
+                </div>
+
+                <!-- Terms & Conditions Checkbox -->
+                <div class="bg-slate-50 border border-slate-100 p-6 rounded-3xl flex items-start gap-4">
+                    <input type="checkbox" id="termsCheck" class="w-6 h-6 mt-1 rounded-lg border-slate-200 text-blue-600 focus:ring-blue-500/20 transition-all cursor-pointer">
+                    <label for="termsCheck" class="text-[11px] font-bold text-slate-500 leading-relaxed cursor-pointer">
+                        Saya menyetujui <a href="{{ route('legal.terms') }}" target="_blank" class="text-blue-600 hover:underline">Syarat & Ketentuan</a> serta memberikan izin untuk memproses data pribadi saya sesuai kebijakan <a href="{{ route('legal.privacy') }}" target="_blank" class="text-blue-600 hover:underline">Privasi</a> NorthSumateraTrip.
+                    </label>
                 </div>
 
                 <!-- Tabs -->
@@ -753,6 +770,11 @@
                 return;
             }
 
+            if (!document.getElementById('termsCheck').checked) {
+                alert('Silakan setujui Syarat & Ketentuan untuk melanjutkan.');
+                return;
+            }
+
             // Change button state
             btn.disabled = true;
             btnText.classList.add('invisible');
@@ -778,7 +800,8 @@
                     hotel_4: document.getElementById('hotel_4')?.value,
                     tiba: document.getElementById('tiba')?.value,
                     flight_balik: document.getElementById('flight_balik')?.value,
-                    notes: document.getElementById('notes')?.value
+                    notes: document.getElementById('notes')?.value,
+                    hp_field: document.getElementById('hp_field')?.value
                 })
             })
             .then(response => response.json())

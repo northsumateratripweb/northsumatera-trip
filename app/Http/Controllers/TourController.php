@@ -37,6 +37,7 @@ class TourController extends Controller
                 'snap_token' => $result['snap_token'],
                 'order_id' => $result['order_id'],
                 'gross_amount' => $result['gross_amount'],
+                'payment_info' => $result['payment_info'],
             ]);
         }
 

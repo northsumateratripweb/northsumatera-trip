@@ -35,7 +35,7 @@ class SendPostTripFollowUp extends Command
         $yesterday = Carbon::yesterday()->toDateString();
         
         $bookings = Booking::where('travel_date', $yesterday)
-            ->where('payment_status', 'success')
+            ->where('payment_status', 'paid')
             ->get();
 
         if ($bookings->isEmpty()) {

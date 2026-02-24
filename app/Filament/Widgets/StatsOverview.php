@@ -15,8 +15,8 @@ class StatsOverview extends BaseWidget
 {
     protected function getStats(): array
     {
-        $totalRevenue   = Booking::where('payment_status', 'success')->sum('total_price');
-        $monthRevenue   = Booking::where('payment_status', 'success')
+        $totalRevenue   = Booking::where('payment_status', 'paid')->sum('total_price');
+        $monthRevenue   = Booking::where('payment_status', 'paid')
             ->whereMonth('created_at', now()->month)->sum('total_price');
         $newBookings    = Booking::where('payment_status', 'pending')->count();
         $pendingReviews = Review::where('is_published', false)->count();

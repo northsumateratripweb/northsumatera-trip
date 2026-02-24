@@ -15,7 +15,7 @@ class PopularToursWidget extends BaseWidget
     {
         $popularTours = Booking::select('tour_id')
             ->selectRaw('COUNT(*) as total_bookings')
-            ->where('payment_status', 'success')
+            ->where('payment_status', 'paid')
             ->whereNotNull('tour_id')
             ->groupBy('tour_id')
             ->orderByDesc('total_bookings')

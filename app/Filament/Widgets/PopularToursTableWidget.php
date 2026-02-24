@@ -19,7 +19,7 @@ class PopularToursTableWidget extends BaseWidget
             ->query(
                 Tour::query()
                     ->withCount(['bookings' => function ($query) {
-                        $query->where('payment_status', 'success');
+                        $query->where('payment_status', 'paid');
                     }])
                     ->orderByDesc('bookings_count')
             )

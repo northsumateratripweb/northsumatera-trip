@@ -44,7 +44,12 @@ class TourService
 
     public function processCheckout($tourId, array $data)
     {
-        $tour = $this->tourRepository->findById($tourId);
+        // Try to find by ID first, then by slug if it's not numeric
+        if (is_numeric($tourId)) {
+            $tour = $this->tourRepository->findById($tourId);
+        } else {
+            $tour = $this->tourRepository->findBySlug($tourId);
+        }
 
         $orderId = 'TRIP-' . strtoupper(uniqid());
         $quantity = $data['qty'] ?? 1;
@@ -59,6 +64,8 @@ class TourService
 
         // Create Booking
         $booking = Booking::create([
+            'user_id' => auth()->id(),
+            'booking_type' => 'tour',
             'tour_id' => $tour->id,
             'trip_type' => $data['trip_id'] ?? null,
             'customer_name' => $data['customer_name'],
@@ -89,7 +96,7 @@ class TourService
             'nama_pelanggan'=> $booking->customer_name,
             'status'        => 'Sudah Booking',
             'nomor_hp'      => $booking->customer_whatsapp ?? $booking->phone,
-            'layanan'       => 'Tour Package',
+            'layanan'       => 'Paket Trip',
             'jenis_mobil'   => null,
             'drone'         => $booking->use_drone,
             'jumlah_hari'   => $tour->duration_days,
@@ -115,6 +122,8 @@ class TourService
             $waMessage .= "• *Tgl Perjalanan:* " . \Carbon\Carbon::parse($booking->travel_date)->format('d M Y') . "\n";
             $waMessage .= "• *Peserta:* " . $booking->qty . " Orang\n";
             $waMessage .= "• *Total:* Rp " . number_format($booking->total_price, 0, ',', '.') . "\n\n";
+            $waMessage .= "Cek status & kirim bukti bayar di sini:\n";
+            $waMessage .= route('booking.check') . "?order_id=" . $booking->external_id . "&phone=" . $booking->phone . "\n\n";
             $waMessage .= "Silakan lakukan pembayaran sesuai instruksi di website. Terima kasih! 🙏";
 
             \App\Services\WhatsAppService::sendMessage($booking->phone, $waMessage);
@@ -128,6 +137,9 @@ class TourService
             'order_id' => $orderId,
             'gross_amount' => $grossAmount,
             'tour' => $tour,
+            'payment_info' => [
+                'bank_details' => \App\Helpers\SettingsHelper::bankDetails()
+            ]
         ];
     }
 }

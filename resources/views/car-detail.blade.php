@@ -150,6 +150,14 @@
                                 <input type="text" name="hp_field" value="" tabindex="-1" autocomplete="off">
                             </div>
 
+                            <!-- Terms & Conditions Checkbox -->
+                            <div class="bg-slate-50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-800 p-6 rounded-3xl flex items-start gap-4 mb-8">
+                                <input type="checkbox" id="termsCheck" required class="w-6 h-6 mt-1 rounded-lg border-slate-200 dark:border-slate-700 text-blue-600 focus:ring-blue-500/20 transition-all cursor-pointer">
+                                <label for="termsCheck" class="text-[11px] font-bold text-slate-500 dark:text-slate-400 leading-relaxed cursor-pointer">
+                                    Saya menyetujui <a href="{{ route('legal.terms') }}" target="_blank" class="text-blue-600 hover:underline">Syarat & Ketentuan</a> serta memberikan izin penggunaan data sesuai kebijakan <a href="{{ route('legal.privacy') }}" target="_blank" class="text-blue-600 hover:underline">Privasi</a>.
+                                </label>
+                            </div>
+
                             <button type="submit" :disabled="loading"
                                     class="w-full py-6 bg-blue-700 hover:bg-blue-800 text-white rounded-full font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3">
                                 <span x-show="!loading" class="flex items-center gap-3">
@@ -260,6 +268,12 @@
         const formData = new FormData(form);
         const data = {};
         formData.forEach((value, key) => data[key] = value);
+
+        if (!document.getElementById('termsCheck').checked) {
+            showNotification('Silakan setujui Syarat & Ketentuan untuk melanjutkan.', 'error');
+            return Promise.resolve();
+        }
+
         data.action = 'payment'; 
 
         const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content;

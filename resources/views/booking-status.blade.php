@@ -43,6 +43,13 @@
                         </div>
                     @endif
 
+                    @if(session('success'))
+                        <div class="p-5 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-100 dark:border-emerald-800 rounded-3xl text-emerald-600 dark:text-emerald-400 text-xs font-bold flex items-center gap-4">
+                            <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     <button type="submit" class="w-full py-6 bg-blue-700 hover:bg-blue-800 text-white rounded-full font-black text-xs uppercase tracking-widest transition-all shadow-xl shadow-blue-500/20 flex items-center justify-center gap-3">
                         Cek Status Sekarang
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -125,7 +132,7 @@
                                         'Dipesan' => true,
                                         'Payment' => in_array($booking->payment_status, ['paid', 'pending']),
                                         'Lunas'   => $booking->payment_status === 'paid',
-                                        'Selesai' => $booking->status === 'success',
+                                        'Selesai' => in_array($booking->status, ['confirmed', 'completed', 'success']),
                                     ];
                                     $stepKeys = array_keys($steps);
                                 @endphp
@@ -175,10 +182,38 @@
                                     <div class="text-center pt-4">
                                         <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6">Atau Scan QRIS Berikut:</p>
                                         <div class="inline-block p-10 bg-white dark:bg-slate-800 rounded-[56px] shadow-sm border border-slate-100 dark:border-slate-700">
-                                            <img src="{{ $bankDetails['qris'] }}" alt="QRIS" class="w-48 h-48 mx-auto object-contain">
+                                            <img src="{{ asset('storage/' . $bankDetails['qris']) }}" alt="QRIS" class="w-48 h-48 mx-auto object-contain">
                                         </div>
                                     </div>
                                 @endif
+
+                                <!-- Upload Bukti Bayar -->
+                                <div class="bg-blue-50 dark:bg-blue-900/10 p-8 rounded-[40px] border border-blue-100 dark:border-blue-900/30 mt-8">
+                                    <p class="text-[10px] font-black text-blue-700 dark:text-blue-400 uppercase tracking-widest mb-6 text-center">Upload Bukti Transfer (Opsional)</p>
+                                    
+                                    @if($booking->payment_proof)
+                                        <div class="mb-4 text-center">
+                                            <p class="text-[10px] font-bold text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/20 py-3 rounded-2xl mb-4">Bukti transfer sudah diunggah</p>
+                                            <a href="{{ asset('storage/' . $booking->payment_proof) }}" target="_blank" class="text-[10px] font-extrabold text-blue-700 uppercase tracking-widest hover:underline">Lihat Bukti Terunggah</a>
+                                        </div>
+                                    @endif
+
+                                    <form action="{{ route('booking.upload-proof', $booking->id) }}" method="POST" enctype="multipart/form-data" class="space-y-4">
+                                        @csrf
+                                        <div class="relative group cursor-pointer">
+                                            <input type="file" name="payment_proof" required accept="image/*" 
+                                                   class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" 
+                                                   onchange="this.nextElementSibling.querySelector('span').textContent = this.files[0].name">
+                                            <div class="w-full bg-white dark:bg-slate-800 border-2 border-dashed border-blue-200 dark:border-blue-800 rounded-3xl py-10 px-6 text-center group-hover:border-blue-500 transition-all">
+                                                <svg class="w-8 h-8 text-blue-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+                                                <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Klik atau Tarik Foto Bukti Bayar</span>
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="w-full py-5 bg-white dark:bg-slate-800 text-blue-700 dark:text-blue-400 border border-blue-100 dark:border-blue-800 rounded-full font-black text-[10px] uppercase tracking-widest transition-all hover:bg-blue-700 hover:text-white">
+                                            Kirim Bukti Pembayaran
+                                        </button>
+                                    </form>
+                                </div>
 
                                 <a href="https://wa.me/{{ preg_replace('/\D/', '', App\Helpers\SettingsHelper::whatsappNumber()) }}?text={{ urlencode("Halo NorthSumateraTrip 👋\n\nSaya ingin konfirmasi pembayaran.\n\n🧾 ID Pesanan: " . ($booking->external_id ?? $booking->id) . "\n💰 Total: Rp " . number_format($booking->total_price, 0, ',', '.') . "\n👤 Nama: " . $booking->customer_name . "\n\nMohon bantuannya ya! Terima kasih 🙏") }}" target="_blank" 
                                    class="w-full py-6 bg-[#25D366] text-white rounded-full font-black text-xs uppercase tracking-widest transition-all shadow-2xl shadow-emerald-500/20 flex items-center justify-center gap-3">
@@ -201,9 +236,26 @@
     </div>
 
     <script>
+        // Magic Link Handler: Auto-submit if parameters exist
+        window.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const orderId = urlParams.get('order_id');
+            const phone = urlParams.get('phone');
+            
+            if (orderId && phone && !@json(isset($booking))) {
+                document.querySelector('input[name="order_id"]').value = orderId;
+                document.querySelector('input[name="phone"]').value = phone;
+                document.querySelector('form[action="{{ route('booking.check') }}"]').submit();
+            }
+        });
+
         function copyToClipboard(text, label) {
             navigator.clipboard.writeText(text).then(() => {
-                alert(`Nomor Rekening ${label} berhasil disalin!`);
+                const alertBox = document.createElement('div');
+                alertBox.className = 'fixed bottom-10 left-1/2 -translate-x-1/2 px-8 py-4 bg-slate-900 text-white rounded-2xl text-xs font-bold z-50 animate-in fade-in slide-in-from-bottom-5';
+                alertBox.textContent = `Nomor Rekening ${label} berhasil disalin!`;
+                document.body.appendChild(alertBox);
+                setTimeout(() => alertBox.remove(), 3000);
             }).catch(() => {
                 alert('Gagal menyalin. Silakan salin manual.');
             });

@@ -12,7 +12,7 @@ class SalesChart extends ChartWidget
 
     protected function getData(): array
     {
-        $bookings = Booking::where('payment_status', 'success')
+        $bookings = Booking::where('payment_status', 'paid')
             ->where('created_at', '>=', Carbon::now()->subDays(30))
             ->selectRaw('DATE(created_at) as date, SUM(total_price) as total')
             ->groupBy('date')
