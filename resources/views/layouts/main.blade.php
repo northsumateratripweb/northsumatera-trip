@@ -55,7 +55,7 @@
 
     <!-- Custom Scripts / JSON-LD -->
     @stack('head')
-
+    <!-- Deployment Sync: 2026-02-24 13:17 -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     
     @stack('styles')

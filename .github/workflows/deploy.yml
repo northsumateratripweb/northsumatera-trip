@@ -33,11 +33,15 @@ jobs:
         server: ${{ secrets.FTP_SERVER }}
         username: ${{ secrets.FTP_USERNAME }}
         password: ${{ secrets.FTP_PASSWORD }}
-        server-dir: /public_html/  # Sesuaikan dengan path folder hosting Anda
+        server-dir: /public_html/
         exclude: |
           **/.git*
           **/.git*/**
           **/node_modules/**
+          **/vendor/**
           **/tests/**
           **/storage/*.sqlite
           .env
+          composer.lock
+          package-lock.json
+          phpunit.xml
