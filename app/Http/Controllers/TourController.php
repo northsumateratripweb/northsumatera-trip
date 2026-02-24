@@ -15,9 +15,10 @@ class TourController extends Controller
         $this->tourService = $tourService;
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $data = $this->tourService->getLandingPageData();
+        $filters = $request->only(['q', 'location', 'sort']);
+        $data = $this->tourService->getLandingPageData($filters);
         return view('welcome', $data); 
     }
 

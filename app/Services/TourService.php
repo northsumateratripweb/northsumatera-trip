@@ -21,16 +21,19 @@ class TourService
         $this->carRepository = $carRepository;
     }
 
-    public function getLandingPageData()
+    public function getLandingPageData($filters = [])
     {
         return [
+            'filters' => $filters,
             'tours' => $this->tourRepository->with(['wishlists'])->all(),
             'posts' => Post::where('is_published', true)->latest()->take(3)->get(),
             'cars' => $this->carRepository->getAvailable(),
             'banners' => \App\Models\Banner::where('is_active', true)->orderBy('order')->get(),
             'faqs' => \App\Models\Faq::where('is_active', true)->orderBy('order')->get(),
             'stats' => \App\Models\Stat::where('is_active', true)->orderBy('order')->get(),
-            'reviews' => \App\Models\Review::with('tour')->where('is_published', true)->latest()->take(6)->get(),
+            'reviews' => \App\Models\Review::with('tour')->where('is_published', true)->latest()->take(3)->get(),
+            'galleries' => \App\Models\Gallery::where('is_active', true)->latest()->take(5)->get(),
+            'socialFeeds' => \App\Models\SocialFeed::latest()->take(4)->get(),
         ];
     }
 

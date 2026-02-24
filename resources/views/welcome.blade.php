@@ -7,11 +7,11 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
+  "@@context": "https://schema.org",
+  "@@type": "LocalBusiness",
   "name": "{{ App\Helpers\SettingsHelper::companyName() }}",
   "image": "{{ App\Helpers\SettingsHelper::heroImage() ?? asset('images/og-image.jpg') }}",
-  "@id": "{{ url('/') }}",
+  "@@id": "{{ url('/') }}",
   "url": "{{ url('/') }}",
   "telephone": "+{{ App\Helpers\SettingsHelper::whatsappNumber() }}",
   "address": {

@@ -7,17 +7,17 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org/",
-  "@type": "Product",
+  "@@context": "https://schema.org/",
+  "@@type": "Product",
   "name": "{{ $tour->title }}",
   "image": "{{ asset('storage/' . $tour->thumbnail) }}",
   "description": "{{ Str::limit(strip_tags($tour->description), 200) }}",
   "brand": {
-    "@type": "Brand",
+    "@@type": "Brand",
     "name": "NorthSumateraTrip"
   },
   "offers": {
-    "@type": "Offer",
+    "@@type": "Offer",
     "url": "{{ url()->current() }}",
     "priceCurrency": "IDR",
     "price": "{{ $tour->price }}",
@@ -28,20 +28,20 @@
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
   "itemListElement": [{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 1,
     "name": "Home",
     "item": "{{ route('home') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 2,
     "name": "Paket Wisata",
     "item": "{{ route('packages') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 3,
     "name": "{{ $tour->title }}",
     "item": "{{ url()->current() }}"

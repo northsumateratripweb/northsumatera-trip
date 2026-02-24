@@ -7,41 +7,41 @@
 @push('schema')
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org/",
-  "@type": "Product",
+  "@@context": "https://schema.org/",
+  "@@type": "Product",
   "name": "Sewa Mobil {{ $car->brand }} {{ $car->name }}",
   "image": "{{ $car->image_url }}",
   "description": "{{ Str::limit(strip_tags($car->description ?? 'Sewa mobil ' . $car->name . ' di Medan Sumatera Utara harga murah.'), 200) }}",
   "brand": {
-    "@type": "Brand",
+    "@@type": "Brand",
     "name": "{{ $car->brand }}"
   },
   "offers": {
-    "@type": "Offer",
+    "@@type": "Offer",
     "url": "{{ url()->current() }}",
     "priceCurrency": "IDR",
     "price": "{{ $car->price_with_driver }}",
-    "itemCondition": "https://schema.org/UsedCondition",
+    "itemCondition": "https://schema.org/NewCondition",
     "availability": "https://schema.org/InStock"
   }
 }
 </script>
 <script type="application/ld+json">
 {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
+  "@@context": "https://schema.org",
+  "@@type": "BreadcrumbList",
   "itemListElement": [{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 1,
     "name": "Home",
     "item": "{{ route('home') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 2,
     "name": "Sewa Mobil",
     "item": "{{ route('rental') }}"
   },{
-    "@type": "ListItem",
+    "@@type": "ListItem",
     "position": 3,
     "name": "{{ $car->name }}",
     "item": "{{ url()->current() }}"

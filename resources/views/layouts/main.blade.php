@@ -64,13 +64,13 @@
     <!-- Organization Schema -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@type": "Organization",
+      "@@context": "https://schema.org",
+      "@@type": "Organization",
       "name": "{{ App\Helpers\SettingsHelper::companyName() }}",
       "url": "{{ url('/') }}",
       "logo": "{{ App\Helpers\SettingsHelper::logo() ?? asset('images/logo.png') }}",
       "contactPoint": {
-        "@type": "ContactPoint",
+        "@@type": "ContactPoint",
         "telephone": "+{{ App\Helpers\SettingsHelper::whatsappNumber() }}",
         "contactType": "customer service",
         "areaServed": "ID",
