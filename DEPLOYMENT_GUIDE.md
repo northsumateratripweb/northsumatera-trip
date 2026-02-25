@@ -7,6 +7,24 @@ Code telah berhasil di-push ke GitHub repository:
 - Branch: main
 - Latest Commit: Travel Website Redesign Complete
 
+### GitHub Actions CI/CD
+
+Workflow otomatis sudah dikonfigurasi untuk:
+1. **Run Tests** - Menjalankan semua test suite setiap push/PR
+2. **Auto Deploy** - Deploy otomatis ke cPanel setelah test berhasil (hanya untuk push ke main)
+
+**Setup GitHub Secrets untuk Auto Deploy:**
+Untuk mengaktifkan auto-deploy ke cPanel, tambahkan secrets berikut di GitHub:
+- `CPANEL_HOST` - Hostname cPanel Anda
+- `CPANEL_USERNAME` - Username SSH cPanel
+- `CPANEL_SSH_KEY` - Private SSH key untuk akses cPanel
+
+Cara menambahkan secrets:
+1. Buka repository di GitHub
+2. Settings → Secrets and variables → Actions
+3. Klik "New repository secret"
+4. Tambahkan ketiga secrets di atas
+
 ## 📦 cPanel Deployment Steps
 
 ### 1. Login ke cPanel
