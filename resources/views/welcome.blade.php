@@ -135,6 +135,50 @@
         </div>
     </section>
 
+    <!-- Trust Section -->
+    <x-trust.trust-section
+        :ratings="[
+            [
+                'platform' => 'Google',
+                'score' => 4.8,
+                'count' => 150,
+                'icon' => '⭐',
+            ],
+        ]"
+        :traveler-count="1200"
+        :legal-badges="[
+            [
+                'name' => 'Licensed Tour Operator',
+                'icon' => 'badge',
+                'description' => 'Officially certified',
+            ],
+            [
+                'name' => 'Secure Booking',
+                'icon' => 'lock',
+                'description' => 'Safe transactions',
+            ],
+            [
+                'name' => '24/7 Support',
+                'icon' => 'headset',
+                'description' => 'Always available',
+            ],
+        ]"
+        :testimonials="[
+            [
+                'name' => 'John Doe',
+                'location' => 'Jakarta, Indonesia',
+                'text' => 'Layanan yang sangat memuaskan, driver tepat waktu dan sangat ramah.',
+                'rating' => 5,
+            ],
+            [
+                'name' => 'Jane Smith',
+                'location' => 'Singapore',
+                'text' => 'Pengalaman berlibur yang luar biasa di Sumatera Utara.',
+                'rating' => 5,
+            ],
+        ]"
+    />
+
     @if(isset($banners) && $banners->count())
         <section class="py-10 bg-slate-50 dark:bg-slate-950">
             <div class="max-w-7xl mx-auto px-6 grid gap-6 md:grid-cols-3">
