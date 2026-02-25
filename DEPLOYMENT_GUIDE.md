@@ -1,226 +1,249 @@
-# Panduan Deployment ke cPanel dengan Git
+# 🚀 Deployment Guide - North Sumatera Trip
 
-## Workflow Deployment
+## ✅ GitHub Deployment - COMPLETED
 
-### 1. Di PC Lokal (Terminal)
+Code telah berhasil di-push ke GitHub repository:
+- Repository: https://github.com/northsumateratripweb/northsumatera-trip
+- Branch: main
+- Latest Commit: Travel Website Redesign Complete
+
+## 📦 cPanel Deployment Steps
+
+### 1. Login ke cPanel
+- URL: https://your-cpanel-url.com:2083
+- Username: [your-cpanel-username]
+- Password: [your-cpanel-password]
+
+### 2. Pull Latest Code dari GitHub
+
+**Option A: Via Terminal (Recommended)**
 ```bash
-# Tambahkan semua perubahan ke staging
-git add .
-
-# Commit perubahan dengan pesan
-git commit -m "Update TourController dan welcome view"
-
-# Push ke repository (GitHub/GitLab/Bitbucket)
-git push
+cd /home/[username]/public_html
+git pull origin main
 ```
 
-### 2. Di cPanel (Terminal/SSH)
+**Option B: Via File Manager**
+1. Buka File Manager di cPanel
+2. Navigate ke public_html
+3. Upload files manually (not recommended for large projects)
+
+### 3. Install Dependencies
+
 ```bash
-# Masuk ke folder project
-cd ~/public_html
-# atau
-cd ~/northsumateratrip
+# Install Composer dependencies
+composer install --optimize-autoloader --no-dev
 
-# Pull perubahan terbaru dari repository
-git pull origin main
-# atau jika branch master
-git pull origin master
+# Install NPM dependencies (if not already built)
+npm install
 
-# Jalankan perintah Laravel untuk update
-php artisan config:clear
+# Build assets for production
+npm run build
+```
+
+### 4. Set Permissions
+
+```bash
+# Set proper permissions
+chmod -R 755 storage bootstrap/cache
+chmod -R 775 storage
+chmod -R 775 bootstrap/cache
+
+# Set ownership (replace username with your cPanel username)
+chown -R username:username storage
+chown -R username:username bootstrap/cache
+```
+
+### 5. Environment Configuration
+
+```bash
+# Copy .env.example if .env doesn't exist
+cp .env.example .env
+
+# Edit .env file with production settings
+nano .env
+```
+
+**Important .env settings:**
+```env
+APP_ENV=production
+APP_DEBUG=false
+APP_URL=https://your-domain.com
+
+DB_CONNECTION=mysql
+DB_HOST=localhost
+DB_PORT=3306
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_user
+DB_PASSWORD=your_database_password
+```
+
+### 6. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 7. Run Migrations
+
+```bash
+# Run database migrations
+php artisan migrate --force
+
+# Seed database (if needed)
+php artisan db:seed --force
+```
+
+### 8. Optimize Application
+
+```bash
+# Clear all caches
 php artisan cache:clear
+php artisan config:clear
 php artisan route:clear
 php artisan view:clear
 
-# Jika ada perubahan database/migration
-php artisan migrate --force
-
-# Jika perlu seed data (seperti translations)
-php artisan db:seed --class=TranslationSeeder --force
-
-# Optimize untuk production
+# Cache for production
 php artisan config:cache
 php artisan route:cache
 php artisan view:cache
+
+# Optimize autoloader
+composer dump-autoload --optimize
 ```
 
-## Setup Git di cPanel (Pertama Kali)
-
-### A. Clone Repository ke cPanel
-
-1. **Login SSH ke cPanel**
-   - Buka Terminal di cPanel atau gunakan SSH client (PuTTY)
-   
-2. **Clone repository**
-   ```bash
-   cd ~
-   git clone https://github.com/username/northsumateratrip.git
-   # atau
-   git clone https://gitlab.com/username/northsumateratrip.git
-   ```
-
-3. **Setup .env**
-   ```bash
-   cd northsumateratrip
-   cp .env.example .env
-   nano .env  # Edit dengan kredensial cPanel
-   ```
-
-4. **Install dependencies**
-   ```bash
-   composer install --optimize-autoloader --no-dev
-   ```
-
-5. **Setup permissions**
-   ```bash
-   chmod -R 775 storage bootstrap/cache
-   ```
-
-6. **Run migrations**
-   ```bash
-   php artisan migrate --force
-   php artisan db:seed --force
-   ```
-
-### B. Setup Git Credentials (Jika Private Repo)
+### 9. Setup Symbolic Link for Storage
 
 ```bash
-# Konfigurasi Git
-git config --global user.name "Your Name"
-git config --global user.email "your@email.com"
-
-# Untuk HTTPS (akan diminta password setiap pull)
-# Atau gunakan Personal Access Token
-
-# Untuk SSH (lebih aman, tidak perlu password)
-ssh-keygen -t rsa -b 4096 -C "your@email.com"
-cat ~/.ssh/id_rsa.pub
-# Copy output dan tambahkan ke GitHub/GitLab SSH Keys
+php artisan storage:link
 ```
 
-## Perintah Git Berguna
+### 10. Configure .htaccess (if needed)
 
-```bash
-# Cek status perubahan
-git status
-
-# Cek branch saat ini
-git branch
-
-# Pindah branch
-git checkout main
-
-# Lihat log commit
-git log --oneline
-
-# Discard perubahan lokal (hati-hati!)
-git reset --hard origin/main
-
-# Pull dengan rebase (lebih bersih)
-git pull --rebase origin main
+Ensure your `.htaccess` in public folder has:
+```apache
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^(.*)$ public/$1 [L]
+</IfModule>
 ```
 
-## Troubleshooting
+### 11. Setup Cron Jobs (Optional)
 
-### Error: "Permission denied (publickey)"
+Add to cPanel Cron Jobs:
 ```bash
-# Generate SSH key baru
-ssh-keygen -t rsa -b 4096
-cat ~/.ssh/id_rsa.pub
-# Tambahkan ke GitHub/GitLab
+* * * * * cd /home/[username]/public_html && php artisan schedule:run >> /dev/null 2>&1
 ```
 
-### Error: "Your local changes would be overwritten"
+## 🔍 Post-Deployment Checklist
+
+- [ ] Website loads correctly
+- [ ] All images display properly
+- [ ] Navigation works (desktop & mobile)
+- [ ] Hero section displays fullscreen
+- [ ] Trust section shows ratings and testimonials
+- [ ] Tour packages grid displays correctly
+- [ ] Forms submit successfully
+- [ ] Database connections work
+- [ ] SSL certificate is active
+- [ ] Performance is optimized
+- [ ] Accessibility features work
+
+## 🐛 Troubleshooting
+
+### Issue: 500 Internal Server Error
+**Solution:**
 ```bash
-# Simpan perubahan lokal
-git stash
+# Check error logs
+tail -f storage/logs/laravel.log
 
-# Pull perubahan
-git pull origin main
-
-# Restore perubahan lokal (jika perlu)
-git stash pop
+# Fix permissions
+chmod -R 755 storage bootstrap/cache
 ```
 
-### Error: "fatal: not a git repository"
+### Issue: Assets not loading
+**Solution:**
 ```bash
-# Inisialisasi git
-git init
-git remote add origin https://github.com/username/repo.git
-git pull origin main
-```
+# Rebuild assets
+npm run build
 
-## Automation dengan Git Hooks (Advanced)
-
-Buat file `.git/hooks/post-receive` di server:
-```bash
-#!/bin/bash
-cd /home/username/northsumateratrip
-git pull origin main
-composer install --no-dev --optimize-autoloader
-php artisan migrate --force
-php artisan config:cache
-php artisan route:cache
-php artisan view:cache
-```
-
-Buat executable:
-```bash
-chmod +x .git/hooks/post-receive
-```
-
-## Best Practices
-
-1. **Jangan commit file .env** - Sudah ada di .gitignore
-2. **Jangan commit folder vendor/** - Install via composer
-3. **Jangan commit folder node_modules/** - Install via npm
-4. **Selalu test di local** sebelum push
-5. **Gunakan branch** untuk fitur baru
-6. **Backup database** sebelum migrate
-7. **Clear cache** setelah pull perubahan
-
-## Quick Commands Cheat Sheet
-
-### Di PC Lokal
-```bash
-git add .
-git commit -m "pesan commit"
-git push
-```
-
-### Di cPanel
-```bash
-cd ~/public_html
-git pull
-php artisan config:clear
+# Clear cache
 php artisan cache:clear
-php artisan view:clear
 ```
 
-## Struktur Folder Recommended di cPanel
+### Issue: Database connection error
+**Solution:**
+- Check .env database credentials
+- Verify database exists in cPanel MySQL
+- Check database user has proper permissions
 
-```
-/home/username/
-├── public_html/              # Symlink atau copy dari project/public
-│   ├── index.php
-│   ├── css/
-│   └── js/
-├── northsumateratrip/        # Git repository
-│   ├── app/
-│   ├── config/
-│   ├── public/              # ← Symlink ke public_html
-│   ├── storage/
-│   └── .git/
-```
-
-### Setup Symlink (Recommended)
+### Issue: White screen / blank page
+**Solution:**
 ```bash
-# Backup public_html lama
-mv ~/public_html ~/public_html.bak
-
-# Buat symlink
-ln -s ~/northsumateratrip/public ~/public_html
-
-# Atau copy isi folder public
-cp -r ~/northsumateratrip/public/* ~/public_html/
+# Enable debug temporarily
+# Edit .env: APP_DEBUG=true
+# Check storage/logs/laravel.log
+# Remember to set APP_DEBUG=false after fixing
 ```
+
+## 📊 Performance Optimization
+
+### Enable OPcache (if available)
+Add to php.ini:
+```ini
+opcache.enable=1
+opcache.memory_consumption=128
+opcache.max_accelerated_files=10000
+opcache.revalidate_freq=60
+```
+
+### Enable Gzip Compression
+Add to .htaccess:
+```apache
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+</IfModule>
+```
+
+### Browser Caching
+Add to .htaccess:
+```apache
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
+```
+
+## 🔐 Security Checklist
+
+- [ ] APP_DEBUG=false in production
+- [ ] Strong APP_KEY generated
+- [ ] Database credentials secure
+- [ ] .env file not publicly accessible
+- [ ] SSL certificate installed
+- [ ] HTTPS redirect enabled
+- [ ] File permissions set correctly (755/644)
+- [ ] Remove unnecessary files (.git, tests, etc.)
+
+## 📞 Support
+
+Jika ada masalah saat deployment:
+1. Check error logs: `storage/logs/laravel.log`
+2. Check cPanel error logs
+3. Contact hosting support if needed
+
+## 🎉 Deployment Complete!
+
+Setelah semua langkah selesai, website Anda sudah live dengan:
+- ✅ Modern responsive design
+- ✅ Optimized performance
+- ✅ Full accessibility support
+- ✅ Mobile-first approach
+- ✅ SEO optimized
+- ✅ Core Web Vitals monitoring
+
+Visit: https://your-domain.com
