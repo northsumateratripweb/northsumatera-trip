@@ -20,11 +20,20 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.2'
-          extensions: mbstring, xml, ctype, fileinfo, json
+          extensions: mbstring, xml, ctype, fileinfo, json, pdo_sqlite
           coverage: none
 
-      - name: Install Dependencies
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+
+      - name: Install PHP Dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Install Node Dependencies
+        run: npm ci
 
       - name: Copy Environment File
         run: cp .env.example .env
@@ -37,12 +46,27 @@ jobs:
 
       - name: Run Migrations
         run: php artisan migrate --force
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+
+      - name: Seed Database
+        run: php artisan db:seed --force
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
+
+      - name: Build Frontend Assets
+        run: npm run build
 
       - name: Clear Config Cache
         run: php artisan config:clear
 
       - name: Run Tests
         run: php artisan test --no-coverage
+        env:
+          DB_CONNECTION: sqlite
+          DB_DATABASE: database/database.sqlite
 
   deploy:
     needs: test
@@ -63,6 +87,8 @@ jobs:
             cd ~/northsumateratrip
             git pull origin main
             composer install --no-dev --optimize-autoloader
+            npm ci
+            npm run build
             php artisan config:clear
             php artisan cache:clear
             php artisan route:clear
