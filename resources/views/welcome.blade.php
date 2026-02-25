@@ -82,19 +82,19 @@
                 </div>
                 
                 <h1 class="text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-slate-900 dark:text-white leading-[1.05] tracking-tight mb-8">
-                    {{ App\Helpers\SettingsHelper::heroTitle() }}
+                    {{ __t('home_hero_title') !== 'home_hero_title' ? __t('home_hero_title') : App\Helpers\SettingsHelper::heroTitle() }}
                 </h1>
                 
                 <p class="max-w-xl text-base md:text-xl text-slate-600 dark:text-slate-400 mb-10 md:mb-12 leading-relaxed animate-fade-up font-medium" style="animation-delay: 0.2s">
-                    {{ App\Helpers\SettingsHelper::heroSubtitle() }}
+                    {{ __t('home_hero_subtitle') !== 'home_hero_subtitle' ? __t('home_hero_subtitle') : App\Helpers\SettingsHelper::heroSubtitle() }}
                 </p>
 
                 <div class="flex flex-wrap items-center gap-4">
                     <a href="#tours" class="px-8 py-4 bg-blue-600 text-white rounded-full font-black text-sm lg:text-base hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20">
-                        {{ __t('home_cta_booking') ?? 'Pesan Sekarang' }}
+                        {{ __t('home_cta_booking') !== 'home_cta_booking' ? __t('home_cta_booking') : 'Pesan Sekarang' }}
                     </a>
                     <a href="{{ route('rental') }}" class="px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-full font-black text-sm lg:text-base hover:bg-slate-50 transition-all">
-                        {{ __t('nav_rental') ?? 'Sewa Mobil' }}
+                        {{ __t('nav_rental') !== 'nav_rental' ? __t('nav_rental') : 'Sewa Mobil' }}
                     </a>
                 </div>
             </div>
