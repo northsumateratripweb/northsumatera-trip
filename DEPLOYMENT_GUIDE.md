@@ -14,16 +14,167 @@ Workflow otomatis sudah dikonfigurasi untuk:
 2. **Auto Deploy** - Deploy otomatis ke cPanel setelah test berhasil (hanya untuk push ke main)
 
 **Setup GitHub Secrets untuk Auto Deploy:**
-Untuk mengaktifkan auto-deploy ke cPanel, tambahkan secrets berikut di GitHub:
-- `CPANEL_HOST` - Hostname cPanel Anda
-- `CPANEL_USERNAME` - Username SSH cPanel
-- `CPANEL_SSH_KEY` - Private SSH key untuk akses cPanel
 
-Cara menambahkan secrets:
-1. Buka repository di GitHub
-2. Settings → Secrets and variables → Actions
-3. Klik "New repository secret"
-4. Tambahkan ketiga secrets di atas
+### Cara Mendapatkan Informasi untuk GitHub Secrets:
+
+#### 1. CPANEL_HOST (Hostname cPanel)
+**Dari mana mendapatkan:**
+- Login ke cPanel Anda
+- Lihat di bagian kanan atas atau email welcome dari hosting provider
+- Biasanya berbentuk: `yourdomain.com` atau `server123.hostingprovider.com`
+- Atau cek di email setup hosting Anda
+
+**Contoh:**
+```
+northsumateratrip.com
+atau
+server.hostingprovider.com
+```
+
+#### 2. CPANEL_USERNAME (Username SSH)
+**Dari mana mendapatkan:**
+- Sama dengan username cPanel Anda
+- Biasanya diberikan saat pertama kali setup hosting
+- Cek di email welcome dari hosting provider
+- Atau tanyakan ke support hosting
+
+**Contoh:**
+```
+northsum
+atau
+cpanelusername
+```
+
+#### 3. CPANEL_SSH_KEY (Private SSH Key)
+**Cara membuat SSH Key:**
+
+**A. Generate SSH Key di komputer lokal:**
+
+**Windows (PowerShell):**
+```powershell
+# 1. Buka PowerShell
+# 2. Generate SSH key
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+# 3. Tekan Enter untuk lokasi default (C:\Users\YourName\.ssh\id_rsa)
+# 4. Tekan Enter 2x untuk skip passphrase (untuk automation)
+# 5. Key akan tersimpan di: C:\Users\YourName\.ssh\id_rsa
+```
+
+**Mac/Linux (Terminal):**
+```bash
+# 1. Buka Terminal
+# 2. Generate SSH key
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+
+# 3. Tekan Enter untuk lokasi default (~/.ssh/id_rsa)
+# 4. Tekan Enter 2x untuk skip passphrase
+# 5. Key akan tersimpan di: ~/.ssh/id_rsa
+```
+
+**B. Copy Private Key:**
+
+**Windows:**
+```powershell
+# Buka file dengan notepad
+notepad C:\Users\YourName\.ssh\id_rsa
+
+# Atau copy ke clipboard
+Get-Content C:\Users\YourName\.ssh\id_rsa | clip
+```
+
+**Mac/Linux:**
+```bash
+# Tampilkan isi private key
+cat ~/.ssh/id_rsa
+
+# Atau copy ke clipboard (Mac)
+pbcopy < ~/.ssh/id_rsa
+
+# Atau copy ke clipboard (Linux)
+xclip -sel clip < ~/.ssh/id_rsa
+```
+
+**C. Upload Public Key ke cPanel:**
+
+1. Copy public key:
+   ```bash
+   # Windows
+   Get-Content C:\Users\YourName\.ssh\id_rsa.pub
+   
+   # Mac/Linux
+   cat ~/.ssh/id_rsa.pub
+   ```
+
+2. Login ke cPanel
+3. Cari "SSH Access" atau "Manage SSH Keys"
+4. Klik "Import Key" atau "Manage"
+5. Paste public key (file .pub) ke form
+6. Authorize the key
+
+**PENTING:** 
+- Yang di-upload ke cPanel adalah **PUBLIC KEY** (id_rsa.pub)
+- Yang disimpan di GitHub Secrets adalah **PRIVATE KEY** (id_rsa)
+- JANGAN share private key ke siapapun!
+
+### Cara Menambahkan Secrets ke GitHub:
+
+1. **Buka Repository di GitHub:**
+   ```
+   https://github.com/northsumateratripweb/northsumatera-trip
+   ```
+
+2. **Masuk ke Settings:**
+   - Klik tab "Settings" di repository
+   - Scroll ke menu kiri, klik "Secrets and variables"
+   - Klik "Actions"
+
+3. **Tambahkan Secret Pertama (CPANEL_HOST):**
+   - Klik tombol "New repository secret"
+   - Name: `CPANEL_HOST`
+   - Secret: Paste hostname cPanel Anda (contoh: `northsumateratrip.com`)
+   - Klik "Add secret"
+
+4. **Tambahkan Secret Kedua (CPANEL_USERNAME):**
+   - Klik "New repository secret" lagi
+   - Name: `CPANEL_USERNAME`
+   - Secret: Paste username cPanel Anda
+   - Klik "Add secret"
+
+5. **Tambahkan Secret Ketiga (CPANEL_SSH_KEY):**
+   - Klik "New repository secret" lagi
+   - Name: `CPANEL_SSH_KEY`
+   - Secret: Paste SELURUH isi private key (termasuk `-----BEGIN RSA PRIVATE KEY-----` dan `-----END RSA PRIVATE KEY-----`)
+   - Klik "Add secret"
+
+### Verifikasi Setup:
+
+Setelah menambahkan ketiga secrets:
+1. Buka tab "Actions" di repository GitHub
+2. Lihat workflow "Deploy to cPanel"
+3. Jika ada error, cek logs untuk troubleshooting
+
+### Troubleshooting SSH Connection:
+
+Jika auto-deploy gagal dengan error SSH:
+
+**1. Test SSH connection manual:**
+```bash
+ssh username@hostname
+```
+
+**2. Pastikan SSH enabled di cPanel:**
+- Login cPanel → SSH Access
+- Pastikan "Manage SSH Keys" tersedia
+- Jika tidak ada, hubungi hosting support untuk enable SSH
+
+**3. Pastikan public key sudah authorized:**
+- cPanel → SSH Access → Manage SSH Keys
+- Pastikan key Anda ada di "Authorized Keys"
+
+**4. Pastikan path deployment benar:**
+- Di workflow file, path adalah `~/northsumateratrip`
+- Sesuaikan dengan path actual di server Anda
 
 ## 📦 cPanel Deployment Steps
 
